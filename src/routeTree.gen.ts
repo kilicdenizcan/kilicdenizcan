@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SssRouteImport } from './routes/sss'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RandevuRouteImport } from './routes/randevu'
 import { Route as IletisimRouteImport } from './routes/iletisim'
 import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
 import { Route as DoktorlarRouteImport } from './routes/doktorlar'
@@ -21,6 +23,16 @@ import { Route as TedavilerSlugRouteImport } from './routes/tedaviler/$slug'
 const SssRoute = SssRouteImport.update({
   id: '/sss',
   path: '/sss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuRoute = RandevuRouteImport.update({
+  id: '/randevu',
+  path: '/randevu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IletisimRoute = IletisimRouteImport.update({
@@ -65,6 +77,8 @@ export interface FileRoutesByFullPath {
   '/doktorlar': typeof DoktorlarRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sss': typeof SssRoute
   '/tedaviler/$slug': typeof TedavilerSlugRoute
   '/tedaviler/': typeof TedavilerIndexRoute
@@ -75,6 +89,8 @@ export interface FileRoutesByTo {
   '/doktorlar': typeof DoktorlarRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sss': typeof SssRoute
   '/tedaviler/$slug': typeof TedavilerSlugRoute
   '/tedaviler': typeof TedavilerIndexRoute
@@ -86,6 +102,8 @@ export interface FileRoutesById {
   '/doktorlar': typeof DoktorlarRoute
   '/hakkimizda': typeof HakkimizdaRoute
   '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sss': typeof SssRoute
   '/tedaviler/$slug': typeof TedavilerSlugRoute
   '/tedaviler/': typeof TedavilerIndexRoute
@@ -98,6 +116,8 @@ export interface FileRouteTypes {
     | '/doktorlar'
     | '/hakkimizda'
     | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
     | '/sss'
     | '/tedaviler/$slug'
     | '/tedaviler/'
@@ -108,6 +128,8 @@ export interface FileRouteTypes {
     | '/doktorlar'
     | '/hakkimizda'
     | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
     | '/sss'
     | '/tedaviler/$slug'
     | '/tedaviler'
@@ -118,6 +140,8 @@ export interface FileRouteTypes {
     | '/doktorlar'
     | '/hakkimizda'
     | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
     | '/sss'
     | '/tedaviler/$slug'
     | '/tedaviler/'
@@ -129,6 +153,8 @@ export interface RootRouteChildren {
   DoktorlarRoute: typeof DoktorlarRoute
   HakkimizdaRoute: typeof HakkimizdaRoute
   IletisimRoute: typeof IletisimRoute
+  RandevuRoute: typeof RandevuRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SssRoute: typeof SssRoute
   TedavilerSlugRoute: typeof TedavilerSlugRoute
   TedavilerIndexRoute: typeof TedavilerIndexRoute
@@ -141,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/sss'
       fullPath: '/sss'
       preLoaderRoute: typeof SssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu': {
+      id: '/randevu'
+      path: '/randevu'
+      fullPath: '/randevu'
+      preLoaderRoute: typeof RandevuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/iletisim': {
@@ -201,6 +241,8 @@ const rootRouteChildren: RootRouteChildren = {
   DoktorlarRoute: DoktorlarRoute,
   HakkimizdaRoute: HakkimizdaRoute,
   IletisimRoute: IletisimRoute,
+  RandevuRoute: RandevuRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SssRoute: SssRoute,
   TedavilerSlugRoute: TedavilerSlugRoute,
   TedavilerIndexRoute: TedavilerIndexRoute,
