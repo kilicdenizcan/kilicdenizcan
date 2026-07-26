@@ -40,7 +40,8 @@ export function Navbar() {
         <nav
           className={cn(
             "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-full px-4 py-2.5 transition-all duration-700 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:px-5",
-            scrolled ? "glass-panel shadow-soft" : "border border-transparent",
+            "glass-panel",
+            scrolled ? "shadow-soft" : "shadow-none",
           )}
         >
           <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
