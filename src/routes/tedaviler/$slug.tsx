@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Check, Clock, Repeat, Syringe } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
-import { treatments, whatsappHref } from "@/lib/site";
+import { treatments, whatsappHref, type Treatment } from "@/lib/site";
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/tedaviler/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): Treatment => {
     const treatment = treatments.find((t) => t.slug === params.slug);
     if (!treatment) throw notFound();
     return treatment;

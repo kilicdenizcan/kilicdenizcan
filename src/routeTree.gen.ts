@@ -9,38 +9,103 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
+import { Route as DoktorlarRouteImport } from './routes/doktorlar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TedavilerIndexRouteImport } from './routes/tedaviler/index'
+import { Route as TedavilerSlugRouteImport } from './routes/tedaviler/$slug'
 
+const HakkimizdaRoute = HakkimizdaRouteImport.update({
+  id: '/hakkimizda',
+  path: '/hakkimizda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DoktorlarRoute = DoktorlarRouteImport.update({
+  id: '/doktorlar',
+  path: '/doktorlar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TedavilerIndexRoute = TedavilerIndexRouteImport.update({
+  id: '/tedaviler/',
+  path: '/tedaviler/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TedavilerSlugRoute = TedavilerSlugRouteImport.update({
+  id: '/tedaviler/$slug',
+  path: '/tedaviler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler/': typeof TedavilerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler': typeof TedavilerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler/': typeof TedavilerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/doktorlar'
+    | '/hakkimizda'
+    | '/tedaviler/$slug'
+    | '/tedaviler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/doktorlar' | '/hakkimizda' | '/tedaviler/$slug' | '/tedaviler'
+  id:
+    | '__root__'
+    | '/'
+    | '/doktorlar'
+    | '/hakkimizda'
+    | '/tedaviler/$slug'
+    | '/tedaviler/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DoktorlarRoute: typeof DoktorlarRoute
+  HakkimizdaRoute: typeof HakkimizdaRoute
+  TedavilerSlugRoute: typeof TedavilerSlugRoute
+  TedavilerIndexRoute: typeof TedavilerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/hakkimizda': {
+      id: '/hakkimizda'
+      path: '/hakkimizda'
+      fullPath: '/hakkimizda'
+      preLoaderRoute: typeof HakkimizdaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doktorlar': {
+      id: '/doktorlar'
+      path: '/doktorlar'
+      fullPath: '/doktorlar'
+      preLoaderRoute: typeof DoktorlarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +113,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tedaviler/': {
+      id: '/tedaviler/'
+      path: '/tedaviler'
+      fullPath: '/tedaviler/'
+      preLoaderRoute: typeof TedavilerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tedaviler/$slug': {
+      id: '/tedaviler/$slug'
+      path: '/tedaviler/$slug'
+      fullPath: '/tedaviler/$slug'
+      preLoaderRoute: typeof TedavilerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DoktorlarRoute: DoktorlarRoute,
+  HakkimizdaRoute: HakkimizdaRoute,
+  TedavilerSlugRoute: TedavilerSlugRoute,
+  TedavilerIndexRoute: TedavilerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
