@@ -9,38 +9,208 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SssRouteImport } from './routes/sss'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RandevuRouteImport } from './routes/randevu'
+import { Route as IletisimRouteImport } from './routes/iletisim'
+import { Route as HakkimizdaRouteImport } from './routes/hakkimizda'
+import { Route as DoktorlarRouteImport } from './routes/doktorlar'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TedavilerIndexRouteImport } from './routes/tedaviler/index'
+import { Route as TedavilerSlugRouteImport } from './routes/tedaviler/$slug'
 
+const SssRoute = SssRouteImport.update({
+  id: '/sss',
+  path: '/sss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RandevuRoute = RandevuRouteImport.update({
+  id: '/randevu',
+  path: '/randevu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IletisimRoute = IletisimRouteImport.update({
+  id: '/iletisim',
+  path: '/iletisim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HakkimizdaRoute = HakkimizdaRouteImport.update({
+  id: '/hakkimizda',
+  path: '/hakkimizda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DoktorlarRoute = DoktorlarRouteImport.update({
+  id: '/doktorlar',
+  path: '/doktorlar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TedavilerIndexRoute = TedavilerIndexRouteImport.update({
+  id: '/tedaviler/',
+  path: '/tedaviler/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TedavilerSlugRoute = TedavilerSlugRouteImport.update({
+  id: '/tedaviler/$slug',
+  path: '/tedaviler/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sss': typeof SssRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler/': typeof TedavilerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sss': typeof SssRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler': typeof TedavilerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/doktorlar': typeof DoktorlarRoute
+  '/hakkimizda': typeof HakkimizdaRoute
+  '/iletisim': typeof IletisimRoute
+  '/randevu': typeof RandevuRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sss': typeof SssRoute
+  '/tedaviler/$slug': typeof TedavilerSlugRoute
+  '/tedaviler/': typeof TedavilerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/doktorlar'
+    | '/hakkimizda'
+    | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
+    | '/sss'
+    | '/tedaviler/$slug'
+    | '/tedaviler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/doktorlar'
+    | '/hakkimizda'
+    | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
+    | '/sss'
+    | '/tedaviler/$slug'
+    | '/tedaviler'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/doktorlar'
+    | '/hakkimizda'
+    | '/iletisim'
+    | '/randevu'
+    | '/sitemap.xml'
+    | '/sss'
+    | '/tedaviler/$slug'
+    | '/tedaviler/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  DoktorlarRoute: typeof DoktorlarRoute
+  HakkimizdaRoute: typeof HakkimizdaRoute
+  IletisimRoute: typeof IletisimRoute
+  RandevuRoute: typeof RandevuRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SssRoute: typeof SssRoute
+  TedavilerSlugRoute: typeof TedavilerSlugRoute
+  TedavilerIndexRoute: typeof TedavilerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sss': {
+      id: '/sss'
+      path: '/sss'
+      fullPath: '/sss'
+      preLoaderRoute: typeof SssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/randevu': {
+      id: '/randevu'
+      path: '/randevu'
+      fullPath: '/randevu'
+      preLoaderRoute: typeof RandevuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iletisim': {
+      id: '/iletisim'
+      path: '/iletisim'
+      fullPath: '/iletisim'
+      preLoaderRoute: typeof IletisimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hakkimizda': {
+      id: '/hakkimizda'
+      path: '/hakkimizda'
+      fullPath: '/hakkimizda'
+      preLoaderRoute: typeof HakkimizdaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doktorlar': {
+      id: '/doktorlar'
+      path: '/doktorlar'
+      fullPath: '/doktorlar'
+      preLoaderRoute: typeof DoktorlarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +218,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tedaviler/': {
+      id: '/tedaviler/'
+      path: '/tedaviler'
+      fullPath: '/tedaviler/'
+      preLoaderRoute: typeof TedavilerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tedaviler/$slug': {
+      id: '/tedaviler/$slug'
+      path: '/tedaviler/$slug'
+      fullPath: '/tedaviler/$slug'
+      preLoaderRoute: typeof TedavilerSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  DoktorlarRoute: DoktorlarRoute,
+  HakkimizdaRoute: HakkimizdaRoute,
+  IletisimRoute: IletisimRoute,
+  RandevuRoute: RandevuRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SssRoute: SssRoute,
+  TedavilerSlugRoute: TedavilerSlugRoute,
+  TedavilerIndexRoute: TedavilerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
