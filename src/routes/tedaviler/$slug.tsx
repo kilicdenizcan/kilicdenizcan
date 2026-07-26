@@ -47,7 +47,7 @@ export const Route = createFileRoute("/tedaviler/$slug")({
 });
 
 function TreatmentDetail() {
-  const t = Route.useLoaderData();
+  const t: Treatment = Route.useLoaderData();
   const others = treatments.filter((x) => x.slug !== t.slug).slice(0, 3);
 
   return (
