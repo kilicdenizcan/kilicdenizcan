@@ -17,8 +17,7 @@ export const clinic = {
   mapEmbed:
     "https://www.google.com/maps?q=75.%20Y%C4%B1l%20Mahallesi%20Cumhuriyet%20Caddesi%20No%3A69%20Sultangazi%20%C4%B0stanbul&output=embed",
   hours: [
-    { day: "Pazartesi – Cuma", value: "09:00 – 19:00" },
-    { day: "Cumartesi", value: "09:00 – 17:00" },
+    { day: "Pazartesi – Cumartesi", value: "09:00 – 21:00" },
     { day: "Pazar", value: "Kapalı" },
   ],
 } as const;
