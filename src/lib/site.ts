@@ -5,9 +5,9 @@ import doctor3 from "@/assets/doctor-3.jpg";
 export const clinic = {
   name: "Özel Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği",
   shortName: "Yeni Yaşam",
-  phoneDisplay: "0212 476 00 69",
-  phone: "+902124760069",
-  whatsapp: "902124760069",
+  phoneDisplay: "0553 841 71 73",
+  phone: "+905538417173",
+  whatsapp: "905538417173",
   whatsappText:
     "Merhaba, Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği'nden randevu almak istiyorum.",
   email: "info@yeniyasamclinic.com",
