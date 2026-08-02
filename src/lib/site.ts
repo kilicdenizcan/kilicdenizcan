@@ -10,7 +10,7 @@ export const clinic = {
   whatsapp: "905538417173",
   whatsappText:
     "Merhaba, Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği'nden randevu almak istiyorum.",
-  email: "info@yeniyasamclinic.com",
+  email: "yeniyasamclinic@gmail.com",
   address: "75. Yıl Mah. Cumhuriyet Cad. No:69 Kat:2, Sultangazi / İstanbul",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Özel+Yeni+Yaşam+Ağız+ve+Diş+Sağlığı+Polikliniği+Sultangazi",
