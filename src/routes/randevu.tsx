@@ -118,6 +118,18 @@ function Appointment() {
                       ))}
                     </select>
                   </Field>
+                  <Field label="Tercih edilen hekim">
+                    <select
+                      name="doctor"
+                      defaultValue={matchedDoctor ?? "Fark etmez"}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
+                    >
+                      <option>Fark etmez</option>
+                      {doctors.map((d) => (
+                        <option key={d.name}>{d.name}</option>
+                      ))}
+                    </select>
+                  </Field>
                   <Field label="Tercih edilen saat">
                     <select
                       name="time"
