@@ -51,7 +51,7 @@ export function Navbar() {
                 alt="Yeni Yaşam Klinik logosu"
                 width={40}
                 height={40}
-                className="size-10 object-contain"
+                className="size-10 object-cover"
               />
             </span>
             <span className="min-w-0 leading-tight">
