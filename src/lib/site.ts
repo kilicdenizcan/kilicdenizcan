@@ -27,8 +27,8 @@ export const whatsappHref = `https://wa.me/${clinic.whatsapp}?text=${encodeURICo
 )}`;
 
 export const stats = [
-  { value: "4.9", label: "Google puanı", detail: "300+ değerlendirme" },
-  { value: "15+", label: "Yıllık deneyim", detail: "Sultangazi'de" },
+  { value: "4.6", label: "Google puanı", detail: "görüşleriniz bizim için değerli." },
+  { value: "40+", label: "Yıllık deneyim", detail: "Sultangazi'de" },
   { value: "12.000+", label: "Mutlu hasta", detail: "tedavi tamamlandı" },
   { value: "%100", label: "Sterilizasyon", detail: "tek kullanımlık set" },
 ];
