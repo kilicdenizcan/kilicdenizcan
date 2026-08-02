@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import logoMark from "@/assets/logo-mark.png.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
 import { clinic } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +51,7 @@ export function Navbar() {
                 alt="Yeni Yaşam Klinik logosu"
                 width={40}
                 height={40}
-                className="size-10 object-contain"
+                className="size-10 object-cover"
               />
             </span>
             <span className="min-w-0 leading-tight">
