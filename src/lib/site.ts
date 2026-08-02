@@ -281,6 +281,58 @@ export const treatments: Treatment[] = [
       { q: "Her 20'lik diş çekilmeli mi?", a: "Hayır. Ağız içinde doğru konumda ve temizlenebilen dişler korunur." },
     ],
   },
+  {
+    slug: "dis-eti-tedavisi",
+    title: "Diş Eti Tedavisi",
+    short: "Kanayan ve çekilen diş etleri için periodontal bakım.",
+    summary:
+      "Diş eti hastalıkları, diş kaybının en sık nedenidir ve çoğu zaman ağrısız ilerler. Yeni Yaşam'da diş eti cep ölçümleri, detartraj ve küretaj protokolü ile iltihap kontrol altına alınır; ileri vakalarda cerrahi destek planlanır.",
+    duration: "45–60 dakika",
+    sessions: "1–4 seans",
+    anesthesia: "Gerektiğinde lokal anestezi",
+    benefits: [
+      "Diş eti kanaması ve iltihabın kontrolü",
+      "Diş eti çekilmesinin yavaşlatılması",
+      "Ağız kokusunun azalması",
+      "Dişlerin uzun süre korunması",
+    ],
+    steps: [
+      { title: "Periodontal muayene", text: "Diş eti cep derinlikleri ölçülür, röntgen ile kemik seviyesi değerlendirilir." },
+      { title: "Detartraj", text: "Diş taşı ve plak tüm yüzeylerden uzaklaştırılır." },
+      { title: "Küretaj", text: "Diş eti cebi içindeki iltihaplı doku lokal anestezi altında temizlenir." },
+      { title: "Kontrol", text: "4–6 hafta sonra iyileşme değerlendirilir ve bakım planı verilir." },
+    ],
+    faq: [
+      { q: "Diş eti tedavisi ağrılı mıdır?", a: "Yüzeyel temizlik ağrısızdır; derin küretaj işlemlerinde lokal anestezi uygulanır." },
+      { q: "Çekilen diş eti geri gelir mi?", a: "Çekilme kendiliğinden geri gelmez, ancak tedavi ile ilerlemesi durdurulur; ileri vakalarda greft uygulanabilir." },
+    ],
+  },
+  {
+    slug: "dolgu",
+    title: "Dolgu",
+    short: "Çürüyen dişte doku kaybını estetik kompozit ile onarma.",
+    summary:
+      "Dolgu tedavisi, çürük nedeniyle kaybedilen diş dokusunu diş rengindeki kompozit malzemeyle yeniden oluşturur. Erken müdahale ile kanal tedavisi ihtiyacı büyük ölçüde önlenir; işlem tek seansta tamamlanır.",
+    duration: "20–40 dakika",
+    sessions: "Tek seans",
+    anesthesia: "Lokal anestezi",
+    benefits: [
+      "Diş rengiyle birebir uyum",
+      "Tek seansta tamamlanma",
+      "Sağlam dokunun korunması",
+      "Kanal tedavisi riskinin azalması",
+    ],
+    steps: [
+      { title: "Muayene", text: "Çürüğün derinliği klinik ve radyolojik olarak belirlenir." },
+      { title: "Temizleme", text: "Çürük doku uzaklaştırılır, sağlam doku korunur." },
+      { title: "Uygulama", text: "Kompozit tabakalar halinde yerleştirilip ışıkla sertleştirilir." },
+      { title: "Cila", text: "Kapanış kontrol edilir, yüzey parlatılır." },
+    ],
+    faq: [
+      { q: "Dolgu ne kadar dayanır?", a: "Ağız bakımı ve kapanışa bağlı olarak ortalama 5–10 yıl kullanılabilir." },
+      { q: "Dolgudan sonra ne zaman yemek yiyebilirim?", a: "Kompozit dolgular anında sertleşir; anestezi etkisi geçtikten sonra yiyebilirsiniz." },
+    ],
+  },
 ];
 
 export const doctors = [
