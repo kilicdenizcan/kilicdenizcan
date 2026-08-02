@@ -15,9 +15,9 @@ export function Footer() {
                   src={logoMark.url}
                   alt="Yeni Yaşam Klinik"
                   loading="lazy"
-                  width={44}
-                  height={44}
-                  className="size-7 scale-[1.75] object-contain"
+                  width={32}
+                  height={32}
+                  className="size-8 object-cover"
                 />
               </span>
               <span className="text-lg font-semibold">Yeni Yaşam</span>
