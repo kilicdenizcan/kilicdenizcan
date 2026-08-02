@@ -421,7 +421,7 @@ export const faqs = [
   },
   {
     q: "Şehir dışından geliyorum, tedavi kaç günde biter?",
-    a: "İmplant üstü protez ve gülüş tasarımı gibi tedavilerde 4–6 günlük iki ziyaret planı hazırlıyoruz. Detaylı planı önceden paylaşıyoruz.",
+    a: "Şehir dışından, yurtdışından gelen hastalarımıza süreç şeffaf şekilde anlatılmaktadır. Bütün tedavilerimizi acele etmeden, etik deontolojik kurallar çerçevesinde tamamlarız.",
   },
   {
     q: "Diş hekimi korkum var, ne yapabilirim?",
