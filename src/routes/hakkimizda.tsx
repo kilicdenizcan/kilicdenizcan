@@ -49,7 +49,7 @@ function About() {
     <>
       <PageHero
         eyebrow="Klinik"
-        title="15 yıldır aynı mahallede, aynı standartla."
+        title={`${clinicYears} yıldır aynı mahallede, aynı standartla.`}
         text="Yeni Yaşam, Sultangazi'de küçük bir muayenehane olarak başladı. Bugün beş üniteli, dijital altyapılı bir poliklinik; ama çalışma biçimimiz ilk günkü gibi: aceleye getirmeden, açıklayarak."
       />
 
