@@ -21,7 +21,7 @@ export const Route = createFileRoute("/hakkimizda")({
       { property: "og:title", content: "Hakkımızda | Yeni Yaşam Klinik" },
       {
         property: "og:description",
-        content: "Sultangazi'de 15 yılı aşkın deneyim, dijital diş hekimliği ve sterilizasyon standardı.",
+        content: `Sultangazi'de ${clinicYears} yılı aşkın deneyim, dijital diş hekimliği ve sterilizasyon standardı.`,
       },
       { property: "og:type", content: "website" },
     ],
