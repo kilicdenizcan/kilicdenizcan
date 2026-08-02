@@ -26,12 +26,30 @@ export const whatsappHref = `https://wa.me/${clinic.whatsapp}?text=${encodeURICo
   clinic.whatsappText,
 )}`;
 
+/** Verilen başlangıç tarihinden bugüne tamamlanan yıl sayısı. */
+export function yearsSince(startYear: number, startMonth = 5) {
+  const now = new Date();
+  let years = now.getFullYear() - startYear;
+  if (now.getMonth() + 1 < startMonth) years -= 1;
+  return Math.max(0, years);
+}
+
+/** Kliniğin/kurucu hekimin mesleki başlangıcı (Mayıs 1986). */
+export const founderCareerStart = { year: 1986, month: 5 } as const;
+/** Kliniğin kuruluşu (2009). */
+export const clinicFoundedYear = 2009;
+
 export const stats = [
   { value: "4.6", label: "Google puanı", detail: "görüşleriniz bizim için değerli." },
-  { value: "40+", label: "Yıllık deneyim", detail: "Sultangazi'de" },
+  {
+    value: `${yearsSince(founderCareerStart.year, founderCareerStart.month)}+`,
+    label: "Yıllık deneyim",
+    detail: "Sultangazi'de",
+  },
   { value: "12.000+", label: "Mutlu hasta", detail: "tedavi tamamlandı" },
   { value: "%100", label: "Sterilizasyon", detail: "tek kullanımlık set" },
 ];
+
 
 export type Treatment = {
   slug: string;
@@ -340,7 +358,8 @@ export const doctors = [
     name: "Dt. Musa Kılıç",
     role: "Kurucu Hekim",
     image: doctor1,
-    experience: "40 Yıl",
+    careerStart: founderCareerStart,
+    experience: `${yearsSince(founderCareerStart.year, founderCareerStart.month)} Yıl`,
     languages: "Türkçe",
     bio: "1986 yılında İstanbul Üniversitesi - Çapa'dan mezun oldu. Cerrahi rehber destekli implantoloji ve ileri kemik greftleme uygulamaları üzerine yurt içi ve yurt dışında eğitimler aldı. Bugüne kadar binlerce hastayı tedaviye kavuşturmuş deneyimli hekimimize kendinizi güvenle emanet edebilirsiniz.",
     focus: ["İmplant cerrahisi", "Kemik greftleme", "Protez planlama"],
@@ -349,7 +368,8 @@ export const doctors = [
     name: "Dt. Burçe Nur Yılmaz",
     role: "Ortodonti",
     image: doctor2,
-    experience: "12 yıl klinik deneyim",
+    careerStart: { year: 2014, month: 5 },
+    experience: `${yearsSince(2014, 5)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce, Almanca",
     bio: "Dijital gülüş tasarımı ve laminate uygulamaları üzerine uzmanlaştı. Tedavi öncesi dijital önizleme protokolünü kliniğe kazandırdı.",
     focus: ["Gülüş tasarımı", "Laminate veneer", "Zirkonyum"],
@@ -358,7 +378,8 @@ export const doctors = [
     name: "Dr. Dt. Emre Demir",
     role: "Ortodonti Uzmanı",
     image: doctor3,
-    experience: "10 yıl klinik deneyim",
+    careerStart: { year: 2016, month: 5 },
+    experience: `${yearsSince(2016, 5)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce",
     bio: "Şeffaf plak tedavileri ve erken dönem çene gelişimi yönlendirmesi üzerine çalışıyor. Yetişkin ortodontisinde görünmez tedavi seçeneklerine odaklanıyor.",
     focus: ["Şeffaf plak", "Sabit ortodonti", "Çocuk ortodontisi"],

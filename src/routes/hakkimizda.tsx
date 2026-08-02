@@ -5,6 +5,9 @@ import heroClinic from "@/assets/hero-clinic.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
+import { clinicFoundedYear, yearsSince } from "@/lib/site";
+
+const clinicYears = yearsSince(clinicFoundedYear, 1);
 
 export const Route = createFileRoute("/hakkimizda")({
   head: () => ({
@@ -18,7 +21,7 @@ export const Route = createFileRoute("/hakkimizda")({
       { property: "og:title", content: "Hakkımızda | Yeni Yaşam Klinik" },
       {
         property: "og:description",
-        content: "Sultangazi'de 15 yılı aşkın deneyim, dijital diş hekimliği ve sterilizasyon standardı.",
+        content: `Sultangazi'de ${clinicYears} yılı aşkın deneyim, dijital diş hekimliği ve sterilizasyon standardı.`,
       },
       { property: "og:type", content: "website" },
     ],
@@ -46,7 +49,7 @@ function About() {
     <>
       <PageHero
         eyebrow="Klinik"
-        title="15 yıldır aynı mahallede, aynı standartla."
+        title={`${clinicYears} yıldır aynı mahallede, aynı standartla.`}
         text="Yeni Yaşam, Sultangazi'de küçük bir muayenehane olarak başladı. Bugün beş üniteli, dijital altyapılı bir poliklinik; ama çalışma biçimimiz ilk günkü gibi: aceleye getirmeden, açıklayarak."
       />
 
