@@ -47,7 +47,7 @@ function Faq() {
       <PageHero
         eyebrow="S.S.S."
         title="Cevabını en çok aradığınız sorular."
-        text="Aradığınızı bulamazsanız WhatsApp hattımızdan yazın; hekimlerimiz aynı gün içinde yanıtlıyor."
+        text="Aradığınızı bulamazsanız WhatsApp hattımızdan yazın; yetkililerimiz en kısa sürede sorunuzu yanıtlayacaktır. "
       />
 
       <section className="section-y pt-4 md:pt-10">
@@ -69,7 +69,7 @@ function Faq() {
         </div>
       </section>
 
-      <CtaBand title="Sorunuzun cevabı burada yoksa." text="Kısaca yazın; hekimlerimiz size özel yanıt versin." />
+      <CtaBand title="Sorunuzun cevabı burada yoksa." text="Kısaca yazın; yetkililerimiz size özel yanıt versin." />
     </>
   );
 }

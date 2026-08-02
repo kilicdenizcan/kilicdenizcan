@@ -5,7 +5,7 @@ import { Reveal } from "./Reveal";
 
 export function CtaBand({
   title = "Gülümsemeniz için doğru zaman, şimdi.",
-  text = "Ücretsiz muayene ve tedavi planlaması için randevunuzu oluşturun. Aynı gün içinde size dönüş yapıyoruz.",
+  text = "Ücretsiz muayene ve tedavi planlaması için randevunuzu oluşturun. Kısaca yazın; yetkililerimiz size özel yanıt versin.",
 }: {
   title?: string;
   text?: string;

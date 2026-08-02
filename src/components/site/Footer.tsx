@@ -23,7 +23,7 @@ export function Footer() {
               <span className="text-lg font-semibold">Yeni Yaşam</span>
             </div>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-primary-foreground/65">
-              Sultangazi'de ağız ve diş sağlığında dijital planlama, sterilizasyon standardı ve
+              Sultangazi'de ağız ve diş sağlığında dijital planlama, etik süreç yönetimi, sterilizasyon standardı ve
               estetik hekimliği bir araya getiren poliklinik.
             </p>
           </div>
@@ -95,7 +95,7 @@ export function Footer() {
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 size-4 shrink-0" strokeWidth={1.6} />
-                <span>Hafta içi 09:00 – 19:00</span>
+                <span>Pazartesi – Cumartesi 09:00 – 21:00</span>
               </li>
             </ul>
             <a
