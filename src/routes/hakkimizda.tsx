@@ -5,6 +5,9 @@ import heroClinic from "@/assets/hero-clinic.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
+import { clinicFoundedYear, yearsSince } from "@/lib/site";
+
+const clinicYears = yearsSince(clinicFoundedYear, 1);
 
 export const Route = createFileRoute("/hakkimizda")({
   head: () => ({
