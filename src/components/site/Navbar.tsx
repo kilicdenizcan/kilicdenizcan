@@ -51,7 +51,7 @@ export function Navbar() {
                 alt="Yeni Yaşam Klinik logosu"
                 width={40}
                 height={40}
-                className="size-10 object-cover"
+                className="size-8 object-cover"
               />
             </span>
             <span className="min-w-0 leading-tight">
@@ -86,7 +86,7 @@ export function Navbar() {
             </a>
             <Link
               to="/randevu"
-              search={{}}
+              search={{ doktor: undefined }}
               className="hidden rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-soft transition-all duration-500 hover:bg-navy-soft sm:inline-flex"
             >
               Randevu Al
@@ -128,7 +128,7 @@ export function Navbar() {
               </ul>
               <Link
                 to="/randevu"
-                search={{}}
+                search={{ doktor: undefined }}
                 onClick={() => setOpen(false)}
                 className="mt-4 block rounded-full bg-navy px-5 py-3.5 text-center text-sm font-medium text-primary-foreground"
               >
