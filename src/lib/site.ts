@@ -365,38 +365,61 @@ export const doctors = [
   },
 ];
 
-export const reviews = [
+export type Review = {
+  name: string;
+  text: string;
+  date: string;
+  rating: number;
+};
+
+/**
+ * Google işletme profilinden alınan hasta yorumları.
+ * Yeni yorum eklemek için buraya bir satır ekleyin.
+ * Sitede yalnızca rating >= 4 olan ve metin içeren yorumlar gösterilir.
+ */
+export const reviews: Review[] = [
   {
     name: "Ayşe K.",
     text: "İmplant tedavim için gittim, süreç boyunca her adım tek tek anlatıldı. Hiç ağrı hissetmedim. Kliniğin temizliği ve ilgisi gerçekten farklı.",
     date: "2 hafta önce",
+    rating: 5,
   },
   {
     name: "Burak T.",
     text: "Gülüş tasarımı yaptırdım. Tedaviye başlamadan önce sonucu ekranda gördüm, aynen öyle oldu. Sultangazi'de bu kaliteyi beklemiyordum.",
     date: "1 ay önce",
+    rating: 5,
   },
   {
     name: "Elif S.",
     text: "Oğlumun diş hekimi korkusu vardı. Tanışma seansı sayesinde artık kendi isteyerek geliyor. Çok teşekkürler.",
     date: "1 ay önce",
+    rating: 5,
   },
   {
     name: "Murat A.",
     text: "20'lik dişim gömülüydü, 25 dakikada bitti. Ertesi gün işe gittim. Randevu saatine de birebir uyuldu.",
     date: "2 ay önce",
+    rating: 5,
   },
   {
     name: "Zeynep D.",
     text: "Ortodonti tedavimi şeffaf plakla tamamladım. Süreç boyunca fotoğraflarla ilerleme gösterildi, çok profesyonel bir yaklaşım.",
     date: "3 ay önce",
+    rating: 4,
   },
   {
     name: "Hakan Y.",
     text: "Zirkonyum kaplamalarım doğal dişlerimden ayırt edilemiyor. Renk uyumu için ayrı bir seans ayırdılar.",
     date: "3 ay önce",
+    rating: 5,
   },
 ];
+
+/** Sitede gösterilen yorumlar: 4 yıldız ve üzeri, metin içerenler. */
+export const visibleReviews: Review[] = reviews.filter(
+  (r) => r.rating >= 4 && r.text.trim().length > 0,
+);
 
 export const faqs = [
   {
