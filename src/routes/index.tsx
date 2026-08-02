@@ -332,7 +332,7 @@ function Home() {
               <div>
                 <p className="text-eyebrow">Hasta yorumları</p>
                 <h2 className="mt-6 max-w-2xl text-3xl leading-[1.08] font-semibold text-navy md:text-5xl">
-                  Google'da 4.9 ortalama.
+                  Google'da 4.6 ortalama.
                 </h2>
               </div>
               <div className="flex items-center gap-3 rounded-full border border-border bg-card px-5 py-3 shadow-soft">
@@ -342,7 +342,7 @@ function Home() {
                     <Star key={i} className="size-3.5 fill-navy text-navy" strokeWidth={0} />
                   ))}
                 </span>
-                <span className="text-sm text-muted-foreground">4.9 / 300+</span>
+                <span className="text-sm text-muted-foreground">4.6 / görüşleriniz değerli</span>
               </div>
             </div>
           </Reveal>
