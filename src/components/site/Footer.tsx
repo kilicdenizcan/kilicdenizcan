@@ -111,7 +111,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-primary-foreground/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {clinic.name}</p>
-          <p>Sağlık Bakanlığı ruhsatlı özel ağız ve diş sağlığı polikliniği</p>
+          
         </div>
       </div>
     </footer>
