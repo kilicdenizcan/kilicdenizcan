@@ -30,7 +30,7 @@ function TreatmentsPage() {
     <>
       <PageHero
         eyebrow="Tedaviler"
-        title="Dokuz tedavi alanı, tek bir standart."
+        title="On bir tedavi alanı, tek bir standart."
         text="Her tedavi başlığında süreç, süre, konfor ve maliyet önceden konuşulur. Aşağıdaki başlıklardan detaylı bilgiye ulaşabilirsiniz."
       />
 
