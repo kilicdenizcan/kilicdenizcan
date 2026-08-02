@@ -425,7 +425,7 @@ export const faqs = [
   },
   {
     q: "Diş hekimi korkum var, ne yapabilirim?",
-    a: "Sedasyon eşliğinde tedavi ve kademeli tanışma protokolü uyguluyoruz. Korku düzeyinize göre seans planı çıkarıyoruz.",
+    a: "Bütün hastalarımıza tedavi süreçlerini şeffaf bir şekilde aktarıyoruz. Sürprizlerle karşılaşmayacaksınız. Sağlıkta temel unsurlardan birinin güven olduğunun farkındayız. Korkularınızı aşabileceğiniz, güvene dayalı bir zemin oluşturuyoruz.",
   },
 ];
 
