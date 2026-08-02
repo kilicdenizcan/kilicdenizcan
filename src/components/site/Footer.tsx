@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import logoMark from "@/assets/logo-mark.png.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
 import { clinic, treatments, whatsappHref } from "@/lib/site";
 
 export function Footer() {
@@ -15,9 +15,9 @@ export function Footer() {
                   src={logoMark.url}
                   alt="Yeni Yaşam Klinik"
                   loading="lazy"
-                  width={44}
-                  height={44}
-                  className="size-7 scale-[1.75] object-contain"
+                  width={32}
+                  height={32}
+                  className="size-8 object-cover"
                 />
               </span>
               <span className="text-lg font-semibold">Yeni Yaşam</span>
