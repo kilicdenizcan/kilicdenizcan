@@ -346,8 +346,8 @@ export const doctors = [
     focus: ["İmplant cerrahisi", "Kemik greftleme", "Protez planlama"],
   },
   {
-    name: "Dt. Selin Yılmaz",
-    role: "Estetik Diş Hekimliği",
+    name: "Dt. Burçe Nur Yılmaz",
+    role: "Ortodonti",
     image: doctor2,
     experience: "12 yıl klinik deneyim",
     languages: "Türkçe, İngilizce, Almanca",
