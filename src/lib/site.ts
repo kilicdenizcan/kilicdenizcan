@@ -26,12 +26,30 @@ export const whatsappHref = `https://wa.me/${clinic.whatsapp}?text=${encodeURICo
   clinic.whatsappText,
 )}`;
 
+/** Verilen başlangıç tarihinden bugüne tamamlanan yıl sayısı. */
+export function yearsSince(startYear: number, startMonth = 5) {
+  const now = new Date();
+  let years = now.getFullYear() - startYear;
+  if (now.getMonth() + 1 < startMonth) years -= 1;
+  return Math.max(0, years);
+}
+
+/** Kliniğin/kurucu hekimin mesleki başlangıcı (Mayıs 1986). */
+export const founderCareerStart = { year: 1986, month: 5 } as const;
+/** Kliniğin kuruluşu (2009). */
+export const clinicFoundedYear = 2009;
+
 export const stats = [
   { value: "4.6", label: "Google puanı", detail: "görüşleriniz bizim için değerli." },
-  { value: "40+", label: "Yıllık deneyim", detail: "Sultangazi'de" },
+  {
+    value: `${yearsSince(founderCareerStart.year, founderCareerStart.month)}+`,
+    label: "Yıllık deneyim",
+    detail: "Sultangazi'de",
+  },
   { value: "12.000+", label: "Mutlu hasta", detail: "tedavi tamamlandı" },
   { value: "%100", label: "Sterilizasyon", detail: "tek kullanımlık set" },
 ];
+
 
 export type Treatment = {
   slug: string;
