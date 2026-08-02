@@ -337,12 +337,12 @@ export const treatments: Treatment[] = [
 
 export const doctors = [
   {
-    name: "Dt. Mehmet Yılmaz",
-    role: "Kurucu Hekim · İmplantoloji",
+    name: "Dt. Musa Kılıç",
+    role: "Kurucu Hekim",
     image: doctor1,
-    experience: "18 yıl klinik deneyim",
-    languages: "Türkçe, İngilizce",
-    bio: "İstanbul Üniversitesi Diş Hekimliği Fakültesi mezunu. Cerrahi rehber destekli implantoloji ve ileri kemik greftleme uygulamaları üzerine yurt içi ve yurt dışında eğitimler aldı.",
+    experience: "40 Yıl",
+    languages: "Türkçe",
+    bio: "1986 yılında İstanbul Üniversitesi - Çapa'dan mezun oldu. Cerrahi rehber destekli implantoloji ve ileri kemik greftleme uygulamaları üzerine yurt içi ve yurt dışında eğitimler aldı. Bugüne kadar binlerce hastayı tedaviye kavuşturmuş deneyimli hekimimize kendinizi güvenle emanet edebilirsiniz.",
     focus: ["İmplant cerrahisi", "Kemik greftleme", "Protez planlama"],
   },
   {
