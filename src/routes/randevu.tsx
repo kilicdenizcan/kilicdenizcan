@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
-import { clinic, treatments, whatsappHref } from "@/lib/site";
+import { clinic, treatments, doctors, whatsappHref } from "@/lib/site";
 
 export const Route = createFileRoute("/randevu")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    doktor: typeof search.doktor === "string" ? search.doktor : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Online Randevu | Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği" },
@@ -22,11 +25,14 @@ export const Route = createFileRoute("/randevu")({
   component: Appointment,
 });
 
-const times = ["09:00 – 12:00", "12:00 – 15:00", "15:00 – 19:00"];
+const times = ["09:00 – 12:00", "12:00 – 15:00", "15:00 – 18:00", "18:00 – 21:00"];
 
 function Appointment() {
+  const { doktor } = Route.useSearch();
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+
+  const matchedDoctor = doctors.find((d) => d.name === doktor)?.name;
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,6 +43,7 @@ function Appointment() {
       `Ad Soyad: ${data.get("name")}`,
       `Telefon: ${data.get("phone")}`,
       `Tedavi: ${data.get("treatment")}`,
+      `Tercih edilen hekim: ${data.get("doctor")}`,
       `Tercih edilen saat: ${data.get("time")}`,
       `Not: ${data.get("note") || "-"}`,
     ].join("\n");
@@ -46,6 +53,7 @@ function Appointment() {
     setSending(false);
     setSent(true);
   }
+
 
   return (
     <>
@@ -107,6 +115,18 @@ function Appointment() {
                       <option>Genel muayene</option>
                       {treatments.map((t) => (
                         <option key={t.slug}>{t.title}</option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field label="Tercih edilen hekim">
+                    <select
+                      name="doctor"
+                      defaultValue={matchedDoctor ?? "Fark etmez"}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
+                    >
+                      <option>Fark etmez</option>
+                      {doctors.map((d) => (
+                        <option key={d.name}>{d.name}</option>
                       ))}
                     </select>
                   </Field>
