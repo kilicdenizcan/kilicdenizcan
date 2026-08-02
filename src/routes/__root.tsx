@@ -111,7 +111,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Dentist",
           name: "Özel Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği",
-          image: "/favicon.ico",
           telephone: "+90 212 476 00 69",
           email: "yeniyasamclinic@gmail.com",
           address: {
