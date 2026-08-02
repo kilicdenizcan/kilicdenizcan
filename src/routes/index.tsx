@@ -16,7 +16,7 @@ import sterilization from "@/assets/gallery-sterilization.jpg";
 import { Reveal } from "@/components/site/Reveal";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
 import { CtaBand } from "@/components/site/CtaBand";
-import { clinic, doctors, faqs, reviews, stats, treatments, whatsappHref } from "@/lib/site";
+import { clinic, doctors, faqs, visibleReviews, stats, treatments, whatsappHref } from "@/lib/site";
 import {
   Accordion,
   AccordionContent,
@@ -348,11 +348,11 @@ function Home() {
           </Reveal>
 
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((r, i) => (
+            {visibleReviews.map((r, i) => (
               <Reveal key={r.name} delay={(i % 3) * 0.07}>
                 <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-8">
                   <span className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, k) => (
+                    {Array.from({ length: r.rating }).map((_, k) => (
                       <Star key={k} className="size-3.5 fill-navy text-navy" strokeWidth={0} />
                     ))}
                   </span>
