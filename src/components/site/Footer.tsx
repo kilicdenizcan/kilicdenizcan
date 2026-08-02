@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
-              <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-white/10">
+              <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-navy border border-black/20">
                 <img
                   src={logoMark.url}
                   alt="Yeni Yaşam Klinik"
