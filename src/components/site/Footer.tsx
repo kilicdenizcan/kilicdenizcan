@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg";
 import { clinic, treatments, whatsappHref } from "@/lib/site";
 
 export function Footer() {
@@ -12,7 +12,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-navy border border-black/20">
                 <img
-                  src={logoMark.url}
+                  src={logoMark}
                   alt="Yeni Yaşam Klinik"
                   loading="lazy"
                   width={32}

@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg";
 import { clinic } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -47,7 +47,7 @@ export function Navbar() {
           <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
             <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-navy">
               <img
-                src={logoMark.url}
+                src={logoMark}
                 alt="Yeni Yaşam Klinik logosu"
                 width={40}
                 height={40}
