@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg";
 import { clinic } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
