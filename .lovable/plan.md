@@ -1,18 +1,15 @@
-Beyaz çerçeveyi kaldırmak ve orijinal logonun kalitesini korumak için favicon'u yeniden üreteceğim.
+Tarayıcıda kalan eski favicon önbelleğini kesin olarak aşmak için ikonu yeni bir dosya adıyla sunacağım.
 
-1. Kaynak görsel
-   - Orijinal yüksek çözünürlüklü logo: `src/assets/logo-mark-new.jpg.asset.json` (JPEG 1417×1134, lacivert zemin üzerinde beyaz diş figürü).
+## Doğrulanan durum
 
-2. Favicon üretimi
-   - ImageMagick ile orijinalden merkeze hizalı, arka planı lacivert (#06264C) kare bir kırpma yap.
-   - Çıktı: `public/favicon.png`, 512×512 piksel, PNG.
-   - Köşeleri şeffaf olmayacak; tamamen logonun kendi lacivert tonuyla doldurulacak. Böylece tarayıcı sekmesinde beyaz çerçeve oluşmayacak.
-   - Yüksek kaliteli yeniden örnekleme (Lanczos) kullanılarak detaylar korunacak.
+- Mevcut `public/favicon.png` 512×512 ve tamamen opak; köşeleri lacivert, beyaz veya şeffaf bir çerçeve içermiyor.
+- Önizleme sunucusu da bu doğru dosyayı `/favicon.png` adresinden döndürüyor.
+- Ekran görüntüsündeki beyaz, yuvarlatılmış kare bu nedenle dosyanın kendisinden değil tarayıcının daha önce kaydettiği favicon sürümünden geliyor.
 
-3. Eski ikonu temizleme
-   - `public/favicon.ico` kalıntısını sil.
-   - `src/routes/__root.tsx` zaten `/favicon.png` olarak referans veriyor; değişikliğe gerek yok.
+## Uygulama
 
-4. Doğrulama
-   - Üretilen `favicon.png` dosyasını açarak köşelerde beyaz/şeffaf alan kalmadığını ve diş figürünün net olduğunu kontrol et.
-   - Önizlemede `/favicon.png` URL'sinin doğru geldiğinden emin ol.
+1. Mevcut yüksek kaliteli ve çerçevesiz ikonu yeni, benzersiz bir adla `public/yeniyasam-favicon.png` olarak oluştur.
+2. `src/routes/__root.tsx` içindeki favicon bağlantısını bu yeni dosya adına geçir; ayrıca tarayıcı uyumluluğu için `shortcut icon` bağlantısı ekle.
+3. Eski favicon yolunu artık sayfa başlığında kullanma; böylece tarayıcı eski önbelleği eşleştiremez.
+4. Önizlemede yeni dosya yolunun 200 döndüğünü ve render edilen `<head>` içinde yeni favicon bağlantısının bulunduğunu doğrula.
+5. Chromium'u temiz bir tarayıcı profiliyle açarak sekme ikonunun lacivert kare zemin ve beyaz diş simgesiyle, beyaz çerçevesiz göründüğünü kontrol et.
