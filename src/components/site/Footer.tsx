@@ -12,7 +12,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <span className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-navy border border-black/20">
                 <img
-                  src={logoMark.url}
+                  src={logoMark}
                   alt="Yeni Yaşam Klinik"
                   loading="lazy"
                   width={32}
