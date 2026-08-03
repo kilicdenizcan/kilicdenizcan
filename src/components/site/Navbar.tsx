@@ -47,7 +47,7 @@ export function Navbar() {
           <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
             <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-navy">
               <img
-                src={logoMark.url}
+                src={logoMark}
                 alt="Yeni Yaşam Klinik logosu"
                 width={40}
                 height={40}

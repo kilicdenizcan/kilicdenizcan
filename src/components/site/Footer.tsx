@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import logoMark from "@/assets/logo-mark-new.jpg.asset.json";
+import logoMark from "@/assets/logo-mark-new.jpg";
 import { clinic, treatments, whatsappHref } from "@/lib/site";
 
 export function Footer() {
