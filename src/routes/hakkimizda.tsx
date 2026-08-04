@@ -5,9 +5,9 @@ import heroClinic from "@/assets/hero-clinic.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
-import { clinicFoundedYear, yearsSince } from "@/lib/site";
+import { founderCareerStart, yearsSince } from "@/lib/site";
 
-const clinicYears = yearsSince(clinicFoundedYear, 1);
+const clinicYears = yearsSince(founderCareerStart.year, founderCareerStart.month);
 
 export const Route = createFileRoute("/hakkimizda")({
   head: () => ({
@@ -50,7 +50,7 @@ function About() {
       <PageHero
         eyebrow="Klinik"
         title={`${clinicYears} yıldır aynı mahallede, aynı standartla.`}
-        text="Yeni Yaşam, Sultangazi'de küçük bir muayenehane olarak başladı. Bugün beş üniteli, dijital altyapılı bir poliklinik; ama çalışma biçimimiz ilk günkü gibi: aceleye getirmeden, açıklayarak."
+        text="Yeni Yaşam, Sultangazi'de küçük bir muayenehane olarak başladı. Bugün üç üniteli, dijital altyapılı bir poliklinik; ama çalışma biçimimiz ilk günkü gibi: aceleye getirmeden, açıklayarak."
       />
 
       <section className="container-page -mt-4 pb-20 md:pb-28">
@@ -73,22 +73,19 @@ function About() {
           <Reveal>
             <p className="text-eyebrow">Misyon</p>
             <h2 className="mt-6 text-3xl leading-[1.1] font-semibold text-navy md:text-4xl">
-              Diş hekimliğini korkulacak bir şey olmaktan çıkarmak.
+              Toplumun ağız ve diş sağlığını sağlamak.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-graphite">
-              Hastalarımızın çoğu kliniğe bir kaygıyla geliyor. Bizim işimiz, tedaviden önce bu
-              kaygıyı çözmek: her adımı anlatmak, seçenekleri paylaşmak ve kararı hastayla birlikte
-              vermek.
+              Misyonumuz, toplum ağız ve diş sağlığı sorunlarının bilimsel yöntemlerle çözümünün sağlanması ve korunmasıdır.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-eyebrow">Vizyon</p>
             <h2 className="mt-6 text-3xl leading-[1.1] font-semibold text-navy md:text-4xl">
-              Bölgemizde referans gösterilen klinik olmak.
+              Örnek teşkil edecek bir kurum olmak.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-graphite">
-              İmplantoloji ve estetik diş hekimliğinde şehir merkezindeki kliniklerle aynı teknoloji
-              ve aynı hekimlik standardını, mahallesinden çıkmadan ulaşılabilir kılmak.
+              Vizyonumuz, ağız ve diş sağlığında&nbsp;tıbbi etiğe ve deontoloji kurallarına uygun sağlık hizmeti üretip&nbsp;hijyen ve hizmet kalitesinde örnek bir kurum olmak.&nbsp;
             </p>
           </Reveal>
         </div>
