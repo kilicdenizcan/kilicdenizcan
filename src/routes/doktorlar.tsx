@@ -84,7 +84,7 @@ function Doctors() {
 
                   <Link
                     to="/randevu"
-                    search={{ doktor: d.name }}
+                    search={{ doktor: d.name, tedavi: undefined }}
                     className="mt-9 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-navy-soft"
                   >
                     {d.name.split(" ").slice(-2).join(" ")} ile randevu

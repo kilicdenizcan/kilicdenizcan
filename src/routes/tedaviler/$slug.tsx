@@ -136,7 +136,7 @@ function TreatmentDetail() {
               </a>
               <Link
                 to="/randevu"
-                search={{ doktor: undefined }}
+                search={{ doktor: undefined, tedavi: t.slug }}
                 className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-border px-6 py-3.5 text-sm font-medium text-navy transition-colors hover:bg-muted"
               >
                 Online randevu

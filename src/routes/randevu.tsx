@@ -8,6 +8,7 @@ import { clinic, treatments, doctors, whatsappHref } from "@/lib/site";
 export const Route = createFileRoute("/randevu")({
   validateSearch: (search: Record<string, unknown>) => ({
     doktor: typeof search.doktor === "string" ? search.doktor : undefined,
+    tedavi: typeof search.tedavi === "string" ? search.tedavi : undefined,
   }),
   head: () => ({
     meta: [
@@ -28,11 +29,13 @@ export const Route = createFileRoute("/randevu")({
 const times = ["09:00 – 12:00", "12:00 – 15:00", "15:00 – 18:00", "18:00 – 21:00"];
 
 function Appointment() {
-  const { doktor } = Route.useSearch();
+  const { doktor, tedavi } = Route.useSearch();
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const matchedDoctor = doctors.find((d) => d.name === doktor)?.name;
+  const matchedTreatment = treatments.find((t) => t.slug === tedavi || t.title === tedavi)?.title;
+
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -110,6 +113,7 @@ function Appointment() {
                   <Field label="Tedavi">
                     <select
                       name="treatment"
+                      defaultValue={matchedTreatment ?? "Genel muayene"}
                       className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
                     >
                       <option>Genel muayene</option>

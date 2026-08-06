@@ -29,7 +29,7 @@ export function CtaBand({
               </a>
               <Link
                 to="/randevu"
-                search={{ doktor: undefined }}
+                search={{ doktor: undefined, tedavi: undefined }}
                 className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-4 text-sm font-medium transition-colors hover:bg-white/10"
               >
                 Online Randevu Formu
