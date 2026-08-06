@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Languages, BriefcaseMedical } from "lucide-react";
+import { Languages, BriefcaseMedical, UserRound } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -39,16 +39,21 @@ function Doctors() {
           {doctors.map((d, i) => (
             <Reveal key={d.name} delay={i * 0.06}>
               <article className="grid gap-8 overflow-hidden rounded-[2rem] border border-border bg-card md:grid-cols-[minmax(0,22rem)_1fr] md:gap-12">
-                <div className="aspect-4/5 overflow-hidden bg-muted md:aspect-auto">
-                  <img
-                    src={d.image}
-                    alt={`${d.name} portresi`}
-                    loading="lazy"
-                    width={912}
-                    height={1104}
-                    className="size-full object-cover"
-                  />
+                <div className="flex aspect-4/5 items-center justify-center overflow-hidden border-b border-border bg-muted md:aspect-auto md:border-r md:border-b-0">
+                  {d.image ? (
+                    <img
+                      src={d.image}
+                      alt={`${d.name} portresi`}
+                      loading="lazy"
+                      width={912}
+                      height={1104}
+                      className="size-full object-cover"
+                    />
+                  ) : (
+                    <UserRound className="size-16 text-border" strokeWidth={1} aria-hidden />
+                  )}
                 </div>
+
                 <div className="p-8 md:py-12 md:pr-12 md:pl-0">
                   <h2 className="text-2xl font-semibold text-navy md:text-3xl">{d.name}</h2>
                   <p className="mt-2 text-sm text-muted-foreground">{d.role}</p>
@@ -59,7 +64,9 @@ function Doctors() {
                       <BriefcaseMedical className="mt-0.5 size-4 shrink-0 text-navy" strokeWidth={1.6} />
                       <div>
                         <dt className="text-xs tracking-[0.16em] text-muted-foreground uppercase">Deneyim</dt>
-                        <dd className="mt-1 text-sm text-foreground">{d.experience}</dd>
+                        <dd className="mt-1 text-sm text-foreground" suppressHydrationWarning>
+                          {d.experience}
+                        </dd>
                       </div>
                     </div>
                     <div className="flex gap-3">

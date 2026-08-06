@@ -1,6 +1,5 @@
 import doctor1 from "@/assets/musa-kilic.png";
-import doctor2 from "@/assets/doctor-2.jpg";
-import doctor3 from "@/assets/doctor-3.jpg";
+
 
 export const clinic = {
   name: "Özel Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği",
@@ -353,7 +352,19 @@ export const treatments: Treatment[] = [
   },
 ];
 
-export const doctors = [
+export type Doctor = {
+  name: string;
+  role: string;
+  /** Gerçek portre geldiğinde doldurulur; boşsa gri yer tutucu gösterilir. */
+  image?: string;
+  careerStart: { year: number; month: number };
+  experience: string;
+  languages: string;
+  bio: string;
+  focus: string[];
+};
+
+export const doctors: Doctor[] = [
   {
     name: "Dt. Musa Kılıç",
     role: "Kurucu Hekim",
@@ -367,7 +378,6 @@ export const doctors = [
   {
     name: "Dt. Burçe Nur Yılmaz",
     role: "Ortodonti",
-    image: doctor2,
     careerStart: { year: 2014, month: 5 },
     experience: `${yearsSince(2014, 5)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce, Almanca",
@@ -377,14 +387,41 @@ export const doctors = [
   {
     name: "Dr. Dt. Emre Demir",
     role: "Ortodonti Uzmanı",
-    image: doctor3,
     careerStart: { year: 2016, month: 5 },
     experience: `${yearsSince(2016, 5)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce",
     bio: "Şeffaf plak tedavileri ve erken dönem çene gelişimi yönlendirmesi üzerine çalışıyor. Yetişkin ortodontisinde görünmez tedavi seçeneklerine odaklanıyor.",
     focus: ["Şeffaf plak", "Sabit ortodonti", "Çocuk ortodontisi"],
   },
+  {
+    name: "Dt. Bilge Coşkun",
+    role: "Restoratif Diş Tedavisi",
+    careerStart: { year: 2015, month: 6 },
+    experience: `${yearsSince(2015, 6)} yıl klinik deneyim`,
+    languages: "Türkçe, İngilizce",
+    bio: "Kompozit dolgu ve estetik restorasyonlar üzerine çalışıyor. Diş eti sağlığını tedavi planının ilk adımı olarak ele alıyor; minimal müdahaleyle doğal görünümü korumayı önceliklendiriyor.",
+    focus: ["Estetik dolgu", "Diş eti tedavisi", "Koruyucu hekimlik"],
+  },
+  {
+    name: "Dt. Zehra Işık",
+    role: "Çocuk Diş Hekimliği",
+    careerStart: { year: 2017, month: 6 },
+    experience: `${yearsSince(2017, 6)} yıl klinik deneyim`,
+    languages: "Türkçe, İngilizce",
+    bio: "Çocuk hastalarda kaygı yönetimi ve koruyucu uygulamalar üzerine çalışıyor. Fissür örtücü, flor uygulaması ve süt dişi tedavilerinde çocuğun kliniğe alışmasını önceleyen kademeli bir yaklaşım izliyor.",
+    focus: ["Çocuk diş hekimliği", "Fissür örtücü", "Koruyucu uygulamalar"],
+  },
+  {
+    name: "Dt. Beyza Oğlakçı",
+    role: "Endodonti ve Genel Diş Hekimliği",
+    careerStart: { year: 2016, month: 9 },
+    experience: `${yearsSince(2016, 9)} yıl klinik deneyim`,
+    languages: "Türkçe, İngilizce",
+    bio: "Büyütme destekli kanal tedavisi ve tekrarlayan enfeksiyonların yönetimi üzerine çalışıyor. Ağrısız tedavi protokolleri ve tek seansta tamamlanabilen vakalarda konforlu çözümlere odaklanıyor.",
+    focus: ["Kanal tedavisi", "Ağrı yönetimi", "Genel diş hekimliği"],
+  },
 ];
+
 
 export type Review = {
   name: string;
