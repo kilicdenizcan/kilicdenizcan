@@ -1,6 +1,5 @@
 import doctor1 from "@/assets/musa-kilic.png";
-import doctor2 from "@/assets/doctor-2.jpg";
-import doctor3 from "@/assets/doctor-3.jpg";
+
 
 export const clinic = {
   name: "Özel Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği",
