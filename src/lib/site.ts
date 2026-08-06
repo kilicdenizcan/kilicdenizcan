@@ -1,4 +1,4 @@
-import doctor1 from "@/assets/doctor-1.jpg";
+import doctor1 from "@/assets/musa-kilic.png";
 import doctor2 from "@/assets/doctor-2.jpg";
 import doctor3 from "@/assets/doctor-3.jpg";
 
