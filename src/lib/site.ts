@@ -385,15 +385,6 @@ export const doctors: Doctor[] = [
     focus: ["Gülüş tasarımı", "Laminate veneer", "Zirkonyum"],
   },
   {
-    name: "Dr. Dt. Emre Demir",
-    role: "Ortodonti Uzmanı",
-    careerStart: { year: 2016, month: 5 },
-    experience: `${yearsSince(2016, 5)} yıl klinik deneyim`,
-    languages: "Türkçe, İngilizce",
-    bio: "Şeffaf plak tedavileri ve erken dönem çene gelişimi yönlendirmesi üzerine çalışıyor. Yetişkin ortodontisinde görünmez tedavi seçeneklerine odaklanıyor.",
-    focus: ["Şeffaf plak", "Sabit ortodonti", "Çocuk ortodontisi"],
-  },
-  {
     name: "Dt. Bilge Coşkun",
     role: "Restoratif Diş Tedavisi",
     careerStart: { year: 2015, month: 6 },
