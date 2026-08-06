@@ -280,7 +280,12 @@ function Home() {
                   <div className="p-7">
                     <h3 className="text-lg font-semibold text-navy">{d.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{d.role}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-graphite">{d.experience}</p>
+                    <p
+                      className="mt-4 text-sm leading-relaxed text-graphite"
+                      suppressHydrationWarning
+                    >
+                      {d.experience}
+                    </p>
                   </div>
                 </article>
               </Reveal>
