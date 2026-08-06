@@ -64,7 +64,9 @@ function Doctors() {
                       <BriefcaseMedical className="mt-0.5 size-4 shrink-0 text-navy" strokeWidth={1.6} />
                       <div>
                         <dt className="text-xs tracking-[0.16em] text-muted-foreground uppercase">Deneyim</dt>
-                        <dd className="mt-1 text-sm text-foreground">{d.experience}</dd>
+                        <dd className="mt-1 text-sm text-foreground" suppressHydrationWarning>
+                          {d.experience}
+                        </dd>
                       </div>
                     </div>
                     <div className="flex gap-3">
