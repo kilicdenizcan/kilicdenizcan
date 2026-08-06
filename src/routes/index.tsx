@@ -9,6 +9,7 @@ import {
   HeartHandshake,
   Star,
   Sparkles,
+  UserRound,
 } from "lucide-react";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import lounge from "@/assets/gallery-lounge.jpg";
