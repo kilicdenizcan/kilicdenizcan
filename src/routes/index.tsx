@@ -261,16 +261,21 @@ function Home() {
             {doctors.map((d, i) => (
               <Reveal key={d.name} delay={i * 0.08}>
                 <article className="group overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:shadow-lift">
-                  <div className="aspect-4/5 overflow-hidden bg-muted">
-                    <img
-                      src={d.image}
-                      alt={`${d.name} portresi`}
-                      loading="lazy"
-                      width={912}
-                      height={1104}
-                      className="size-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
-                    />
+                  <div className="flex aspect-4/5 items-center justify-center overflow-hidden bg-muted">
+                    {d.image ? (
+                      <img
+                        src={d.image}
+                        alt={`${d.name} portresi`}
+                        loading="lazy"
+                        width={912}
+                        height={1104}
+                        className="size-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <UserRound className="size-14 text-border" strokeWidth={1} aria-hidden />
+                    )}
                   </div>
+
                   <div className="p-7">
                     <h3 className="text-lg font-semibold text-navy">{d.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{d.role}</p>
