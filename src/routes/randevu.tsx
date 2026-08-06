@@ -29,11 +29,13 @@ export const Route = createFileRoute("/randevu")({
 const times = ["09:00 – 12:00", "12:00 – 15:00", "15:00 – 18:00", "18:00 – 21:00"];
 
 function Appointment() {
-  const { doktor } = Route.useSearch();
+  const { doktor, tedavi } = Route.useSearch();
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const matchedDoctor = doctors.find((d) => d.name === doktor)?.name;
+  const matchedTreatment = treatments.find((t) => t.slug === tedavi || t.title === tedavi)?.title;
+
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
