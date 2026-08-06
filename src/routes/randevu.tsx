@@ -8,6 +8,7 @@ import { clinic, treatments, doctors, whatsappHref } from "@/lib/site";
 export const Route = createFileRoute("/randevu")({
   validateSearch: (search: Record<string, unknown>) => ({
     doktor: typeof search.doktor === "string" ? search.doktor : undefined,
+    tedavi: typeof search.tedavi === "string" ? search.tedavi : undefined,
   }),
   head: () => ({
     meta: [
