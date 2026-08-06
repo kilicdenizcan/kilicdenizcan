@@ -113,6 +113,7 @@ function Appointment() {
                   <Field label="Tedavi">
                     <select
                       name="treatment"
+                      defaultValue={matchedTreatment ?? "Genel muayene"}
                       className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
                     >
                       <option>Genel muayene</option>
