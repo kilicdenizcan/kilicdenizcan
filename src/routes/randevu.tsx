@@ -4,6 +4,13 @@ import { Check, Loader2 } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { clinic, treatments, doctors, whatsappHref } from "@/lib/site";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/randevu")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -36,6 +43,9 @@ function Appointment() {
   const matchedDoctor = doctors.find((d) => d.name === doktor)?.name;
   const matchedTreatment = treatments.find((t) => t.slug === tedavi || t.title === tedavi)?.title;
 
+  const [treatment, setTreatment] = useState(matchedTreatment ?? "Genel muayene");
+  const [doctor, setDoctor] = useState(matchedDoctor ?? "Fark etmez");
+  const [time, setTime] = useState(times[0]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,7 +66,6 @@ function Appointment() {
     setSending(false);
     setSent(true);
   }
-
 
   return (
     <>
@@ -111,38 +120,51 @@ function Appointment() {
                     />
                   </Field>
                   <Field label="Tedavi">
-                    <select
-                      name="treatment"
-                      defaultValue={matchedTreatment ?? "Genel muayene"}
-                      className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
-                    >
-                      <option>Genel muayene</option>
-                      {treatments.map((t) => (
-                        <option key={t.slug}>{t.title}</option>
-                      ))}
-                    </select>
+                    <Select value={treatment} onValueChange={setTreatment}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Tedavi seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Genel muayene">Genel muayene</SelectItem>
+                        {treatments.map((t) => (
+                          <SelectItem key={t.slug} value={t.title}>
+                            {t.title}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <input type="hidden" name="treatment" value={treatment} />
                   </Field>
                   <Field label="Tercih edilen hekim">
-                    <select
-                      name="doctor"
-                      defaultValue={matchedDoctor ?? "Fark etmez"}
-                      className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
-                    >
-                      <option>Fark etmez</option>
-                      {doctors.map((d) => (
-                        <option key={d.name}>{d.name}</option>
-                      ))}
-                    </select>
+                    <Select value={doctor} onValueChange={setDoctor}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Hekim seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Fark etmez">Fark etmez</SelectItem>
+                        {doctors.map((d) => (
+                          <SelectItem key={d.name} value={d.name}>
+                            {d.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <input type="hidden" name="doctor" value={doctor} />
                   </Field>
                   <Field label="Tercih edilen saat">
-                    <select
-                      name="time"
-                      className="w-full rounded-xl border border-border bg-background px-4 py-3.5 text-sm outline-none transition-colors focus:border-navy"
-                    >
-                      {times.map((t) => (
-                        <option key={t}>{t}</option>
-                      ))}
-                    </select>
+                    <Select value={time} onValueChange={setTime}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Saat aralığı seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {times.map((t) => (
+                          <SelectItem key={t} value={t}>
+                            {t}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <input type="hidden" name="time" value={time} />
                   </Field>
                 </div>
 
