@@ -34,11 +34,12 @@ function Contact() {
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <Reveal>
             <div className="space-y-8">
-              {[
-                { icon: MapPin, label: "Adres", value: clinic.address },
-                { icon: Phone, label: "Telefon", value: clinic.phoneDisplay, href: `tel:${clinic.phone}` },
-                { icon: Mail, label: "E-posta", value: clinic.email, href: `mailto:${clinic.email}` },
-              ].map((c) => (
+                {[
+                  { icon: MapPin, label: "Adres", value: clinic.address },
+                  { icon: Phone, label: "Telefon", value: clinic.phoneDisplay, href: `tel:${clinic.phone}` },
+                  { icon: Phone, label: "Telefon", value: clinic.phone2Display, href: `tel:${clinic.phone2}` },
+                  { icon: Mail, label: "E-posta", value: clinic.email, href: `mailto:${clinic.email}` },
+                ].map((c) => (
                 <div key={c.label} className="flex gap-4">
                   <c.icon className="mt-1 size-5 shrink-0 text-navy" strokeWidth={1.5} />
                   <div className="min-w-0">
