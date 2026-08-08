@@ -77,13 +77,22 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <a
-              href={`tel:${clinic.phone}`}
-              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-graphite transition-colors hover:text-navy xl:flex"
-            >
-              <Phone className="size-4" strokeWidth={1.6} />
-              {clinic.phoneDisplay}
-            </a>
+            <div className="hidden items-center gap-1 text-sm text-graphite xl:flex">
+              <a
+                href={`tel:${clinic.phone}`}
+                className="flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-colors hover:text-navy"
+              >
+                <Phone className="size-4" strokeWidth={1.6} />
+                {clinic.phoneDisplay}
+              </a>
+              <span className="text-border">|</span>
+              <a
+                href={`tel:${clinic.phone2}`}
+                className="flex items-center gap-1.5 rounded-full px-2.5 py-2 transition-colors hover:text-navy"
+              >
+                {clinic.phone2Display}
+              </a>
+            </div>
             <Link
               to="/randevu"
               search={{ doktor: undefined, tedavi: undefined }}
