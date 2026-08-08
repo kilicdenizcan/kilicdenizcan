@@ -25,6 +25,12 @@ export const whatsappHref = `https://wa.me/${clinic.whatsapp}?text=${encodeURICo
   clinic.whatsappText,
 )}`;
 
+/** Belirli bir tedavi başlığı için WhatsApp randevu bağlantısı üretir. */
+export function whatsappHrefWithTreatment(treatmentTitle: string) {
+  const text = `Merhaba, Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği'nden ${treatmentTitle} tedavisi hakkında bilgi almak ve randevu almak istiyorum.`;
+  return `https://wa.me/${clinic.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
 /** Verilen başlangıç tarihinden bugüne tamamlanan yıl sayısı. */
 export function yearsSince(startYear: number, startMonth = 5) {
   const now = new Date();
