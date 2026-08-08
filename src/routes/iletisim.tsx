@@ -36,24 +36,37 @@ function Contact() {
             <div className="space-y-8">
                 {[
                   { icon: MapPin, label: "Adres", value: clinic.address },
-                  { icon: Phone, label: "Telefon", value: clinic.phoneDisplay, href: `tel:${clinic.phone}` },
-                  { icon: Phone, label: "Telefon", value: clinic.phone2Display, href: `tel:${clinic.phone2}` },
                   { icon: Mail, label: "E-posta", value: clinic.email, href: `mailto:${clinic.email}` },
                 ].map((c) => (
-                <div key={c.label} className="flex gap-4">
-                  <c.icon className="mt-1 size-5 shrink-0 text-navy" strokeWidth={1.5} />
+                  <div key={c.label} className="flex gap-4">
+                    <c.icon className="mt-1 size-5 shrink-0 text-navy" strokeWidth={1.5} />
+                    <div className="min-w-0">
+                      <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{c.label}</p>
+                      {c.href ? (
+                        <a href={c.href} className="mt-1.5 block text-base text-foreground hover:text-navy">
+                          {c.value}
+                        </a>
+                      ) : (
+                        <p className="mt-1.5 text-base leading-relaxed text-foreground">{c.value}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                <div className="flex items-center gap-4">
+                  <Phone className="size-5 shrink-0 text-navy" strokeWidth={1.5} />
                   <div className="min-w-0">
-                    <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{c.label}</p>
-                    {c.href ? (
-                      <a href={c.href} className="mt-1.5 block text-base text-foreground hover:text-navy">
-                        {c.value}
+                    <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">Telefon</p>
+                    <div className="mt-1.5 flex flex-col gap-1">
+                      <a href={`tel:${clinic.phone}`} className="block text-base text-foreground hover:text-navy">
+                        {clinic.phoneDisplay}
                       </a>
-                    ) : (
-                      <p className="mt-1.5 text-base leading-relaxed text-foreground">{c.value}</p>
-                    )}
+                      <a href={`tel:${clinic.phone2}`} className="block text-base text-foreground hover:text-navy">
+                        {clinic.phone2Display}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              ))}
 
               <div className="flex gap-4">
                 <Clock className="mt-1 size-5 shrink-0 text-navy" strokeWidth={1.5} />
