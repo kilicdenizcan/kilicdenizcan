@@ -126,7 +126,7 @@ function TreatmentDetail() {
                 ))}
               </ul>
               <a
-                href={whatsappHref}
+                href={whatsappHrefWithTreatment(t.title)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-navy-soft"
