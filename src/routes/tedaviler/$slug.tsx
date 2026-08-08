@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Check, Clock, Repeat, Syringe } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
-import { treatments, whatsappHref, type Treatment } from "@/lib/site";
+import { treatments, whatsappHrefWithTreatment, type Treatment } from "@/lib/site";
 import {
   Accordion,
   AccordionContent,
