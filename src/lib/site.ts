@@ -6,6 +6,8 @@ export const clinic = {
   shortName: "Yeni Yaşam",
   phoneDisplay: "0553 841 71 73",
   phone: "+905538417173",
+  phone2Display: "0212 536 49 56",
+  phone2: "+902125364956",
   whatsapp: "905538417173",
   whatsappText:
     "Merhaba, Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği'nden randevu almak istiyorum.",
