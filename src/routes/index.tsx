@@ -127,7 +127,9 @@ function Home() {
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div className="px-1 md:px-4">
-                <p className="text-3xl font-semibold text-navy md:text-4xl">{s.value}</p>
+                <p className="text-3xl font-semibold text-navy md:text-4xl" suppressHydrationWarning>
+                  {s.value}
+                </p>
                 <p className="mt-2 text-sm font-medium text-foreground">{s.label}</p>
                 <p className="text-sm text-muted-foreground">{s.detail}</p>
               </div>
@@ -147,7 +149,7 @@ function Home() {
             <p className="mt-6 text-base leading-relaxed text-graphite">
               Her hasta için ortalama 45 dakikalık bir ilk değerlendirme ayırıyoruz. Röntgen ve
               dijital tarama sonrası tedavi seçeneklerini, sürelerini ve maliyetlerini yazılı olarak
-              paylaşıyoruz. Sürpriz yok, baskı yok.
+              paylaşıyoruz.&nbsp;
             </p>
             <Link
               to="/hakkimizda"
@@ -160,10 +162,10 @@ function Home() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { icon: ScanLine, title: "Dijital planlama", text: "3B tomografi, dijital ölçü ve cerrahi rehber ile öngörülebilir sonuç." },
+              { icon: ScanLine, title: "Dijital planlama", text: "Panoramik, RVG, 3B tomografi ve dijital ölçü \u00a0ile öngörülebilir sonuç." },
               { icon: ShieldCheck, title: "Sterilizasyon", text: "B sınıfı otoklav, poşetli saklama ve hasta önünde açılan setler." },
-              { icon: HeartHandshake, title: "Tek hekim sorumluluğu", text: "Tedavinizi başlatan hekim, süreci sonuna kadar yürütür." },
-              { icon: Sparkles, title: "Konfor odaklı", text: "Sedasyon seçeneği, sessiz cihazlar ve dakikliğe saygılı randevu düzeni." },
+              { icon: HeartHandshake, title: "Güven ortamı", text: "Tedaviniz süresince güvende hissettiğiniz, dilediğiniz an iletişime geçebildiğiniz bir ortam." },
+              { icon: Sparkles, title: "Memnuniyet", text: "Tedaviniz sonunda kliniğimizden gülerek ayrılacaksınız." },
             ].map((f, i) => (
               <Reveal key={f.title} delay={i * 0.08}>
                 <article className="h-full rounded-3xl border border-border bg-card p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
@@ -227,11 +229,10 @@ function Home() {
           <Reveal>
             <p className="text-eyebrow">Öncesi / Sonrası</p>
             <h2 className="mt-6 text-3xl leading-[1.08] font-semibold text-navy md:text-5xl">
-              Sonucu tedaviye başlamadan görürsünüz.
+              Gülüşünüzü düzeltmek sandığınız kadar zor değil.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-graphite">
-              Dijital gülüş tasarımında hedeflenen sonucu ekranda ve ağzınızdaki geçici provada
-              görürsünüz. Onayınız olmadan kalıcı işlem yapılmaz.
+              Kliniğimizde "Diode Laser" sayesinde gülüşünüzü yenilikçi çözümler ile ideal noktaya getiriyoruz.
             </p>
             <Link
               to="/tedaviler/$slug"
