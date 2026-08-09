@@ -82,7 +82,7 @@ export const treatments: Treatment[] = [
     title: "Koruyucu Diş Hekimliği",
     short: "Çürük oluşmadan önce koruyucu önlemlerle sağlıklı gülüşler.",
     summary:
-      "Yeni Yaşam'da koruyucu diş hekimliği sadece diş taşı temizliği değil, bütüncül bir sağlık yaklaşımıdır. Diş taşı temizliği ve her kapsamlı işlem yaptıran hastaya ücretsiz ağız ve diş sağlığı eğitimi verilir; çocuk hastalara diş fırçalama eğitimi verilip fırçalama takvimi oluşturulur. Çocuk dişlerine flor uygulaması yapılır; genç ve süt dişlerini çürüğe karşı korumak için fissür örtücü uygulaması gerçekleştirilir.",
+      "Kliniğimizde koruyucu diş hekimliği sadece diş taşı temizliği değil, bütüncül bir sağlık yaklaşımıdır. Diş taşı temizliği ve her kapsamlı işlem yaptıran hastaya ücretsiz ağız ve diş sağlığı eğitimi verilir; çocuk hastalara bakteri plağı boyaması yapılır, diş fırçalama eğitimi verilip fırçalama takvimi oluşturulur. Çocuk dişlerine flor uygulaması yapılır; genç ve süt dişlerini çürüğe karşı korumak için fissür örtücü uygulaması gerçekleştirilir.",
     duration: "",
     sessions: "",
     anesthesia: "",
