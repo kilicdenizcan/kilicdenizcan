@@ -78,6 +78,32 @@ export type Treatment = {
 
 export const treatments: Treatment[] = [
   {
+    slug: "koruyucu-dis-hekimligi",
+    title: "Koruyucu Diş Hekimliği",
+    short: "Çürük oluşmadan önce koruyucu önlemlerle sağlıklı gülüşler.",
+    summary:
+      "Yeni Yaşam'da koruyucu diş hekimliği sadece diş taşı temizliği değil, bütüncül bir sağlık yaklaşımıdır. Diş taşı temizliği ve her kapsamlı işlem yaptıran hastaya ücretsiz ağız ve diş sağlığı eğitimi verilir; çocuk hastalara diş fırçalama eğitimi verilip fırçalama takvimi oluşturulur. Çocuk dişlerine flor uygulaması yapılır; genç ve süt dişlerini çürüğe karşı korumak için fissür örtücü uygulaması gerçekleştirilir.",
+    duration: "",
+    sessions: "",
+    anesthesia: "",
+    benefits: [
+      "Çürük oluşmadan önce erken müdahale",
+      "Çocuklarda doğru fırçalama alışkanlığı",
+      "Süt ve genç dişlerin korunması",
+      "Bütüncül ağız sağlığı eğitimi",
+    ],
+    steps: [
+      { title: "Risk değerlendirmesi", text: "Ağız içi muayene, çürük riski ve diş eti sağlığı değerlendirilir." },
+      { title: "Profesyonel temizlik", text: "Ultrasonik temizlik ve parlatma ile diş taşları ve plak uzaklaştırılır." },
+      { title: "Koruyucu uygulamalar", text: "Gerektiğinde flor ve fissür örtücü uygulaması yapılır." },
+      { title: "Eğitim ve takvim", text: "Hasta ve ebeveyne bireysel fırçalama tekniği ve takvimi önerilir." },
+    ],
+    faq: [
+      { q: "Koruyucu işlemler ne kadar gerekli?", a: "Çürük ve diş eti hastalıklarının büyük bölümü önlenebilir. Erken yaşta başlayan koruyucu uygulamalar, ileride daha invaziv tedavilere ihtiyacı ciddi ölçüde azaltır." },
+      { q: "Kaç yaşında başlanmalı?", a: "İlk diş hekimi ziyareti ilk süt dişi çıktıktan sonra, en geç 1 yaşında yapılmalıdır. Fissür örtücü ve flor uygulamaları genellikle süt ve kalıcı dişlerin çıkışı tamamlandığı dönemlerde planlanır." },
+    ],
+  },
+  {
     slug: "implant",
     title: "Diş İmplantı",
     short: "Eksik dişin yerine, ömür boyu kullanılabilen titanyum kök.",
