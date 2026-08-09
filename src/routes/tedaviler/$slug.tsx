@@ -128,7 +128,7 @@ function TreatmentDetail() {
                             </div>
                             <div className="mt-6 flex items-center gap-3 text-xs tracking-[0.16em] text-muted-foreground uppercase">
                               <span className="h-px flex-1 bg-border" />
-                              Ortak devam
+                              ORTAK SONUÇ
                               <span className="h-px flex-1 bg-border" />
                             </div>
                           </div>
