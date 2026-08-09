@@ -91,7 +91,7 @@ export const treatments: Treatment[] = [
       { title: "Dijital planlama", text: "3B tomografi ile kemik hacmi ölçülür, implant konumu milimetrik planlanır." },
       { title: "Cerrahi uygulama", text: "Lokal anestezi altında ağrısız yerleştirme." },
       { title: "Osseointegrasyon (gerek varsa)", text: "İmplantın kemikle kaynaşması için 2–3 ay beklenir." },
-      { title: "Üst yapı", text: "Dijital ölçü ile zirkonyum kron hazırlanır ve implanta sabitlenir." },
+      { title: "Üst yapı", text: "Dijital ölçü ile zirkonyum veya metal porselen hazırlanır ve implanta sabitlenir." },
     ],
     faq: [
       { q: "İmplant tedavisi ağrılı mıdır?", a: "İşlem lokal anestezi altında yapılır ve hasta ağrı hissetmez. Sonrasında hafif hassasiyet 1–2 gün sürebilir." },
