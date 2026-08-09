@@ -77,7 +77,7 @@ export const treatments: Treatment[] = [
     title: "Diş İmplantı",
     short: "Eksik dişin yerine, ömür boyu kullanılabilen titanyum kök.",
     summary:
-      "İmplant tedavisi, kaybedilen dişin kökünü titanyum bir vida ile yeniden oluşturur. Yeni Yaşam'da her implant planlaması 3B dijital tomografi ve cerrahi rehber ile yapılır; böylece işlem hem daha kısa hem de öngörülebilir olur.",
+      "İmplant tedavisi, kaybedilen dişin kökünü titanyum bir vida ile yeniden oluşturur. Yeni Yaşam'da her implant planlaması panoramik röntgen, RVG ve 3B dijital tomografi \u00a0ile yapılır; böylece işlem hem daha kısa hem de öngörülebilir olur.\n",
     duration: "30–60 dakika",
     sessions: "2 seans + iyileşme",
     anesthesia: "Lokal anestezi",
@@ -89,8 +89,8 @@ export const treatments: Treatment[] = [
     ],
     steps: [
       { title: "Dijital planlama", text: "3B tomografi ile kemik hacmi ölçülür, implant konumu milimetrik planlanır." },
-      { title: "Cerrahi uygulama", text: "Lokal anestezi altında, rehber destekli ve ağrısız yerleştirme." },
-      { title: "Osseointegrasyon", text: "İmplantın kemikle kaynaşması için 2–3 ay beklenir, geçici diş yapılır." },
+      { title: "Cerrahi uygulama", text: "Lokal anestezi altında ağrısız yerleştirme." },
+      { title: "Osseointegrasyon (gerek varsa)", text: "İmplantın kemikle kaynaşması için 2–3 ay beklenir." },
       { title: "Üst yapı", text: "Dijital ölçü ile zirkonyum kron hazırlanır ve implanta sabitlenir." },
     ],
     faq: [
