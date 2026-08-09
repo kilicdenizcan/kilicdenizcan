@@ -142,7 +142,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: "zirkonyum",
-    title: "Zirkonyum Kaplama",
+    title: "Estetik Uygulamalar",
     short: "Metal içermeyen, ışığı doğal diş gibi geçiren estetik kron.",
     summary:
       "Zirkonyum kronlar, metal destekli kaplamaların aksine ışığı geçirdiği için doğal diş görünümü verir. Diş eti kenarında gri hat oluşturmaz ve alerjik reaksiyon riski taşımaz.",
