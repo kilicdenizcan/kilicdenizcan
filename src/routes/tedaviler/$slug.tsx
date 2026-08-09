@@ -49,6 +49,7 @@ export const Route = createFileRoute("/tedaviler/$slug")({
 function TreatmentDetail() {
   const t: Treatment = Route.useLoaderData();
   const others = treatments.filter((x) => x.slug !== t.slug).slice(0, 3);
+  const showMeta = Boolean(t.duration || t.sessions || t.anesthesia);
 
   return (
     <>
@@ -69,21 +70,23 @@ function TreatmentDetail() {
               {t.summary}
             </p>
 
-            <dl className="mt-12 grid gap-6 sm:grid-cols-3">
-              {[
-                { icon: Clock, label: "İşlem süresi", value: t.duration },
-                { icon: Repeat, label: "Seans", value: t.sessions },
-                { icon: Syringe, label: "Anestezi", value: t.anesthesia },
-              ].map((m) => (
-                <div key={m.label} className="flex gap-3">
-                  <m.icon className="mt-0.5 size-4 shrink-0 text-navy" strokeWidth={1.6} />
-                  <div>
-                    <dt className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{m.label}</dt>
-                    <dd className="mt-1 text-sm text-foreground">{m.value}</dd>
+            {showMeta && (
+              <dl className="mt-12 grid gap-6 sm:grid-cols-3">
+                {[
+                  { icon: Clock, label: "İşlem süresi", value: t.duration },
+                  { icon: Repeat, label: "Seans", value: t.sessions },
+                  { icon: Syringe, label: "Anestezi", value: t.anesthesia },
+                ].map((m) => (
+                  <div key={m.label} className="flex gap-3">
+                    <m.icon className="mt-0.5 size-4 shrink-0 text-navy" strokeWidth={1.6} />
+                    <div>
+                      <dt className="text-xs tracking-[0.16em] text-muted-foreground uppercase">{m.label}</dt>
+                      <dd className="mt-1 text-sm text-foreground">{m.value}</dd>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </dl>
+                ))}
+              </dl>
+            )}
           </Reveal>
         </div>
       </section>
