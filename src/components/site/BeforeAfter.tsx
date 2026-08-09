@@ -21,71 +21,73 @@ export function BeforeAfter() {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="relative aspect-[4/3] w-full touch-none cursor-ew-resize overflow-hidden rounded-[2rem] bg-muted select-none sm:aspect-[16/10]"
-      onPointerDown={(e) => {
-        dragging.current = true;
-        e.currentTarget.setPointerCapture(e.pointerId);
-        move(e.clientX);
-      }}
-      onPointerMove={(e) => {
-        if (dragging.current) move(e.clientX);
-      }}
-      onPointerUp={(e) => {
-        dragging.current = false;
-        if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
-      }}
-      onPointerCancel={() => (dragging.current = false)}
-      onPointerLeave={() => (dragging.current = false)}
-    >
-      <img
-        src={afterImg}
-        alt="Gülüş tasarımı sonrası diş görünümü"
-        loading="lazy"
-        draggable={false}
-        width={1200}
-        height={912}
-        className="pointer-events-none absolute inset-0 size-full object-cover object-center"
-      />
-      <div className="pointer-events-none absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+    <>
+      <div
+        ref={ref}
+        className="relative aspect-[25/19] w-full touch-none cursor-ew-resize overflow-hidden rounded-[2rem] bg-muted select-none"
+        onPointerDown={(e) => {
+          dragging.current = true;
+          e.currentTarget.setPointerCapture(e.pointerId);
+          move(e.clientX);
+        }}
+        onPointerMove={(e) => {
+          if (dragging.current) move(e.clientX);
+        }}
+        onPointerUp={(e) => {
+          dragging.current = false;
+          if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+        }}
+        onPointerCancel={() => (dragging.current = false)}
+        onPointerLeave={() => (dragging.current = false)}
+      >
         <img
-          src={beforeImg}
-          alt="Tedavi öncesi diş görünümü"
+          src={afterImg}
+          alt="Gülüş tasarımı sonrası diş görünümü"
           loading="lazy"
           draggable={false}
           width={1200}
           height={912}
-          className="absolute inset-0 size-full object-cover object-center"
+          className="pointer-events-none absolute inset-0 size-full object-cover object-center"
+        />
+        <div className="pointer-events-none absolute inset-0 will-change-[clip-path]" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+          <img
+            src={beforeImg}
+            alt="Tedavi öncesi diş görünümü"
+            loading="lazy"
+            draggable={false}
+            width={1200}
+            height={912}
+            className="absolute inset-0 size-full object-cover object-center"
+          />
+        </div>
+
+        <span className="pointer-events-none absolute top-5 left-5 rounded-full bg-navy/80 px-3 py-1.5 text-xs font-medium text-primary-foreground backdrop-blur-sm">
+          Öncesi
+        </span>
+        <span className="pointer-events-none absolute top-5 right-5 rounded-full bg-background/85 px-3 py-1.5 text-xs font-medium text-navy backdrop-blur-sm">
+          Sonrası
+        </span>
+
+        <div className="pointer-events-none absolute inset-y-0 w-px bg-background/90 shadow-[0_0_12px_rgba(0,0,0,0.15)]" style={{ left: `${pos}%` }}>
+          <span className="absolute top-1/2 left-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-background text-navy shadow-lift">
+            <MoveHorizontal className="size-5" strokeWidth={1.6} />
+          </span>
+        </div>
+
+        <label className="sr-only" htmlFor="ba-range">
+          Öncesi sonrası karşılaştırma
+        </label>
+        <input
+          id="ba-range"
+          type="range"
+          min={2}
+          max={98}
+          value={pos}
+          onChange={(e) => setPos(Number(e.target.value))}
+          className="sr-only pointer-events-none"
         />
       </div>
-
-      <span className="pointer-events-none absolute top-5 left-5 rounded-full bg-navy/80 px-3 py-1.5 text-xs font-medium text-primary-foreground backdrop-blur-sm">
-        Öncesi
-      </span>
-      <span className="pointer-events-none absolute top-5 right-5 rounded-full bg-background/85 px-3 py-1.5 text-xs font-medium text-navy backdrop-blur-sm">
-        Sonrası
-      </span>
-
-      <div className="pointer-events-none absolute inset-y-0 w-px bg-background/90" style={{ left: `${pos}%` }}>
-        <span className="absolute top-1/2 left-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-background text-navy shadow-lift">
-          <MoveHorizontal className="size-5" strokeWidth={1.6} />
-        </span>
-      </div>
-
-      <label className="sr-only" htmlFor="ba-range">
-        Öncesi sonrası karşılaştırma
-      </label>
-      <input
-        id="ba-range"
-        type="range"
-        min={2}
-        max={98}
-        value={pos}
-        onChange={(e) => setPos(Number(e.target.value))}
-        className="sr-only"
-      />
-
-    </div>
+      <p className="mt-3 text-center text-xs text-muted-foreground/60">*Görsel temsilidir.</p>
+    </>
   );
 }
