@@ -8,11 +8,11 @@ import { treatments } from "@/lib/site";
 export const Route = createFileRoute("/tedaviler/")({
   head: () => ({
     meta: [
-      { title: "Tedaviler | İmplant, Gülüş Tasarımı, Zirkonyum | Yeni Yaşam" },
+      { title: "Tedaviler | Koruyucu Diş Hekimliği, İmplant, Gülüş Tasarımı | Yeni Yaşam" },
       {
         name: "description",
         content:
-          "İmplant, gülüş tasarımı, zirkonyum, ortodonti, çocuk diş hekimliği, kanal tedavisi ve daha fazlası. Sultangazi Yeni Yaşam Polikliniği.",
+          "Koruyucu diş hekimliği, implant, gülüş tasarımı, zirkonyum, ortodonti, çocuk diş hekimliği, kanal tedavisi ve daha fazlası. Sultangazi Yeni Yaşam Polikliniği.",
       },
       { property: "og:title", content: "Tedaviler | Yeni Yaşam Klinik" },
       {
@@ -49,7 +49,7 @@ function TreatmentsPage() {
                 </div>
                 <div className="mt-10 flex items-center justify-between">
                   <span className="text-xs tracking-[0.16em] text-muted-foreground uppercase">
-                    {t.sessions}
+                    {t.sessions || "—"}
                   </span>
                   <ArrowUpRight
                     className="size-4 text-navy transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
