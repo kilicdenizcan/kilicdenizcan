@@ -145,9 +145,9 @@ export const treatments: Treatment[] = [
     title: "Estetik Uygulamalar",
     short: "Metal içermeyen, ışığı doğal diş gibi geçiren estetik kron.",
     summary:
-      "Zirkonyum kronlar, metal destekli kaplamaların aksine ışığı geçirdiği için doğal diş görünümü verir. Diş eti kenarında gri hat oluşturmaz ve alerjik reaksiyon riski taşımaz.",
-    duration: "60 dakika",
-    sessions: "2–3 seans",
+      "Zirkonyum, e-max, empress kronlar ve lamine uygulamaları.\u00a0",
+    duration: "Değişkenlik gösterir",
+    sessions: "3-4 seans",
     anesthesia: "Lokal anestezi",
     benefits: [
       "Doğal ışık geçirgenliği",
@@ -156,10 +156,10 @@ export const treatments: Treatment[] = [
       "Doku dostu, alerji yapmaz",
     ],
     steps: [
-      { title: "Hazırlık", text: "Diş minimal düzeyde hazırlanır ve dijital ölçü alınır." },
+      { title: "Hazırlık", text: "Diş minimal düzeyde hazırlanır. Akabinde dijital veya konvensiyonel ölçü alınır." },
       { title: "Renk seçimi", text: "Doğal dişlerinizle uyumlu renk gün ışığında belirlenir." },
-      { title: "Prova", text: "Alt yapı provası ile uyum kontrol edilir." },
-      { title: "Yapıştırma", text: "Kron kalıcı simantasyon ile sabitlenir." },
+      { title: "Prova", text: "Alt ve üst yapı provaları ile uyum kontrol edilir.\u00a0" },
+      { title: "Yapıştırma", text: "Yapılan iş uygun malzeme ile simante edilerek sabitlenir." },
     ],
     faq: [
       { q: "Zirkonyum sararır mı?", a: "Hayır. Yüzeyi gözeneksiz olduğu için çay, kahve ve sigara lekesi tutmaz." },
