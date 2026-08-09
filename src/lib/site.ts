@@ -68,6 +68,11 @@ export type Treatment = {
   anesthesia: string;
   benefits: string[];
   steps: { title: string; text: string }[];
+  branchStep?: {
+    afterStep: number;
+    title: string;
+    options: { title: string; text: string }[];
+  };
   faq: { q: string; a: string }[];
 };
 
