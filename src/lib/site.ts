@@ -53,7 +53,7 @@ export const stats = [
     label: "Yıllık deneyim",
     detail: "Sultangazi'de",
   },
-  { value: "12.000+", label: "Mutlu hasta", detail: "tedavi tamamlandı" },
+  { value: "10.000+", label: "Mutlu hasta", detail: "tedavi tamamlandı" },
   { value: "%100", label: "Sterilizasyon", detail: "tek kullanımlık set" },
 ];
 
