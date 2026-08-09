@@ -119,21 +119,21 @@ export const treatments: Treatment[] = [
     title: "Gülüş Tasarımı",
     short: "Yüz hatlarınıza özel, dijital olarak planlanan doğal gülüş.",
     summary:
-      "Gülüş tasarımı yalnızca diş beyazlatmak değildir. Yüz simetriniz, dudak hattınız ve konuşma biçiminiz analiz edilerek size özel bir gülüş kurgulanır; tedaviye başlamadan önce sonucu dijital olarak görürsünüz.",
-    duration: "45 dakika analiz",
-    sessions: "3–5 seans",
+      "Gülüş tasarımı yalnızca diş beyazlatmak değildir. Yüz simetriniz, dudak hattınız ve konuşma biçiminiz analiz edilerek size özel bir gülüş kurgulanır; Diode Laser ile Gingivoplasti (diş eti estetiği) ve Gingivektomi (hastalıklı diş eti operasyonu) yapılarak gülüş tasarımı uygulanır.\u00a0",
+    duration: "Değişkenlik gösterir",
+    sessions: "Değişkenlik gösterir",
     anesthesia: "Gerektiğinde lokal",
     benefits: [
-      "Tedavi öncesi dijital önizleme (mock-up)",
+      "Kalıcı tedavi öncesi önizleme\u00a0",
       "Yüz oranlarına uygun doğal görünüm",
       "Minimum diş aşındırması",
       "Uzun ömürlü, leke tutmayan yüzeyler",
     ],
     steps: [
       { title: "Analiz", text: "Fotoğraf, video ve dijital ölçü ile gülüş analizi yapılır." },
-      { title: "Dijital tasarım", text: "Yeni gülüşünüz ekranda tasarlanır ve birlikte revize edilir." },
-      { title: "Prova", text: "Geçici mock-up ile yeni gülüşünüzü ağzınızda deneyimlersiniz." },
-      { title: "Uygulama", text: "Onaylanan tasarım laminate veya zirkonyum ile kalıcı hale getirilir." },
+      { title: "Özel tasarım", text: "Yeni gülüşünüz tasarlanır ve birlikte revize edilir." },
+      { title: "Prova", text: "Geçici mock-up veya geçici diş ile yeni gülüşünüzü ağzınızda deneyimlersiniz." },
+      { title: "Uygulama", text: "Onaylanan tasarım laminate, zirkonyum veya metal destekli porselen ile kalıcı hale getirilir." },
     ],
     faq: [
       { q: "Sonucu önceden görebilir miyim?", a: "Evet. Dijital tasarım ve ağız içi prova ile tedaviye başlamadan sonucu görürsünüz." },
