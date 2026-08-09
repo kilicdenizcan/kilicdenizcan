@@ -68,6 +68,11 @@ export type Treatment = {
   anesthesia: string;
   benefits: string[];
   steps: { title: string; text: string }[];
+  branchStep?: {
+    afterStep: number;
+    title: string;
+    options: { title: string; text: string }[];
+  };
   faq: { q: string; a: string }[];
 };
 
@@ -90,9 +95,20 @@ export const treatments: Treatment[] = [
     steps: [
       { title: "Dijital planlama", text: "3B tomografi ile kemik hacmi ölçülür, implant konumu milimetrik planlanır." },
       { title: "Cerrahi uygulama", text: "Lokal anestezi altında ağrısız yerleştirme." },
-      { title: "Osseointegrasyon (gerek varsa)", text: "İmplantın kemikle kaynaşması için 2–3 ay beklenir." },
       { title: "Üst yapı", text: "Dijital ölçü ile zirkonyum veya metal porselen hazırlanır ve implanta sabitlenir." },
     ],
+    branchStep: {
+      afterStep: 2,
+      title: "Uygulama yöntemi",
+      options: [
+        { title: "Osseointegrasyon (gerek varsa)", text: "İmplantın kemikle kaynaşması için 2–3 ay beklenir." },
+        { title: "İmmediat uygulama-yükleme", text: "Diş çekildiği gibi implant yerleştirilir ve diş yapılır." },
+        {
+          title: "Fast&Fixed İmplant",
+          text: "Bütün dişlerin çekilmesi sonucunda uygulanan metottur. Dişler çekildikten sonra implantlar hemen yerleştirilir ve üzerine diş yapılır.",
+        },
+      ],
+    },
     faq: [
       { q: "İmplant tedavisi ağrılı mıdır?", a: "İşlem lokal anestezi altında yapılır ve hasta ağrı hissetmez. Sonrasında hafif hassasiyet 1–2 gün sürebilir." },
       { q: "İmplant ne kadar dayanır?", a: "Düzenli bakım ve altı aylık kontrollerle implantlar ömür boyu kullanılabilir." },
