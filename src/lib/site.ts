@@ -111,7 +111,7 @@ export const treatments: Treatment[] = [
     },
     faq: [
       { q: "İmplant tedavisi ağrılı mıdır?", a: "İşlem lokal anestezi altında yapılır ve hasta ağrı hissetmez. Sonrasında hafif hassasiyet 1–2 gün sürebilir." },
-      { q: "İmplant ne kadar dayanır?", a: "Düzenli bakım ve altı aylık kontrollerle implantlar ömür boyu kullanılabilir." },
+      { q: "İmplant ne kadar dayanır?", a: "İmplant ömründe kesinlik kavramı yoktur. Düzenli bakım ve altı aylık kontroller implantların ömrünü ciddi oranda uzatır.\u00a0" },
     ],
   },
   {
