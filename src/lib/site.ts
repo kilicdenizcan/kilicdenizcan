@@ -136,7 +136,7 @@ export const treatments: Treatment[] = [
       { title: "Uygulama", text: "Onaylanan tasarım laminate, zirkonyum veya metal destekli porselen ile kalıcı hale getirilir." },
     ],
     faq: [
-      { q: "Sonucu önceden görebilir miyim?", a: "Evet. Dijital tasarım ve ağız içi prova ile tedaviye başlamadan sonucu görürsünüz." },
+      { q: "Sonucu önceden görebilir miyim?", a: "Evet. Dijital tasarım ve ağız içi prova ile tedaviye başlamadan olası sonucu görürsünüz." },
       { q: "Dişlerim çok aşındırılır mı?", a: "Laminate uygulamalarında aşındırma çoğu vakada 0.3–0.5 mm ile sınırlıdır." },
     ],
   },
