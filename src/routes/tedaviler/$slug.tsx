@@ -98,19 +98,57 @@ function TreatmentDetail() {
               </h2>
             </Reveal>
             <ol className="mt-10 space-y-8">
-              {t.steps.map((s, i) => (
-                <Reveal key={s.title} delay={i * 0.06}>
-                  <li className="grid grid-cols-[2.5rem_1fr] gap-5">
-                    <span className="grid size-10 place-items-center rounded-full border border-border text-sm font-medium text-navy">
-                      {i + 1}
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-navy">{s.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-graphite">{s.text}</p>
-                    </div>
-                  </li>
-                </Reveal>
-              ))}
+              {t.steps.map((s, i) => {
+                const branch = t.branchStep;
+                const showBranchBefore = branch ? i === branch.afterStep : false;
+                const number = branch && i >= branch.afterStep ? i + 2 : i + 1;
+                return (
+                  <div key={s.title} className="space-y-8">
+                    {showBranchBefore && branch ? (
+                      <Reveal delay={i * 0.06}>
+                        <li className="grid grid-cols-[2.5rem_1fr] gap-5">
+                          <span className="grid size-10 place-items-center rounded-full border border-border text-sm font-medium text-navy">
+                            {branch.afterStep + 1}
+                          </span>
+                          <div>
+                            <h3 className="text-lg font-semibold text-navy">{branch.title}</h3>
+                            <p className="mt-2 text-sm leading-relaxed text-graphite">
+                              Vakanıza göre üç farklı yoldan biri uygulanır; hepsi aynı son adıma bağlanır.
+                            </p>
+                            <div className="relative mt-6 grid gap-4 sm:grid-cols-3">
+                              {branch.options.map((o) => (
+                                <div
+                                  key={o.title}
+                                  className="relative rounded-3xl border border-border bg-card p-6 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift"
+                                >
+                                  <h4 className="text-sm font-semibold text-navy">{o.title}</h4>
+                                  <p className="mt-2 text-sm leading-relaxed text-graphite">{o.text}</p>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="mt-6 flex items-center gap-3 text-xs tracking-[0.16em] text-muted-foreground uppercase">
+                              <span className="h-px flex-1 bg-border" />
+                              Ortak devam
+                              <span className="h-px flex-1 bg-border" />
+                            </div>
+                          </div>
+                        </li>
+                      </Reveal>
+                    ) : null}
+                    <Reveal delay={i * 0.06}>
+                      <li className="grid grid-cols-[2.5rem_1fr] gap-5">
+                        <span className="grid size-10 place-items-center rounded-full border border-border text-sm font-medium text-navy">
+                          {number}
+                        </span>
+                        <div>
+                          <h3 className="text-lg font-semibold text-navy">{s.title}</h3>
+                          <p className="mt-2 text-sm leading-relaxed text-graphite">{s.text}</p>
+                        </div>
+                      </li>
+                    </Reveal>
+                  </div>
+                );
+              })}
             </ol>
           </div>
 
