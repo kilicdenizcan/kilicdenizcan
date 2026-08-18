@@ -381,13 +381,13 @@ export const treatments: Treatment[] = [
     title: "Dolgu",
     short: "Çürüyen dişte doku kaybını estetik kompozit ile onarma.",
     summary:
-      "Dolgu tedavisi, çürük nedeniyle kaybedilen diş dokusunu diş rengindeki kompozit malzemeyle yeniden oluşturur. Erken müdahale ile kanal tedavisi ihtiyacı büyük ölçüde önlenir; işlem tek seansta tamamlanır.",
+      "Dolgu tedavisi, çürük nedeniyle kaybedilen diş dokusunu diş rengindeki kompozit veya porselen malzemeyle yeniden oluşturur. Erken müdahale ile kanal tedavisi ihtiyacı büyük ölçüde önlenir; işlem tek seansta tamamlanır.",
     duration: "20–40 dakika",
-    sessions: "Tek seans",
+    sessions: "Tek seans (Inley \u00a02 seans)",
     anesthesia: "Lokal anestezi",
     benefits: [
-      "Diş rengiyle birebir uyum",
-      "Tek seansta tamamlanma",
+      "Diş rengiyle uyumlu",
+      "Inley harici tek seansta tamamlanma",
       "Sağlam dokunun korunması",
       "Kanal tedavisi riskinin azalması",
     ],
