@@ -30,12 +30,11 @@ export const Route = createFileRoute("/hakkimizda")({
 });
 
 const timeline = [
-  { year: "1986", title: "Mesleki Başlangıç", text: "Dt. Musa Kılıç, İstanbul Üniversitesi Çapa Diş Hekimliği Fakültesi'nden mezun oldu." },
-  { year: "1995", title: "Sultangazi'de İlk Adım", text: "Sultangazi 75. Yıl Mahallesi'nde ilk diş muayenehanemizi açtık." },
-  { year: "2007", title: "Gelişim ve Uzmanlaşma", text: "İmplantoloji ve cerrahi alanındaki yatırımlarımızla bölgede güvenin adresi olduk." },
-  { year: "2009", title: "Kurumsallaşma", text: "Özel Yeni Yaşam Polikliniği olarak kurumsal yapımızı tamamladık." },
+  { year: "1986", title: "Mesleki Başlangıç", text: "Dt. Musa Kılıç, İstanbul Üniversitesi Çapa Diş Hekimliği Fakültesi'nden mezun oldu ve Sultangazi'de muayenehanesini açtı." },
+  { year: "1989", title: "Sultangazi'de İkinci Adım", text: "Muayenehanemizi 1989 yılında taşıdık." },
+  { year: "2007", title: "Sultangazi'de Üçüncü Adım", text: "Muayenehanemizi taşıyıp büyüterek sizlere daha iyi hizmet sunduk." },
   { year: "2022", title: "Modern Poliklinik", text: "Üç üniteli, dijital altyapılı ve ileri sterilizasyon standartlarına sahip yeni kliniğimize taşındık." },
-  { year: "2025", title: "12.000+ hasta", text: "Bugüne kadar 12.000'den fazla hastanın tedavisi tamamlandı." },
+  { year: "2026", title: "10.000+ hasta", text: "Bugüne kadar 10.000'den fazla hastanın tedavisi tamamlandı." },
 ];
 
 const values = [
@@ -50,7 +49,7 @@ function About() {
     <>
       <PageHero
         eyebrow="Klinik"
-        title={`${clinicYears} yıldır aynı mahallede, aynı standartla.`}
+        title={`${clinicYears} yıldır aynı bölgede, aynı standartla.`}
         text="Yeni Yaşam, Sultangazi'de küçük bir muayenehane olarak başladı. Bugün üç üniteli, dijital altyapılı bir poliklinik; ama çalışma biçimimiz ilk günkü gibi: aceleye getirmeden, açıklayarak."
       />
 
