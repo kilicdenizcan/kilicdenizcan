@@ -30,7 +30,7 @@ function TreatmentsPage() {
     <>
       <PageHero
         eyebrow="Tedaviler"
-        title="On üç tedavi alanı; aynı hassasiyet, aynı özen."
+        title="On iki tedavi alanı; aynı hassasiyet, aynı özen."
         text="Her tedavi başlığında süreç, süre, konfor ve maliyet önceden konuşulur. Aşağıdaki başlıklardan detaylı bilgiye ulaşabilirsiniz."
       />
 
