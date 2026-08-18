@@ -268,7 +268,7 @@ export const treatments: Treatment[] = [
     ],
     faq: [
       { q: "Kanal tedavisi ağrılı mı?", a: "Anestezi altında ağrı hissedilmez. Sonrasındaki hassasiyet birkaç gün içinde geçer." },
-      { q: "Kanal tedavili dişe kaplama şart mı?", a: "Arka dişlerde kırılmayı önlemek için kaplama önerilir." },
+      { q: "Kanal tedavili dişe kaplama şart mı?", a: "Doku desteği zayıf dişlerde kırılmayı önlemek için kaplama önerilir." },
     ],
   },
   {
