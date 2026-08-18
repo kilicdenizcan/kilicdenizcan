@@ -277,7 +277,7 @@ export const treatments: Treatment[] = [
     short: "Tek seansta, mine yapısına zarar vermeden birkaç ton açılma.",
     summary:
       "Ofis tipi beyazlatma ile tek seansta belirgin sonuç alınır; ev tipi sistemle bu sonuç uzun süre korunur. Uygulama öncesi diş eti koruması ve hassasiyet yönetimi standardımızdır.",
-    duration: "45 dakika",
+    duration: "1 saat",
     sessions: "1–2 seans",
     anesthesia: "Gerekmez",
     benefits: [
