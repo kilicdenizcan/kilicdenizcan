@@ -198,8 +198,8 @@ export const treatments: Treatment[] = [
     short: "Şeffaf plak ve modern braketlerle konforlu diş düzeltme.",
     summary:
       "Çapraşık dişler yalnızca estetik değil, çiğneme ve diş eti sağlığı sorunudur. Şeffaf plak (aligner) ve estetik braket seçenekleriyle tedavi sürecini günlük hayatınızı aksatmadan tamamlarsınız.",
-    duration: "20 dakika kontrol",
-    sessions: "6–24 ay",
+    duration: "Ortalama 20 dakika kontrol",
+    sessions: "Değişkenlik gösterir",
     anesthesia: "Gerekmez",
     benefits: [
       "Şeffaf plak ile fark edilmeyen tedavi",
