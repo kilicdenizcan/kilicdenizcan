@@ -284,13 +284,13 @@ export const treatments: Treatment[] = [
       "Tek seansta görünür sonuç",
       "Mine yapısına zarar vermeyen jel",
       "Hassasiyet azaltıcı protokol",
-      "Ev tipi set ile kalıcılık",
+      
     ],
     steps: [
       { title: "Ön kontrol", text: "Çürük ve diş eti sağlığı değerlendirilir, gerekirse temizlik yapılır." },
       { title: "İzolasyon", text: "Diş eti bariyeri uygulanır." },
       { title: "Uygulama", text: "Beyazlatma jeli ışıkla aktive edilir." },
-      { title: "Koruma", text: "Ev tipi set ve beslenme önerileri verilir." },
+      { title: "Koruma", text: "Beslenme önerileri ve ağız bakımı eğitimi verilerek sürecin korunması sağlanır." },
     ],
     faq: [
       { q: "Beyazlatma dişe zarar verir mi?", a: "Hekim kontrolünde yapılan uygulamalar mine yapısına zarar vermez." },
