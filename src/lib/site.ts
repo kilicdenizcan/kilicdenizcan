@@ -354,7 +354,7 @@ export const treatments: Treatment[] = [
     title: "Diş Eti Tedavisi",
     short: "Kanayan ve çekilen diş etleri için periodontal bakım.",
     summary:
-      "Diş eti hastalıkları, diş kaybının en sık nedenidir ve çoğu zaman ağrısız ilerler. Yeni Yaşam'da diş eti cep ölçümleri, detartraj ve küretaj protokolü ile iltihap kontrol altına alınır; ileri vakalarda cerrahi destek planlanır.",
+      "Diş eti hastalıkları, diş kaybının en sık nedenidir ve çoğu zaman ağrısız ilerler. Diş eti şekillendirmeleri yapılarak estetik görünüm sağlanır. Diş eti çekilmesi vakalarında greft uygulamasıyla diş eti görünümü düzeltilir.\u00a0",
     duration: "45–60 dakika",
     sessions: "1–4 seans",
     anesthesia: "Gerektiğinde lokal anestezi",
