@@ -236,6 +236,7 @@ export const treatments: Treatment[] = [
     steps: [
       { title: "Tanışma", text: "Çocuk hastamız klinik ekibi ile tanışır, güven ortamı sağlanır." },
       { title: "Muayene", text: "Çürük ve gelişim kontrolü oyunlaştırılarak yapılır." },
+      { title: "tedavi", text: "gerekli görülen tedaviler yapılır." },
       { title: "Koruyucu uygulama", text: "Fissür örtücü ve flor ile çürük riski azaltılır." },
       { title: "Takip", text: "6 aylık periyotlarla gelişim izlenir." },
     ],
