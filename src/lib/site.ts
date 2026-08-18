@@ -328,21 +328,21 @@ export const treatments: Treatment[] = [
     title: "20'lik Diş Cerrahisi",
     short: "Gömülü dişlerde planlı, hızlı ve konforlu cerrahi.",
     summary:
-      "Gömülü 20'lik dişler ağrı, sıkışma ve çapraşıklığa yol açabilir. 3B tomografi ile sinir komşuluğu değerlendirildikten sonra cerrahi işlem kısa sürede ve konforlu şekilde tamamlanır.",
+      "Gömülü 20'lik dişler ağrı, sıkışma ve çapraşıklığa yol açabilir. Panoramik röntgen (gerekli durumlarda 3B tomografi) ile sinir komşuluğu değerlendirildikten sonra cerrahi işlem kısa sürede ve konforlu şekilde tamamlanır.",
     duration: "20–40 dakika",
     sessions: "Tek seans",
     anesthesia: "Lokal anestezi",
     benefits: [
-      "3B tomografi ile güvenli planlama",
-      "Kısa işlem süresi",
+      "Panoramik röntgen / 3B tomografi ile güvenli planlama",
+      "Tek seansta tedavi",
       "Dikiş ve iyileşme protokolü",
       "Sonrası ağrı yönetimi desteği",
     ],
     steps: [
-      { title: "Görüntüleme", text: "Tomografi ile diş ve sinir ilişkisi incelenir." },
+      { title: "Görüntüleme", text: "Röntgen veya tomografi ile diş ve sinir ilişkisi incelenir." },
       { title: "Cerrahi", text: "Lokal anestezi altında diş çıkarılır." },
       { title: "Dikiş", text: "Bölge kapatılır, iyileşme hızlandırılır." },
-      { title: "Kontrol", text: "7 gün sonra dikiş alınır ve iyileşme değerlendirilir." },
+      { title: "Kontrol", text: "10 gün sonra dikiş alınır ve iyileşme değerlendirilir." },
     ],
     faq: [
       { q: "Yüzüm şişer mi?", a: "İlk 48 saatte hafif ödem olabilir; soğuk uygulama ile hızla geriler." },
