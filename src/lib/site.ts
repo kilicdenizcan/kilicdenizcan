@@ -314,7 +314,7 @@ export const treatments: Treatment[] = [
     ],
     steps: [
       { title: "Muayene", text: "Diş eti cep ölçümleri yapılır." },
-      { title: "Ultrasonik temizlik", text: "Diş taşları titreşimle, dişi çizmeden uzaklaştırılır." },
+      { title: "Ultrasonik temizlik", text: "Diş taşları, titreşim vasıtasıyla dişe zarar vermeden uzaklaştırılır." },
       { title: "Air-flow", text: "Çay, kahve ve sigara lekeleri temizlenir." },
       { title: "Parlatma", text: "Yüzey cilalanarak yeni birikim geciktirilir." },
     ],
