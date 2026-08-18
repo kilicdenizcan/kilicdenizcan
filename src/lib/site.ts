@@ -368,6 +368,7 @@ export const treatments: Treatment[] = [
       { title: "Periodontal muayene", text: "Diş eti cep derinlikleri ölçülür, röntgen ile kemik seviyesi değerlendirilir." },
       { title: "Detartraj", text: "Diş taşı ve plak tüm yüzeylerden uzaklaştırılır." },
       { title: "Küretaj", text: "Diş eti cebi içindeki iltihaplı doku lokal anestezi altında temizlenir." },
+      { title: "Diğer tedaviler", text: "Diş eti şekillendirmesi ve greft uygulaması yapılır." },
       { title: "Kontrol", text: "4–6 hafta sonra iyileşme değerlendirilir ve bakım planı verilir." },
     ],
     faq: [
