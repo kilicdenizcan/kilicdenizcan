@@ -215,7 +215,7 @@ export const treatments: Treatment[] = [
     ],
     faq: [
       { q: "Şeffaf plak günde kaç saat takılmalı?", a: "Günde en az 20–22 saat takılması tedavi süresinin planlandığı gibi ilerlemesini sağlar." },
-      { q: "Yetişkinler ortodonti olabilir mi?", a: "Evet. Diş eti sağlığı uygun olan her yaşta ortodontik tedavi mümkündür." },
+      { q: "Yetişkinler ortodonti olabilir mi?", a: "Evet. Diş eti sağlığı uygun olan her hasta için ortodontik tedavi mümkündür." },
     ],
   },
   {
