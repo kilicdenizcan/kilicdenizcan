@@ -422,7 +422,7 @@ export const doctors: Doctor[] = [
     role: "Kurucu Hekim",
     image: doctor1,
     careerStart: founderCareerStart,
-    experience: `${yearsSince(founderCareerStart.year, founderCareerStart.month)} Yıl`,
+    experience: `${yearsSince(founderCareerStart.year, founderCareerStart.month)} Yıl deneyim`,
     languages: "Türkçe",
     bio: "1986 yılında İstanbul Üniversitesi - Çapa'dan mezun oldu. Cerrahi rehber destekli implantoloji ve ileri kemik greftleme uygulamaları üzerine yurt içi ve yurt dışında eğitimler aldı. Bugüne kadar binlerce hastayı tedaviye kavuşturmuş deneyimli hekimimize kendinizi güvenle emanet edebilirsiniz.",
     focus: ["İmplant cerrahisi", "Kemik greftleme", "Protez planlama"],
