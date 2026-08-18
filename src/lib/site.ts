@@ -252,7 +252,7 @@ export const treatments: Treatment[] = [
     summary:
       "İlerlemiş çürük veya travma sonucu iltihaplanan diş sinirinin temizlenmesi işlemidir. Rotary sistemler ve apeks bulucu cihazlar sayesinde çoğu vaka tek seansta ve ağrısız tamamlanır.",
     duration: "45–90 dakika",
-    sessions: "1–2 seans",
+    sessions: "2-3 seans",
     anesthesia: "Lokal anestezi",
     benefits: [
       "Diş çekilmeden korunur",
