@@ -102,7 +102,7 @@ function About() {
           <ol className="mt-14 border-l border-border">
             {timeline.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.06}>
-                <li className="relative grid gap-3 pb-16 pl-8 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-12">
+                <li className="relative grid gap-1 pb-24 pl-8 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-8">
                   <span className="absolute top-1.5 -left-[5px] size-2.5 rounded-full bg-navy" />
                   <span className="text-sm font-semibold tracking-wide text-navy/70 md:text-base">{t.year}</span>
                   <div>
