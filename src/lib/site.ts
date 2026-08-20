@@ -1,4 +1,5 @@
 import doctor1 from "@/assets/musa-kilic.png";
+import doctor2 from "@/assets/bilge-coskun.png";
 
 
 export const clinic = {
