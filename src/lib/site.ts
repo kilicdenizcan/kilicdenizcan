@@ -451,6 +451,7 @@ export const doctors: Doctor[] = [
   {
     name: "Dt. Zehra Işık",
     role: "Çocuk Diş Hekimliği",
+    image: doctor3,
     careerStart: { year: 2017, month: 6 },
     experience: `${yearsSince(2017, 6)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce",
