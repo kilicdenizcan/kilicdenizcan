@@ -1,6 +1,7 @@
 import doctor1 from "@/assets/musa-kilic.png";
 import doctor2 from "@/assets/bilge-coskun.png";
 import doctor3 from "@/assets/zehra-isik.png";
+import doctor4 from "@/assets/beyza-oglakci.png";
 
 
 export const clinic = {
@@ -461,6 +462,7 @@ export const doctors: Doctor[] = [
   {
     name: "Dt. Beyza Oğlakçı",
     role: "Endodonti ve Genel Diş Hekimliği",
+    image: doctor4,
     careerStart: { year: 2016, month: 9 },
     experience: `${yearsSince(2016, 9)} yıl klinik deneyim`,
     languages: "Türkçe, İngilizce",
