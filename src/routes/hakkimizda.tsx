@@ -99,15 +99,14 @@ function About() {
               Adım adım büyüdük.
             </h2>
           </Reveal>
-          <ol className="mt-14 border-l border-border">
+          <ol className="mt-14 border-y border-border">
             {timeline.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.06}>
-                <li className="relative grid gap-1 pb-32 pl-8 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-8">
-                  <span className="absolute top-1.5 -left-[5px] size-2.5 rounded-full bg-navy" />
-                  <span className="text-sm font-semibold tracking-wide text-navy/70 md:text-base">{t.year}</span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-navy">{t.title}</h3>
-                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-graphite">{t.text}</p>
+                <li className="grid gap-5 border-b border-border py-9 last:border-b-0 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-12 md:py-12">
+                  <span className="font-serif text-4xl leading-none text-navy md:text-5xl">{t.year}</span>
+                  <div className="min-w-0">
+                    <h3 className="text-xl font-semibold text-navy md:text-2xl">{t.title}</h3>
+                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graphite md:text-base">{t.text}</p>
                   </div>
                 </li>
               </Reveal>
