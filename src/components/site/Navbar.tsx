@@ -27,12 +27,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-5">
@@ -103,16 +97,17 @@ export function Navbar() {
         </nav>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="container-page lg:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: "transform, opacity" }}
+            className="container-page lg:hidden [transform:translateZ(0)]"
           >
-            <div className="mt-3 rounded-3xl glass-panel p-4 shadow-lift">
+            <div className="mt-3 rounded-3xl border border-border/70 bg-background p-4 shadow-lift">
               <ul className="flex flex-col">
                 {links.map((l) => (
                   <li key={l.to}>
