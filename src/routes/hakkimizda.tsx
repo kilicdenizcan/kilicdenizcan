@@ -139,8 +139,8 @@ function About() {
       <section className="section-y">
         <div className="container-page grid gap-4 md:grid-cols-2">
           {[
-            { img: lounge, alt: "Klinik bekleme salonu", label: "Bekleme salonu" },
-            { img: sterilization, alt: "Sterilizasyon ünitesi", label: "Sterilizasyon ünitesi" },
+            { img: lounge, alt: "Klinik bekleme salonu", label: "Bekleme Salonu" },
+            { img: sterilization, alt: "Sterilizasyon ünitesi", label: "Muayene Odası" },
           ].map((g, i) => (
             <Reveal key={g.label} delay={i * 0.1}>
               <figure className="overflow-hidden rounded-3xl bg-muted">
