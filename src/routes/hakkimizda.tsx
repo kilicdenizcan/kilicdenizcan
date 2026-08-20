@@ -103,7 +103,7 @@ function About() {
             {timeline.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.06}>
                 <li className="grid gap-5 border-b border-border py-9 last:border-b-0 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-12 md:py-12">
-                  <span className="font-serif text-4xl leading-none text-navy md:text-5xl">{t.year}</span>
+                  <span className="text-4xl font-semibold leading-none text-navy md:text-5xl">{t.year}</span>
                   <div className="min-w-0">
                     <h3 className="text-xl font-semibold text-navy md:text-2xl">{t.title}</h3>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graphite md:text-base">{t.text}</p>
