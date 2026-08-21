@@ -149,11 +149,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 
+const langBootstrap = `(function(){try{var u=new URLSearchParams(location.search).get('lang');var s=localStorage.getItem('yy-lang');var en=u==='en'||(u!=='tr'&&s==='en');if(en){document.documentElement.lang='en';document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending');},1200);}}catch(e){}})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="tr">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: langBootstrap }} />
       </head>
       <body>
         {children}
@@ -162,6 +165,7 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();

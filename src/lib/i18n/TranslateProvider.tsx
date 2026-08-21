@@ -1,7 +1,21 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+
+/** useLayoutEffect on the client, useEffect during SSR (avoids React warning). */
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
 import { overridesEn } from "./overrides.en";
+import { generatedEn } from "./generated.en";
 import { translateServer } from "./translate.functions";
 
 export type Lang = "tr" | "en";
@@ -106,7 +120,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
-    return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
+    return overridesEn[key] ?? dictionary[key] ?? generatedEn[key] ?? cacheRef.current.get(key);
   }, []);
 
 
@@ -208,35 +222,44 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   }, [lang, requestTranslations]);
 
 
-  // Re-apply on language change, DOM mutations and route transitions.
-  useEffect(() => {
-    let frame = 0;
-    const schedule = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => applyTranslations());
+  // Apply synchronously (before paint) on language change, DOM mutations and
+  // route transitions, so new pages never flash Turkish first.
+  useIsomorphicLayoutEffect(() => {
+    let running = false;
+    const run = () => {
+      if (running) return;
+      running = true;
+      try {
+        applyTranslations();
+        document.documentElement.classList.remove("lang-pending");
+      } finally {
+        running = false;
+      }
     };
 
-    schedule();
+    run();
 
-    const observer = new MutationObserver(() => schedule());
+    const observer = new MutationObserver(run);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   });
 
   const setLang = useCallback((next: Lang) => {
+    const root = document.documentElement;
+    root.classList.add("lang-switching");
+    window.setTimeout(() => root.classList.remove("lang-switching"), 320);
+
     setLangState(next);
     langRef.current = next;
     window.localStorage.setItem("yy-lang", next);
-    document.documentElement.lang = next;
+    root.lang = next;
     const url = new URL(window.location.href);
     if (next === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
     window.history.replaceState(null, "", url.toString());
   }, []);
+
 
   const t = useCallback(
     (source: string) => {
