@@ -223,7 +223,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   // Apply synchronously (before paint) on language change, DOM mutations and
   // route transitions, so new pages never flash Turkish first.
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let running = false;
     const run = () => {
       if (running) return;
