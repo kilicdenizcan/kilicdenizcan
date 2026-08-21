@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
+import { overridesEn } from "./overrides.en";
 import { translateServer } from "./translate.functions";
 
 export type Lang = "tr" | "en";
