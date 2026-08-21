@@ -13,7 +13,7 @@ export const dictionary: Record<string, string> = {
   // Nav
   "Ana Sayfa": "Home",
   Klinik: "Clinic",
-  "Hekimlerimiz": "Our Doctors",
+  "Hekimlerimiz": "Doctors",
   Tedaviler: "Treatments",
   Blog: "Blog",
   "S.S.S.": "FAQ",
