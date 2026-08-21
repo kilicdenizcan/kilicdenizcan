@@ -92,9 +92,10 @@ function Doctors() {
                   <Link
                     to="/randevu"
                     search={{ doktor: d.name, tedavi: undefined }}
+                    data-no-translate
                     className="mt-9 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-navy-soft"
                   >
-                    {d.name} ile randevu
+                    {lang === "en" ? `Book with ${d.name}` : `${d.name} ile randevu`}
                   </Link>
                 </div>
               </article>
