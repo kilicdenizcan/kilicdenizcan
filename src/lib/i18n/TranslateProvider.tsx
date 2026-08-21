@@ -209,11 +209,26 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     if (active === "tr" && !trRestoreRef.current) {
       for (const node of textNodes) {
         const value = node.nodeValue ?? "";
-        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+        if (!isTranslatable(value)) continue;
+        if (isScrambling(node)) continue;
+        // Repair any node still holding an English string (e.g. a header that
+        // was mid-animation when the restore pass ran).
+        const back = reverseLookup(value);
+        if (back) {
+          node.nodeValue = value.replace(value.trim(), back);
+          continue;
+        }
+        if (!lookup(value)) missing.add(value.trim());
       }
       for (const { el, attr } of attrTargets) {
         const value = el.getAttribute(attr) ?? "";
-        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+        if (!isTranslatable(value)) continue;
+        const back = reverseLookup(value);
+        if (back) {
+          el.setAttribute(attr, back);
+          continue;
+        }
+        if (!lookup(value)) missing.add(value.trim());
       }
       pendingRef.current = Array.from(missing);
       return;
