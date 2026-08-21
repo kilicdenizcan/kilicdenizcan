@@ -311,11 +311,14 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     }
 
     if (active === "tr" && trRestoreRef.current) {
-      // Restore finished: forget stored originals so the next EN switch reads
-      // whatever the source currently says (including fresh edits).
       trRestoreRef.current = false;
-      originalsRef.current = new WeakMap();
-      attrOriginalsRef.current = new WeakMap();
+      // Wait for in-flight scrambles to settle before forgetting the stored
+      // originals, otherwise a node that finishes late keeps its English text.
+      window.setTimeout(() => {
+        if (langRef.current !== "tr") return;
+        originalsRef.current = new WeakMap();
+        attrOriginalsRef.current = new WeakMap();
+      }, animated.length > 0 ? 1600 : 0);
     }
 
     pendingRef.current = Array.from(missing);
