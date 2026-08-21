@@ -457,7 +457,7 @@ export const doctors: Doctor[] = [
     experience: "İzmir Katip Çelebi Üniversitesi",
     languages: "Türkçe, İngilizce",
     bio: "İzmir Katip Çelebi Üniversitesi’nden mezun oldum. Mezuniyetimden sonra özellikle endodonti alanında çeşitli kurslara katıldım.Mesleğimin güncel gelişmelerini çeşitli seminer ve kongreler ile yakından takip etmekteyim.",
-    focus: ["Detertraj-Küretaj", "Kanal tedavisi", "Çocuk diş hekimliği"],
+    focus: ["Detertraj-Küretaj", "Kanal tedavisi", "Çocuk diş hekimliği", "Metal porselen ve zirkonya kuron"],
   },
   {
     name: "Dt. Beyza Oğlakçı",
@@ -467,7 +467,7 @@ export const doctors: Doctor[] = [
     experience: "Biruni Üniversitesi",
     languages: "Türkçe, İngilizce",
     bio: "Biruni Üniversitesi'nden mezun oldum. Kanal tedavisi üzerine ileri seviye kurslar aldım ve pratikte uygulamaktayım . Ön bölge estetik dolgular, kuronlar, köprüler yapmaktan keyif alıyorum.",
-    focus: ["İmplant üstü protez", "Diş beyazlatma", "Estetik laminate veneer"],
+    focus: ["İmplant üstü protez", "Diş beyazlatma", "Estetik laminate veneer", "Zirkonya kuron"],
   },
 ];
 
