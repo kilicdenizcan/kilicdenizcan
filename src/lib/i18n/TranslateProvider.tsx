@@ -1,4 +1,17 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+
+/** useLayoutEffect on the client, useEffect during SSR (avoids React warning). */
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
 import { overridesEn } from "./overrides.en";
