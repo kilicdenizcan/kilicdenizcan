@@ -31,6 +31,9 @@ function isTranslatable(value: string) {
   return true;
 }
 
+const CACHE_KEY = "yy-i18n-en-v1";
+const CHUNK = 25;
+
 export function TranslateProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("tr");
   const cacheRef = useRef<Map<string, string>>(new Map());
@@ -38,24 +41,72 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const attrOriginalsRef = useRef<WeakMap<Element, Map<string, string>>>(new WeakMap());
   const inFlightRef = useRef<Set<string>>(new Set());
   const langRef = useRef<Lang>("tr");
+  const persistTimerRef = useRef<number>(0);
   const [, forceRender] = useState(0);
 
   langRef.current = lang;
 
-  // Restore preference on mount (client only, avoids hydration mismatch).
+  // Restore preference + persisted translation cache (client only).
   useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(CACHE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, string>;
+        for (const [k, v] of Object.entries(parsed)) cacheRef.current.set(k, v);
+      }
+    } catch {
+      /* ignore corrupt cache */
+    }
     const urlLang = new URLSearchParams(window.location.search).get("lang");
     const stored = window.localStorage.getItem("yy-lang");
     if (urlLang === "en" || (urlLang !== "tr" && stored === "en")) {
       setLangState("en");
       document.documentElement.lang = "en";
     }
+    forceRender((v) => v + 1);
   }, []);
+
+  const persistCache = useCallback(() => {
+    window.clearTimeout(persistTimerRef.current);
+    persistTimerRef.current = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(CACHE_KEY, JSON.stringify(Object.fromEntries(cacheRef.current)));
+      } catch {
+        /* quota */
+      }
+    }, 800);
+  }, []);
+
+  /** Fetch missing strings in small parallel chunks so text fills in fast. */
+  const requestTranslations = useCallback(
+    (missing: string[]) => {
+      const todo = missing.filter((s) => !inFlightRef.current.has(s)).slice(0, 150);
+      if (todo.length === 0) return;
+      todo.forEach((s) => inFlightRef.current.add(s));
+      for (let i = 0; i < todo.length; i += CHUNK) {
+        const batch = todo.slice(i, i + CHUNK);
+        void translateServer({ data: { lang: "en", texts: batch } })
+          .then((result) => {
+            for (const [source, translated] of Object.entries(result ?? {})) {
+              cacheRef.current.set(source, translated);
+            }
+            persistCache();
+            batch.forEach((s) => inFlightRef.current.delete(s));
+            forceRender((v) => v + 1);
+          })
+          .catch(() => {
+            batch.forEach((s) => inFlightRef.current.delete(s));
+          });
+      }
+    },
+    [persistCache],
+  );
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
     return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
   }, []);
+
 
   /** Collect translatable text nodes + attributes below `root`. */
   const collectTargets = useCallback(() => {
