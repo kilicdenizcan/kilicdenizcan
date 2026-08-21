@@ -214,3 +214,18 @@
     padding-block: 8rem;
   }
 }
+
+/* Language switch: brief fade so text swaps feel smooth, never delayed. */
+html.lang-switching body {
+  animation: lang-swap 0.32s ease;
+}
+
+@keyframes lang-swap {
+  0% { opacity: 1; }
+  35% { opacity: 0.55; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.lang-switching body { animation: none; }
+}
