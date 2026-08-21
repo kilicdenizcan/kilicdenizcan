@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import logoMark from "@/assets/logo-mark-new.jpg";
 import { clinic } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { useTranslate } from "@/lib/i18n/TranslateProvider";
 
 const links = [
   { to: "/", label: "Ana Sayfa" },
@@ -19,6 +20,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { lang, setLang, t } = useTranslate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -64,13 +66,28 @@ export function Navbar() {
                   activeOptions={{ exact: l.to === "/" }}
                   className="relative rounded-full px-3.5 py-2 text-sm text-graphite transition-colors duration-300 hover:text-navy [&.active]:text-navy [&.active]:font-medium"
                 >
-                  {l.label}
+                  {t(l.label)}
                 </Link>
               </li>
             ))}
           </ul>
 
           <div className="flex items-center gap-2">
+            <div className="hidden items-center rounded-full border border-border p-0.5 text-xs sm:flex">
+              {(["tr", "en"] as const).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => setLang(l)}
+                  className={cn(
+                    "rounded-full px-2.5 py-1 uppercase transition-colors",
+                    lang === l ? "bg-navy text-primary-foreground" : "text-graphite hover:text-navy",
+                  )}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
             <a
               href={`tel:${clinic.phone}`}
               className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-graphite transition-colors hover:text-navy xl:flex"
@@ -78,12 +95,13 @@ export function Navbar() {
               <Phone className="size-4" strokeWidth={1.6} />
               {clinic.phoneDisplay}
             </a>
+
             <Link
               to="/randevu"
               search={{ doktor: undefined, tedavi: undefined }}
               className="hidden rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-soft transition-all duration-500 hover:bg-navy-soft sm:inline-flex"
             >
-              Randevu Al
+              {t("Randevu Al")}
             </Link>
             <button
               type="button"
@@ -116,7 +134,7 @@ export function Navbar() {
                       onClick={() => setOpen(false)}
                       className="block border-b border-border/60 py-3.5 text-base text-graphite last:border-0 [&.active]:text-navy [&.active]:font-medium"
                     >
-                      {l.label}
+                      {t(l.label)}
                     </Link>
                   </li>
                 ))}
@@ -127,7 +145,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-4 block rounded-full bg-navy px-5 py-3.5 text-center text-sm font-medium text-primary-foreground"
               >
-                Randevu Al
+                {t("Randevu Al")}
               </Link>
             </div>
           </motion.div>
