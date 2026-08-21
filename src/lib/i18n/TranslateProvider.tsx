@@ -52,9 +52,10 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
             const batch = Array.from(pendingRef.current);
             pendingRef.current.clear();
             if (batch.length > 0) {
-              void translateServer({ lang, texts: batch }).then((result) => {
+              void translateServer({ data: { lang, texts: batch } }).then((result) => {
                 if (result) setCache((prev) => ({ ...prev, ...result }));
               });
+
             }
           }, 600);
         }
