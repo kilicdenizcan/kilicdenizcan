@@ -272,9 +272,18 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       });
     }
 
+    if (active === "tr" && trRestoreRef.current) {
+      // Restore finished: forget stored originals so the next EN switch reads
+      // whatever the source currently says (including fresh edits).
+      trRestoreRef.current = false;
+      originalsRef.current = new WeakMap();
+      attrOriginalsRef.current = new WeakMap();
+    }
+
     pendingRef.current = Array.from(missing);
     if (active === "en") requestTranslations(pendingRef.current);
   }, [collectTargets, lookup, requestTranslations]);
+
 
   // Warm the English cache in the background while the page is in Turkish,
   // so switching to EN is near-instant.
