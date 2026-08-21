@@ -71,6 +71,21 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <div className="hidden items-center rounded-full border border-border p-0.5 text-xs sm:flex">
+              {(["tr", "en"] as const).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => setLang(l)}
+                  className={cn(
+                    "rounded-full px-2.5 py-1 uppercase transition-colors",
+                    lang === l ? "bg-navy text-primary-foreground" : "text-graphite hover:text-navy",
+                  )}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
             <a
               href={`tel:${clinic.phone}`}
               className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-graphite transition-colors hover:text-navy xl:flex"
@@ -78,6 +93,7 @@ export function Navbar() {
               <Phone className="size-4" strokeWidth={1.6} />
               {clinic.phoneDisplay}
             </a>
+
             <Link
               to="/randevu"
               search={{ doktor: undefined, tedavi: undefined }}
