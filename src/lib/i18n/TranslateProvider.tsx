@@ -245,8 +245,8 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       let remaining = animated.length;
       animated.forEach((item, index) => {
         scrambleText(item.node, item.from, item.to, {
-          delay: Math.min(index * 14, 260),
-          duration: 460 + Math.min(item.to.length * 4, 140),
+          delay: Math.min(index * 26, 420),
+          duration: 820 + Math.min(item.to.length * 6, 320),
           onDone: () => {
             remaining -= 1;
             if (remaining <= 0) suppressObserverRef.current = false;
@@ -305,7 +305,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       window.setTimeout(() => root.classList.remove("lang-switching"), 320);
     } else {
       root.classList.add("lang-decoding");
-      window.setTimeout(() => root.classList.remove("lang-decoding"), 700);
+      window.setTimeout(() => root.classList.remove("lang-decoding"), 1400);
     }
 
     setLangState(next);
