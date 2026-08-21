@@ -275,7 +275,9 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       if (running || suppressObserverRef.current) return;
       running = true;
       try {
-        applyTranslations();
+        const animate = decodeRef.current;
+        decodeRef.current = false;
+        applyTranslations(animate);
         document.documentElement.classList.remove("lang-pending");
       } finally {
         running = false;
@@ -295,6 +297,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     const reduced = prefersReducedMotion();
     cancelScrambles();
     suppressObserverRef.current = false;
+    decodeRef.current = !reduced;
 
     if (reduced) {
       root.classList.add("lang-switching");
@@ -312,12 +315,8 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     if (next === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
     window.history.replaceState(null, "", url.toString());
+  }, []);
 
-    if (!reduced) {
-      // Run the decode pass right after React commits the new language state.
-      window.requestAnimationFrame(() => applyTranslations(true));
-    }
-  }, [applyTranslations]);
 
 
   const t = useCallback(
