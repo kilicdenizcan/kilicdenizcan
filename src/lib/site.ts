@@ -437,7 +437,7 @@ export const doctors: Doctor[] = [
     experience: "Gazi Üniversitesi",
     languages: "Türkçe, İngilizce",
     bio: "Gazi Üniversitesi diş hekimliği fakültesinden mezun oldum. Okan Üniversitesi Ortodonti Ana Bilim Dalı'nda doktora(pHd) yapmaktayım. Ortodontik tedavilerle çocuklarda, gençlerde ve yetişkinlerde dişlerin ve çenelerin konumunu, birbirleriyle olan ilişkisini ve kapanış problemlerini tedavi ediyorum. Mesleki becerilerimi geliştirmek için ortodonti ve diş hekimliği alanındaki güncel gelişmeleri takip ediyorum. ",
-    focus: ["Şeffaf-metal braket tel tedavisi", "Şeffaf plak tedavisi", "Ortognatik cerrahi"],
+    focus: ["Şeffaf-metal braket tel tedavisi", "Şeffaf plak tedavisi", "Ortognatik cerrahi", "Çene gelişimi ve ortopedik tedaviler", "Myobrace"],
   },
   {
     name: "Dt. Bilge Coşkun",
