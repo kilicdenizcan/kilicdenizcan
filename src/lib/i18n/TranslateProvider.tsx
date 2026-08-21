@@ -208,35 +208,43 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   }, [lang, requestTranslations]);
 
 
-  // Re-apply on language change, DOM mutations and route transitions.
-  useEffect(() => {
-    let frame = 0;
-    const schedule = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => applyTranslations());
+  // Apply synchronously (before paint) on language change, DOM mutations and
+  // route transitions, so new pages never flash Turkish first.
+  useLayoutEffect(() => {
+    let running = false;
+    const run = () => {
+      if (running) return;
+      running = true;
+      try {
+        applyTranslations();
+      } finally {
+        running = false;
+      }
     };
 
-    schedule();
+    run();
 
-    const observer = new MutationObserver(() => schedule());
+    const observer = new MutationObserver(run);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   });
 
   const setLang = useCallback((next: Lang) => {
+    const root = document.documentElement;
+    root.classList.add("lang-switching");
+    window.setTimeout(() => root.classList.remove("lang-switching"), 320);
+
     setLangState(next);
     langRef.current = next;
     window.localStorage.setItem("yy-lang", next);
-    document.documentElement.lang = next;
+    root.lang = next;
     const url = new URL(window.location.href);
     if (next === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
     window.history.replaceState(null, "", url.toString());
   }, []);
+
 
   const t = useCallback(
     (source: string) => {
