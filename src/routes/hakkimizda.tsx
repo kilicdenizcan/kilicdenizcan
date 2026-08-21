@@ -57,11 +57,11 @@ function About() {
         <Reveal>
           <div className="overflow-hidden rounded-[2.5rem]">
             <img
-              src={heroClinic}
-              alt="Yeni Yaşam Kliniği tedavi odası"
+              src={clinicBuilding.url}
+              alt="Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği bina tabelası"
               loading="lazy"
-              width={1600}
-              height={1104}
+              width={1696}
+              height={954}
               className="aspect-[16/9] w-full object-cover"
             />
           </div>
