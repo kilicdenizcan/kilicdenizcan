@@ -180,6 +180,23 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     const missing = new Set<string>();
     const animated: { node: Text; from: string; to: string; top: number; left: number }[] = [];
 
+    // Turkish is the source language: never write to the DOM. We only collect
+    // strings so the English cache can warm up in the background. The single
+    // exception is the restore pass right after switching EN -> TR.
+    if (active === "tr" && !trRestoreRef.current) {
+      for (const node of textNodes) {
+        const value = node.nodeValue ?? "";
+        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+      }
+      for (const { el, attr } of attrTargets) {
+        const value = el.getAttribute(attr) ?? "";
+        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+      }
+      pendingRef.current = Array.from(missing);
+      return;
+    }
+
+
     for (const node of textNodes) {
       let original = originalsRef.current.get(node);
       if (original === undefined) {
