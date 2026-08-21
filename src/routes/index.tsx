@@ -279,7 +279,7 @@ function Home() {
                   </div>
 
                   <div className="p-7">
-                    <h3 className="text-lg font-semibold text-navy">{d.name}</h3>
+                    <h3 data-no-translate className="text-lg font-semibold text-navy">{d.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{d.role}</p>
                     <p
                       className="mt-4 text-sm leading-relaxed text-graphite"
@@ -371,7 +371,7 @@ function Home() {
                   </span>
                   <p className="mt-5 grow text-sm leading-relaxed text-graphite">"{r.text}"</p>
                   <div className="mt-7 flex items-center justify-between text-sm">
-                    <span className="font-medium text-navy">{r.name}</span>
+                    <span data-no-translate className="font-medium text-navy">{r.name}</span>
                     <span className="text-muted-foreground">{r.date}</span>
                   </div>
                 </article>

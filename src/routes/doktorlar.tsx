@@ -55,7 +55,7 @@ function Doctors() {
                 </div>
 
                 <div className="p-8 md:py-12 md:pr-12 md:pl-0">
-                  <h2 className="text-2xl font-semibold text-navy md:text-3xl">{d.name}</h2>
+                  <h2 data-no-translate className="text-2xl font-semibold text-navy md:text-3xl">{d.name}</h2>
                   <p className="mt-2 text-sm text-muted-foreground">{d.role}</p>
                   <p className="mt-6 max-w-xl text-base leading-relaxed text-graphite">{d.bio}</p>
 
