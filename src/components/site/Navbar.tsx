@@ -126,7 +126,25 @@ export function Navbar() {
             className="container-page lg:hidden [transform:translateZ(0)]"
           >
             <div className="mt-3 rounded-3xl border border-border/70 bg-background p-4 shadow-lift">
-              <ul className="flex flex-col">
+              <div className="flex items-center justify-between pb-3.5">
+                <span className="text-[0.62rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">Dil</span>
+                <div className="flex items-center rounded-full border border-border p-0.5 text-xs">
+                  {(["tr", "en"] as const).map((l) => (
+                    <button
+                      key={l}
+                      type="button"
+                      onClick={() => setLang(l)}
+                      className={cn(
+                        "rounded-full px-2.5 py-1 uppercase transition-colors",
+                        lang === l ? "bg-navy text-primary-foreground" : "text-graphite hover:text-navy",
+                      )}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <ul className="flex flex-col border-t border-border/60 pt-1">
                 {links.map((l) => (
                   <li key={l.to}>
                     <Link
