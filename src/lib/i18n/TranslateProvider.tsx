@@ -260,7 +260,9 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       const currentValue = node.nodeValue ?? "";
       if (currentValue === target) continue;
 
-      if (animate) {
+      // The navbar must flip instantly and losslessly — never animate it.
+      const inHeader = !!node.parentElement?.closest("header");
+      if (animate && !inHeader) {
         const rect = nodeRect(node);
         if (rect) {
           animated.push({ node, from: currentValue, to: target, top: rect.top, left: rect.left });
