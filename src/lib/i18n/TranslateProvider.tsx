@@ -139,6 +139,27 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     return overridesEn[key] ?? dictionary[key] ?? generatedEn[key] ?? cacheRef.current.get(key);
   }, []);
 
+  /** English -> Turkish reverse index, used to repair leftovers after EN -> TR. */
+  const reverseRef = useRef<Map<string, string> | null>(null);
+  const reverseSizeRef = useRef(-1);
+  const reverseLookup = useCallback((value: string) => {
+    const size = cacheRef.current.size;
+    if (!reverseRef.current || reverseSizeRef.current !== size) {
+      const map = new Map<string, string>();
+      const add = (tr: string, en: string) => {
+        const k = en.trim();
+        if (k && !map.has(k) && k !== tr.trim()) map.set(k, tr.trim());
+      };
+      for (const [tr, en] of Object.entries(generatedEn)) add(tr, en);
+      for (const [tr, en] of Object.entries(dictionary)) add(tr, en);
+      for (const [tr, en] of Object.entries(overridesEn)) add(tr, en);
+      for (const [tr, en] of cacheRef.current.entries()) add(tr, en);
+      reverseRef.current = map;
+      reverseSizeRef.current = size;
+    }
+    return reverseRef.current.get(value.trim());
+  }, []);
+
 
   /** Collect translatable text nodes + attributes below `root`. */
   const collectTargets = useCallback(() => {
@@ -188,11 +209,26 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     if (active === "tr" && !trRestoreRef.current) {
       for (const node of textNodes) {
         const value = node.nodeValue ?? "";
-        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+        if (!isTranslatable(value)) continue;
+        if (isScrambling(node)) continue;
+        // Repair any node still holding an English string (e.g. a header that
+        // was mid-animation when the restore pass ran).
+        const back = reverseLookup(value);
+        if (back) {
+          node.nodeValue = value.replace(value.trim(), back);
+          continue;
+        }
+        if (!lookup(value)) missing.add(value.trim());
       }
       for (const { el, attr } of attrTargets) {
         const value = el.getAttribute(attr) ?? "";
-        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+        if (!isTranslatable(value)) continue;
+        const back = reverseLookup(value);
+        if (back) {
+          el.setAttribute(attr, back);
+          continue;
+        }
+        if (!lookup(value)) missing.add(value.trim());
       }
       pendingRef.current = Array.from(missing);
       return;
@@ -275,16 +311,19 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     }
 
     if (active === "tr" && trRestoreRef.current) {
-      // Restore finished: forget stored originals so the next EN switch reads
-      // whatever the source currently says (including fresh edits).
       trRestoreRef.current = false;
-      originalsRef.current = new WeakMap();
-      attrOriginalsRef.current = new WeakMap();
+      // Wait for in-flight scrambles to settle before forgetting the stored
+      // originals, otherwise a node that finishes late keeps its English text.
+      window.setTimeout(() => {
+        if (langRef.current !== "tr") return;
+        originalsRef.current = new WeakMap();
+        attrOriginalsRef.current = new WeakMap();
+      }, animated.length > 0 ? 1600 : 0);
     }
 
     pendingRef.current = Array.from(missing);
     if (active === "en") requestTranslations(pendingRef.current);
-  }, [collectTargets, lookup, requestTranslations]);
+  }, [collectTargets, lookup, reverseLookup, requestTranslations]);
 
 
   // Warm the English cache in the background while the page is in Turkish,
