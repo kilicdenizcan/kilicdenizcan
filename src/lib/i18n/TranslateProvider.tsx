@@ -70,6 +70,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const persistTimerRef = useRef<number>(0);
   const pendingRef = useRef<string[]>([]);
   const suppressObserverRef = useRef(false);
+  const decodeRef = useRef(false);
 
   const [, forceRender] = useState(0);
 
