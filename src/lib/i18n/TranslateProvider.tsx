@@ -31,6 +31,9 @@ function isTranslatable(value: string) {
   return true;
 }
 
+const CACHE_KEY = "yy-i18n-en-v1";
+const CHUNK = 25;
+
 export function TranslateProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("tr");
   const cacheRef = useRef<Map<string, string>>(new Map());
@@ -38,24 +41,74 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const attrOriginalsRef = useRef<WeakMap<Element, Map<string, string>>>(new WeakMap());
   const inFlightRef = useRef<Set<string>>(new Set());
   const langRef = useRef<Lang>("tr");
+  const persistTimerRef = useRef<number>(0);
+  const pendingRef = useRef<string[]>([]);
+
   const [, forceRender] = useState(0);
 
   langRef.current = lang;
 
-  // Restore preference on mount (client only, avoids hydration mismatch).
+  // Restore preference + persisted translation cache (client only).
   useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(CACHE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, string>;
+        for (const [k, v] of Object.entries(parsed)) cacheRef.current.set(k, v);
+      }
+    } catch {
+      /* ignore corrupt cache */
+    }
     const urlLang = new URLSearchParams(window.location.search).get("lang");
     const stored = window.localStorage.getItem("yy-lang");
     if (urlLang === "en" || (urlLang !== "tr" && stored === "en")) {
       setLangState("en");
       document.documentElement.lang = "en";
     }
+    forceRender((v) => v + 1);
   }, []);
+
+  const persistCache = useCallback(() => {
+    window.clearTimeout(persistTimerRef.current);
+    persistTimerRef.current = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(CACHE_KEY, JSON.stringify(Object.fromEntries(cacheRef.current)));
+      } catch {
+        /* quota */
+      }
+    }, 800);
+  }, []);
+
+  /** Fetch missing strings in small parallel chunks so text fills in fast. */
+  const requestTranslations = useCallback(
+    (missing: string[]) => {
+      const todo = missing.filter((s) => !inFlightRef.current.has(s)).slice(0, 150);
+      if (todo.length === 0) return;
+      todo.forEach((s) => inFlightRef.current.add(s));
+      for (let i = 0; i < todo.length; i += CHUNK) {
+        const batch = todo.slice(i, i + CHUNK);
+        void translateServer({ data: { lang: "en", texts: batch } })
+          .then((result) => {
+            for (const [source, translated] of Object.entries(result ?? {})) {
+              cacheRef.current.set(source, translated);
+            }
+            persistCache();
+            batch.forEach((s) => inFlightRef.current.delete(s));
+            forceRender((v) => v + 1);
+          })
+          .catch(() => {
+            batch.forEach((s) => inFlightRef.current.delete(s));
+          });
+      }
+    },
+    [persistCache],
+  );
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
     return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
   }, []);
+
 
   /** Collect translatable text nodes + attributes below `root`. */
   const collectTargets = useCallback(() => {
@@ -106,13 +159,14 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       }
       if (active === "tr") {
         if (node.nodeValue !== original) node.nodeValue = original;
+        if (!lookup(original)) missing.add(original.trim());
         continue;
       }
       const translated = lookup(original);
       if (translated) {
         const next = original.replace(original.trim(), translated);
         if (node.nodeValue !== next) node.nodeValue = next;
-      } else if (!inFlightRef.current.has(original.trim())) {
+      } else {
         missing.add(original.trim());
       }
     }
@@ -130,32 +184,29 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       }
       if (active === "tr") {
         if (el.getAttribute(attr) !== original) el.setAttribute(attr, original);
+        if (!lookup(original)) missing.add(original.trim());
         continue;
       }
       const translated = lookup(original);
       if (translated) {
         if (el.getAttribute(attr) !== translated) el.setAttribute(attr, translated);
-      } else if (!inFlightRef.current.has(original.trim())) {
+      } else {
         missing.add(original.trim());
       }
     }
 
-    if (active === "en" && missing.size > 0) {
-      const batch = Array.from(missing).slice(0, 100);
-      batch.forEach((s) => inFlightRef.current.add(s));
-      void translateServer({ data: { lang: "en", texts: batch } })
-        .then((result) => {
-          for (const [source, translated] of Object.entries(result ?? {})) {
-            cacheRef.current.set(source, translated);
-          }
-          batch.forEach((s) => inFlightRef.current.delete(s));
-          forceRender((v) => v + 1);
-        })
-        .catch(() => {
-          batch.forEach((s) => inFlightRef.current.delete(s));
-        });
-    }
-  }, [collectTargets, lookup]);
+    pendingRef.current = Array.from(missing);
+    if (active === "en") requestTranslations(pendingRef.current);
+  }, [collectTargets, lookup, requestTranslations]);
+
+  // Warm the English cache in the background while the page is in Turkish,
+  // so switching to EN is near-instant.
+  useEffect(() => {
+    if (lang !== "tr") return;
+    const id = window.setTimeout(() => requestTranslations(pendingRef.current), 2500);
+    return () => window.clearTimeout(id);
+  }, [lang, requestTranslations]);
+
 
   // Re-apply on language change, DOM mutations and route transitions.
   useEffect(() => {
