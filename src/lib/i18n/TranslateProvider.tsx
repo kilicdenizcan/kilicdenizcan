@@ -15,6 +15,7 @@ const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffec
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
 import { overridesEn } from "./overrides.en";
+import { generatedEn } from "./generated.en";
 import { translateServer } from "./translate.functions";
 
 export type Lang = "tr" | "en";
@@ -119,7 +120,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
-    return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
+    return overridesEn[key] ?? dictionary[key] ?? generatedEn[key] ?? cacheRef.current.get(key);
   }, []);
 
 
