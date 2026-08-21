@@ -17,6 +17,7 @@ import { dictionary } from "./dictionary";
 import { overridesEn } from "./overrides.en";
 import { generatedEn } from "./generated.en";
 import { translateServer } from "./translate.functions";
+import { cancelScrambles, isScrambling, prefersReducedMotion, scrambleText } from "./scramble";
 
 export type Lang = "tr" | "en";
 
@@ -45,6 +46,17 @@ function isTranslatable(value: string) {
   return true;
 }
 
+/** Bounding box of a text node, or null when off-screen / not rendered. */
+function nodeRect(node: Text) {
+  const range = document.createRange();
+  range.selectNodeContents(node);
+  const rect = range.getBoundingClientRect();
+  range.detach?.();
+  if (rect.width === 0 && rect.height === 0) return null;
+  if (rect.bottom < -80 || rect.top > window.innerHeight + 80) return null;
+  return rect;
+}
+
 const CACHE_KEY = "yy-i18n-en-v1";
 const CHUNK = 25;
 
@@ -57,6 +69,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const langRef = useRef<Lang>("tr");
   const persistTimerRef = useRef<number>(0);
   const pendingRef = useRef<string[]>([]);
+  const suppressObserverRef = useRef(false);
 
   const [, forceRender] = useState(0);
 
@@ -160,10 +173,11 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     return { textNodes, attrTargets };
   }, []);
 
-  const applyTranslations = useCallback(() => {
+  const applyTranslations = useCallback((animate = false) => {
     const active = langRef.current;
     const { textNodes, attrTargets } = collectTargets();
     const missing = new Set<string>();
+    const animated: { node: Text; from: string; to: string; top: number; left: number }[] = [];
 
     for (const node of textNodes) {
       let original = originalsRef.current.get(node);
@@ -171,18 +185,33 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
         original = node.nodeValue ?? "";
         originalsRef.current.set(node, original);
       }
-      if (active === "tr") {
-        if (node.nodeValue !== original) node.nodeValue = original;
-        if (!lookup(original)) missing.add(original.trim());
-        continue;
+      if (isScrambling(node)) continue;
+
+      const target =
+        active === "tr"
+          ? original
+          : (() => {
+              const translated = lookup(original);
+              if (!translated) {
+                missing.add(original.trim());
+                return null;
+              }
+              return original.replace(original.trim(), translated);
+            })();
+
+      if (active === "tr" && !lookup(original)) missing.add(original.trim());
+      if (target === null) continue;
+      const currentValue = node.nodeValue ?? "";
+      if (currentValue === target) continue;
+
+      if (animate) {
+        const rect = nodeRect(node);
+        if (rect) {
+          animated.push({ node, from: currentValue, to: target, top: rect.top, left: rect.left });
+          continue;
+        }
       }
-      const translated = lookup(original);
-      if (translated) {
-        const next = original.replace(original.trim(), translated);
-        if (node.nodeValue !== next) node.nodeValue = next;
-      } else {
-        missing.add(original.trim());
-      }
+      node.nodeValue = target;
     }
 
     for (const { el, attr } of attrTargets) {
@@ -209,6 +238,22 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       }
     }
 
+    if (animated.length > 0) {
+      animated.sort((a, b) => (a.top - b.top) || (a.left - b.left));
+      suppressObserverRef.current = true;
+      let remaining = animated.length;
+      animated.forEach((item, index) => {
+        scrambleText(item.node, item.from, item.to, {
+          delay: Math.min(index * 14, 260),
+          duration: 460 + Math.min(item.to.length * 4, 140),
+          onDone: () => {
+            remaining -= 1;
+            if (remaining <= 0) suppressObserverRef.current = false;
+          },
+        });
+      });
+    }
+
     pendingRef.current = Array.from(missing);
     if (active === "en") requestTranslations(pendingRef.current);
   }, [collectTargets, lookup, requestTranslations]);
@@ -227,7 +272,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   useIsomorphicLayoutEffect(() => {
     let running = false;
     const run = () => {
-      if (running) return;
+      if (running || suppressObserverRef.current) return;
       running = true;
       try {
         applyTranslations();
@@ -247,8 +292,17 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   const setLang = useCallback((next: Lang) => {
     const root = document.documentElement;
-    root.classList.add("lang-switching");
-    window.setTimeout(() => root.classList.remove("lang-switching"), 320);
+    const reduced = prefersReducedMotion();
+    cancelScrambles();
+    suppressObserverRef.current = false;
+
+    if (reduced) {
+      root.classList.add("lang-switching");
+      window.setTimeout(() => root.classList.remove("lang-switching"), 320);
+    } else {
+      root.classList.add("lang-decoding");
+      window.setTimeout(() => root.classList.remove("lang-decoding"), 700);
+    }
 
     setLangState(next);
     langRef.current = next;
@@ -258,7 +312,12 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     if (next === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
     window.history.replaceState(null, "", url.toString());
-  }, []);
+
+    if (!reduced) {
+      // Run the decode pass right after React commits the new language state.
+      window.requestAnimationFrame(() => applyTranslations(true));
+    }
+  }, [applyTranslations]);
 
 
   const t = useCallback(
