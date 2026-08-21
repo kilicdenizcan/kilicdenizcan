@@ -31,7 +31,7 @@ export function Navbar() {
 
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-5">
+    <header data-no-translate className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-5">
       <div className="container-page">
         <nav
           className={cn(
