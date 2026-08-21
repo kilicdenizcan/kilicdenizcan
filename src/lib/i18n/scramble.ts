@@ -7,7 +7,8 @@
  * reads as decoding rather than noise.
  */
 
-const GLYPHS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ·/-—:";
+const LOWER = "abcdefghijklmnopqrstuvwxyz";
+const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const running = new Map<Text, number>();
 
@@ -20,8 +21,15 @@ export function cancelScrambles() {
   running.clear();
 }
 
-function randomGlyph() {
-  return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+/** Case-matched neutral glyph, so the silhouette of the word stays calm. */
+function glyphFor(target: string) {
+  const pool = target === target.toUpperCase() && target !== target.toLowerCase() ? UPPER : LOWER;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+/** Soft ease-out so the reveal decelerates instead of snapping. */
+function easeOut(t: number) {
+  return 1 - Math.pow(1 - t, 3);
 }
 
 type Options = {
@@ -32,19 +40,21 @@ type Options = {
   onDone?: () => void;
 };
 
+/** How often a still-unresolved character picks a new glyph (ms). */
+const CHURN = 70;
+
 export function scrambleText(node: Text, from: string, to: string, options: Options = {}) {
-  const { delay = 0, duration = 480, onDone } = options;
+  const { delay = 0, duration = 900, onDone } = options;
 
   const existing = running.get(node);
   if (existing !== undefined) cancelAnimationFrame(existing);
 
   const length = Math.max(from.length, to.length);
-  // Per-character window inside the total duration (staggered left → right).
-  const spread = duration * 0.55;
-  const perChar = length > 1 ? spread / (length - 1) : 0;
-  const charDuration = duration - spread;
-
   const start = performance.now() + delay;
+
+  // Stable per-character glyphs, refreshed slowly, so text does not strobe.
+  const glyphs: string[] = new Array(length).fill("");
+  let lastChurn = -Infinity;
 
   const finish = () => {
     running.delete(node);
@@ -63,25 +73,24 @@ export function scrambleText(node: Text, from: string, to: string, options: Opti
       return;
     }
 
+    const progress = easeOut(Math.min(elapsed / duration, 1));
+    // Characters resolve left to right along the eased progress line.
+    const resolvedUpTo = progress * length;
+    const churn = elapsed - lastChurn >= CHURN;
+    if (churn) lastChurn = elapsed;
+
     let out = "";
     for (let i = 0; i < length; i += 1) {
       const target = to[i] ?? "";
       const source = from[i] ?? "";
 
-      // Untouched characters (identical or whitespace) never scramble.
-      if (target === source || target === " " || target === "") {
+      if (i < resolvedUpTo || target === source || target === " " || target === "") {
         out += target;
         continue;
       }
 
-      const charStart = i * perChar;
-      if (elapsed < charStart) {
-        out += source === " " ? " " : randomGlyph();
-      } else if (elapsed < charStart + charDuration) {
-        out += Math.random() < 0.35 ? target : randomGlyph();
-      } else {
-        out += target;
-      }
+      if (churn || !glyphs[i]) glyphs[i] = glyphFor(target);
+      out += glyphs[i];
     }
 
     node.nodeValue = out;
