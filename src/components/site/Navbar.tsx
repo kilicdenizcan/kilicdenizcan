@@ -64,7 +64,7 @@ export function Navbar() {
                 <Link
                   to={l.to}
                   activeOptions={{ exact: l.to === "/" }}
-                  className="relative rounded-full px-3.5 py-2 text-sm text-graphite transition-colors duration-300 hover:text-navy [&.active]:text-navy [&.active]:font-medium"
+                  className="relative whitespace-nowrap rounded-full px-3.5 py-2 text-sm text-graphite transition-colors duration-300 hover:text-navy [&.active]:text-navy [&.active]:font-medium"
                 >
                   {t(l.label)}
                 </Link>
