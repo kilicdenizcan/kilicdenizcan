@@ -427,7 +427,7 @@ export const doctors: Doctor[] = [
     careerStart: founderCareerStart,
     experience: "İstanbul Üniversitesi",
     languages: "Türkçe",
-    bio: "1986 yılında İstanbul Üniversitesi - Çapa'dan mezun oldu. İmplantoloji, endodonti gibi birçok tedaviye yönelik çok sayıda eğitimler aldı. 2004-2005 yıllarında eğitmen diş hekimliği kapsamında pilot okul çalışması koordinatörlüğü yapmıştır. 40 yıldır etik-deontolojik kurallarına uygun şekilde hizmet veren hekimimiz \"Sürekli diş hekimi\"  sertifikasına sahip olup kendini sürekli yenilemektedir.",
+    bio: "1986 yılında İstanbul Üniversitesi - Çapa'dan mezun oldu. İmplantoloji, endodonti gibi birçok tedaviye yönelik çok sayıda eğitimler aldı. 2004-2005 yıllarında eğitmen diş hekimliği kapsamında pilot okul çalışması koordinatörlüğü yapmıştır. 40 yıldır etik-deontolojik kurallarına uygun şekilde hizmet veren hekimimiz \"Sürekli Dişhekimliği Eğitimi (SDE)\"  sertifikasına sahip olup kendini sürekli yenilemektedir.",
     focus: ["Koruyucu diş hekimliği", "İmplant-implant üstü uygulamalar", "Kanal tedavisi"],
   },
   {
