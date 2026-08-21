@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
 import { translateServer } from "./translate.functions";
@@ -19,87 +19,182 @@ export function useTranslate() {
   return ctx;
 }
 
-export function TranslateProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("tr");
-  const [cache, setCache] = useState<Record<string, string>>({});
-  const pendingRef = useRef<Set<string>>(new Set());
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hydratedRef = useRef(false);
+const SKIP_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "CODE", "PRE", "SVG", "PATH"]);
 
-  // Initial language from URL ?lang= or stored preference (client only).
+/** Strings that should never be sent for translation. */
+function isTranslatable(value: string) {
+  const text = value.trim();
+  if (text.length < 2) return false;
+  // Numbers, dates, prices, phone numbers, symbols only.
+  if (!/[a-zçğıöşüA-ZÇĞİÖŞÜ]{2}/.test(text)) return false;
+  return true;
+}
+
+export function TranslateProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Lang>("tr");
+  const cacheRef = useRef<Map<string, string>>(new Map());
+  const originalsRef = useRef<WeakMap<Text, string>>(new WeakMap());
+  const attrOriginalsRef = useRef<WeakMap<Element, Map<string, string>>>(new WeakMap());
+  const inFlightRef = useRef<Set<string>>(new Set());
+  const langRef = useRef<Lang>("tr");
+  const [, forceRender] = useState(0);
+
+  langRef.current = lang;
+
+  // Restore preference on mount (client only, avoids hydration mismatch).
   useEffect(() => {
-    hydratedRef.current = true;
     const urlLang = new URLSearchParams(window.location.search).get("lang");
     const stored = window.localStorage.getItem("yy-lang");
-    const initial = urlLang === "en" || stored === "en" ? "en" : "tr";
-    setLang(initial);
+    if (urlLang === "en" || (urlLang !== "tr" && stored === "en")) {
+      setLangState("en");
+      document.documentElement.lang = "en";
+    }
   }, []);
 
-  const t = useMemo(
-    () =>
-      (source: string): string => {
-        if (lang === "tr") return source;
-        if (!source) return source;
-        const cached = cache[source];
-        if (cached) return cached;
-        const dict = dictionary[source];
-        if (dict) return dict;
-        // Queue for AI translation (batched, debounced).
-        if (hydratedRef.current) {
-          pendingRef.current.add(source);
-          if (timerRef.current) clearTimeout(timerRef.current);
-          timerRef.current = setTimeout(() => {
-            const batch = Array.from(pendingRef.current);
-            pendingRef.current.clear();
-            if (batch.length > 0) {
-              void translateServer({ data: { lang, texts: batch } }).then((result) => {
-                if (result) setCache((prev) => ({ ...prev, ...result }));
-              });
+  const lookup = useCallback((source: string) => {
+    const key = source.trim();
+    return dictionary[key] ?? cacheRef.current.get(key);
+  }, []);
 
-            }
-          }, 600);
+  /** Collect translatable text nodes + attributes below `root`. */
+  const collectTargets = useCallback(() => {
+    const textNodes: Text[] = [];
+    const attrTargets: { el: Element; attr: string }[] = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as Element;
+          if (SKIP_TAGS.has(el.tagName) || el.hasAttribute("data-no-translate")) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
         }
-        return source;
+        return NodeFilter.FILTER_ACCEPT;
       },
-    [lang, cache],
-  );
+    });
 
-  const changeLang = useMemo(
-    () => (next: Lang) => {
-      setLang(next);
-      window.localStorage.setItem("yy-lang", next);
-      document.documentElement.lang = next === "en" ? "en" : "tr";
-      const url = new URL(window.location.href);
-      if (next === "en") url.searchParams.set("lang", "en");
-      else url.searchParams.delete("lang");
-      window.history.replaceState(null, "", url.toString());
-    },
-    [],
-  );
-
-  return (
-    <TranslateContext.Provider value={{ lang, t, setLang: changeLang }}>
-      {children}
-    </TranslateContext.Provider>
-  );
-}
-
-/** Recursively translate every string in an object/array of data. */
-export function useLocalized<T>(data: T): T {
-  const { t } = useTranslate();
-  return useMemo(() => translateData(data, t), [data, t]);
-}
-
-export function translateData<T>(data: T, translate: (s: string) => string): T {
-  if (typeof data === "string") return translate(data) as unknown as T;
-  if (Array.isArray(data)) return data.map((v) => translateData(v, translate)) as unknown as T;
-  if (data && typeof data === "object") {
-    const out: Record<string, unknown> = {};
-    const skip = new Set(["slug", "image", "href", "to", "id", "src", "url", "phone", "email"]);
-    for (const [k, v] of Object.entries(data)) {
-      out[k] = skip.has(k) ? v : translateData(v, translate);
+    let current = walker.nextNode();
+    while (current) {
+      if (current.nodeType === Node.TEXT_NODE) {
+        const node = current as Text;
+        const original = originalsRef.current.get(node) ?? node.nodeValue ?? "";
+        if (isTranslatable(original)) textNodes.push(node);
+      } else {
+        const el = current as Element;
+        for (const attr of ["placeholder", "aria-label", "title", "alt"]) {
+          const stored = attrOriginalsRef.current.get(el)?.get(attr);
+          const value = stored ?? el.getAttribute(attr);
+          if (value && isTranslatable(value)) attrTargets.push({ el, attr });
+        }
+      }
+      current = walker.nextNode();
     }
-    return out as T;
-  }
-  return data;
+    return { textNodes, attrTargets };
+  }, []);
+
+  const applyTranslations = useCallback(() => {
+    const active = langRef.current;
+    const { textNodes, attrTargets } = collectTargets();
+    const missing = new Set<string>();
+
+    for (const node of textNodes) {
+      let original = originalsRef.current.get(node);
+      if (original === undefined) {
+        original = node.nodeValue ?? "";
+        originalsRef.current.set(node, original);
+      }
+      if (active === "tr") {
+        if (node.nodeValue !== original) node.nodeValue = original;
+        continue;
+      }
+      const translated = lookup(original);
+      if (translated) {
+        const next = original.replace(original.trim(), translated);
+        if (node.nodeValue !== next) node.nodeValue = next;
+      } else if (!inFlightRef.current.has(original.trim())) {
+        missing.add(original.trim());
+      }
+    }
+
+    for (const { el, attr } of attrTargets) {
+      let map = attrOriginalsRef.current.get(el);
+      if (!map) {
+        map = new Map();
+        attrOriginalsRef.current.set(el, map);
+      }
+      let original = map.get(attr);
+      if (original === undefined) {
+        original = el.getAttribute(attr) ?? "";
+        map.set(attr, original);
+      }
+      if (active === "tr") {
+        if (el.getAttribute(attr) !== original) el.setAttribute(attr, original);
+        continue;
+      }
+      const translated = lookup(original);
+      if (translated) {
+        if (el.getAttribute(attr) !== translated) el.setAttribute(attr, translated);
+      } else if (!inFlightRef.current.has(original.trim())) {
+        missing.add(original.trim());
+      }
+    }
+
+    if (active === "en" && missing.size > 0) {
+      const batch = Array.from(missing).slice(0, 100);
+      batch.forEach((s) => inFlightRef.current.add(s));
+      void translateServer({ data: { lang: "en", texts: batch } })
+        .then((result) => {
+          for (const [source, translated] of Object.entries(result ?? {})) {
+            cacheRef.current.set(source, translated);
+          }
+          batch.forEach((s) => inFlightRef.current.delete(s));
+          forceRender((v) => v + 1);
+        })
+        .catch(() => {
+          batch.forEach((s) => inFlightRef.current.delete(s));
+        });
+    }
+  }, [collectTargets, lookup]);
+
+  // Re-apply on language change, DOM mutations and route transitions.
+  useEffect(() => {
+    let frame = 0;
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => applyTranslations());
+    };
+
+    schedule();
+
+    const observer = new MutationObserver(() => schedule());
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  });
+
+  const setLang = useCallback((next: Lang) => {
+    setLangState(next);
+    langRef.current = next;
+    window.localStorage.setItem("yy-lang", next);
+    document.documentElement.lang = next;
+    const url = new URL(window.location.href);
+    if (next === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    window.history.replaceState(null, "", url.toString());
+  }, []);
+
+  const t = useCallback(
+    (source: string) => {
+      if (langRef.current === "tr") return source;
+      return lookup(source) ?? source;
+    },
+    [lookup],
+  );
+
+  const value = useMemo(() => ({ lang, t, setLang }), [lang, t, setLang]);
+
+  return <TranslateContext.Provider value={value}>{children}</TranslateContext.Provider>;
 }
