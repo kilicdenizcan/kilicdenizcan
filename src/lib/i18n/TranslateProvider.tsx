@@ -157,13 +157,14 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       }
       if (active === "tr") {
         if (node.nodeValue !== original) node.nodeValue = original;
+        if (!lookup(original)) missing.add(original.trim());
         continue;
       }
       const translated = lookup(original);
       if (translated) {
         const next = original.replace(original.trim(), translated);
         if (node.nodeValue !== next) node.nodeValue = next;
-      } else if (!inFlightRef.current.has(original.trim())) {
+      } else {
         missing.add(original.trim());
       }
     }
@@ -181,32 +182,29 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       }
       if (active === "tr") {
         if (el.getAttribute(attr) !== original) el.setAttribute(attr, original);
+        if (!lookup(original)) missing.add(original.trim());
         continue;
       }
       const translated = lookup(original);
       if (translated) {
         if (el.getAttribute(attr) !== translated) el.setAttribute(attr, translated);
-      } else if (!inFlightRef.current.has(original.trim())) {
+      } else {
         missing.add(original.trim());
       }
     }
 
-    if (active === "en" && missing.size > 0) {
-      const batch = Array.from(missing).slice(0, 100);
-      batch.forEach((s) => inFlightRef.current.add(s));
-      void translateServer({ data: { lang: "en", texts: batch } })
-        .then((result) => {
-          for (const [source, translated] of Object.entries(result ?? {})) {
-            cacheRef.current.set(source, translated);
-          }
-          batch.forEach((s) => inFlightRef.current.delete(s));
-          forceRender((v) => v + 1);
-        })
-        .catch(() => {
-          batch.forEach((s) => inFlightRef.current.delete(s));
-        });
-    }
-  }, [collectTargets, lookup]);
+    pendingRef.current = Array.from(missing);
+    if (active === "en") requestTranslations(pendingRef.current);
+  }, [collectTargets, lookup, requestTranslations]);
+
+  // Warm the English cache in the background while the page is in Turkish,
+  // so switching to EN is near-instant.
+  useEffect(() => {
+    if (lang !== "tr") return;
+    const id = window.setTimeout(() => requestTranslations(pendingRef.current), 2500);
+    return () => window.clearTimeout(id);
+  }, [lang, requestTranslations]);
+
 
   // Re-apply on language change, DOM mutations and route transitions.
   useEffect(() => {
