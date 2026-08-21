@@ -15,6 +15,8 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
+import { TranslateProvider } from "@/lib/i18n/TranslateProvider";
+
 
 function NotFoundComponent() {
   return (
