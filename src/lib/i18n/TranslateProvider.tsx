@@ -71,6 +71,8 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const pendingRef = useRef<string[]>([]);
   const suppressObserverRef = useRef(false);
   const decodeRef = useRef(false);
+  const trRestoreRef = useRef(false);
+
 
   const [, forceRender] = useState(0);
 
@@ -180,6 +182,23 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     const missing = new Set<string>();
     const animated: { node: Text; from: string; to: string; top: number; left: number }[] = [];
 
+    // Turkish is the source language: never write to the DOM. We only collect
+    // strings so the English cache can warm up in the background. The single
+    // exception is the restore pass right after switching EN -> TR.
+    if (active === "tr" && !trRestoreRef.current) {
+      for (const node of textNodes) {
+        const value = node.nodeValue ?? "";
+        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+      }
+      for (const { el, attr } of attrTargets) {
+        const value = el.getAttribute(attr) ?? "";
+        if (isTranslatable(value) && !lookup(value)) missing.add(value.trim());
+      }
+      pendingRef.current = Array.from(missing);
+      return;
+    }
+
+
     for (const node of textNodes) {
       let original = originalsRef.current.get(node);
       if (original === undefined) {
@@ -255,9 +274,18 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       });
     }
 
+    if (active === "tr" && trRestoreRef.current) {
+      // Restore finished: forget stored originals so the next EN switch reads
+      // whatever the source currently says (including fresh edits).
+      trRestoreRef.current = false;
+      originalsRef.current = new WeakMap();
+      attrOriginalsRef.current = new WeakMap();
+    }
+
     pendingRef.current = Array.from(missing);
     if (active === "en") requestTranslations(pendingRef.current);
   }, [collectTargets, lookup, requestTranslations]);
+
 
   // Warm the English cache in the background while the page is in Turkish,
   // so switching to EN is near-instant.
@@ -294,6 +322,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   });
 
   const setLang = useCallback((next: Lang) => {
+    trRestoreRef.current = next === "tr";
     const root = document.documentElement;
     const reduced = prefersReducedMotion();
     cancelScrambles();
