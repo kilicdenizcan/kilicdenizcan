@@ -95,8 +95,9 @@ export function translateData<T>(data: T, translate: (s: string) => string): T {
   if (Array.isArray(data)) return data.map((v) => translateData(v, translate)) as unknown as T;
   if (data && typeof data === "object") {
     const out: Record<string, unknown> = {};
+    const skip = new Set(["slug", "image", "href", "to", "id", "src", "url", "phone", "email"]);
     for (const [k, v] of Object.entries(data)) {
-      out[k] = translateData(v, translate);
+      out[k] = skip.has(k) ? v : translateData(v, translate);
     }
     return out as T;
   }
