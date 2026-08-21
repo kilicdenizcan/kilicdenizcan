@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
 import { doctors } from "@/lib/site";
+import { useTranslate } from "@/lib/i18n/TranslateProvider";
 
 export const Route = createFileRoute("/doktorlar")({
   head: () => ({
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/doktorlar")({
 });
 
 function Doctors() {
+  const { lang } = useTranslate();
   return (
     <>
       <PageHero
