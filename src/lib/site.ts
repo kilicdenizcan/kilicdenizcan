@@ -553,7 +553,7 @@ export const posts = [
     title: "İmplant tedavisi hakkında bilmeniz gereken 7 şey",
     excerpt:
       "İmplant kimlere uygulanır, süreç ne kadar sürer, ağrılı mıdır? Hekimlerimizin en sık aldığı soruları yanıtladık.",
-    date: "12 Mart 2025",
+    date: "21 Ağustos 2026",
     read: "6 dk okuma",
     category: "İmplantoloji",
   },
@@ -562,7 +562,7 @@ export const posts = [
     title: "Gülüş tasarımı nasıl planlanır?",
     excerpt:
       "Dijital gülüş tasarımında yüz analizi, mock-up provası ve materyal seçimi adım adım nasıl ilerler?",
-    date: "28 Şubat 2025",
+    date: "21 Ağustos 2026\n",
     read: "5 dk okuma",
     category: "Estetik",
   },
@@ -571,7 +571,7 @@ export const posts = [
     title: "Çocuklarda diş hekimi korkusu nasıl önlenir?",
     excerpt:
       "İlk ziyaretin zamanlaması ve ebeveynlerin kullandığı dil, çocuğun ömür boyu diş sağlığını belirliyor.",
-    date: "9 Şubat 2025",
+    date: "21 Ağustos 2026\n",
     read: "4 dk okuma",
     category: "Pedodonti",
   },
@@ -580,7 +580,7 @@ export const posts = [
     title: "Diş eti kanaması neden olur?",
     excerpt:
       "Fırçalarken görülen kanama masum değildir. Erken dönemde müdahale, diş kaybını önlemenin en etkili yolu.",
-    date: "21 Ocak 2025",
+    date: "21 Ağustos 2026\n",
     read: "4 dk okuma",
     category: "Periodontoloji",
   },
