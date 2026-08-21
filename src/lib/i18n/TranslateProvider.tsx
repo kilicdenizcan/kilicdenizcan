@@ -322,6 +322,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   });
 
   const setLang = useCallback((next: Lang) => {
+    trRestoreRef.current = next === "tr";
     const root = document.documentElement;
     const reduced = prefersReducedMotion();
     cancelScrambles();
