@@ -434,10 +434,10 @@ export const doctors: Doctor[] = [
     name: "Dt. Burçe Nur Yılmaz",
     role: "Ortodonti",
     careerStart: { year: 2014, month: 5 },
-    experience: "İstanbul Üniversitesi ",
+    experience: "Gazi Üniversitesi",
     languages: "Türkçe, İngilizce",
-    bio: "İstanbul Üniversitesi - Çapa'dan mezun oldum. Çocuklarla iletişim kurmak ve onları ağız ve diş sağlığı yönünden bilgilendirmek ilgi alanımdır. Endodonti alanında çeşitli kurslara katıldım. Mesleki becerilerimi geliştirmek için diş hekimliği alanındaki güncel gelişmeleri takip ediyorum.",
-    focus: ["Gülüş tasarımı", "Laminate veneer", "Zirkonyum"],
+    bio: "...",
+    focus: ["Braket tel tedavisi", "Şeffaf plak tedavisi", "Ortodonti uygulamaları"],
   },
   {
     name: "Dt. Bilge Coşkun",
@@ -446,7 +446,7 @@ export const doctors: Doctor[] = [
     careerStart: { year: 2015, month: 6 },
     experience: "İstanbul Üniversitesi ",
     languages: "Türkçe, İngilizce",
-    bio: "İstanbul üniversitesi diş hekimliği fakültesinden mezun oldum. Çocuklarla iletişim kurmak ve onları ağız ve diş sağlığı yönünden bilgilendirmek ilgi alanımdır. \nEndodonti alanında çeşitli kurslara katıldım. Mesleki becerilerimi geliştirmek için diş hekimliği alanındaki güncel gelişmeleri takip ediyorum.\n\n",
+    bio: "İstanbul Üniversitesi - Çapa'dan mezun oldum. Çocuklarla iletişim kurmak ve onları ağız ve diş sağlığı konusunda bilgilendirmek ilgi alanımdır. Endodonti alanında çeşitli kurslara katıldım. Mesleki becerilerimi geliştirmek için diş hekimliği alanındaki güncel gelişmeleri takip ediyorum.\n",
     focus: ["Çocuk diş hekimliği", "Estetik kompozit lamina", "Metal porselen ve zirkonya kuron"],
   },
   {
