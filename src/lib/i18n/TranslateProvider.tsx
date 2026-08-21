@@ -320,7 +320,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
     pendingRef.current = Array.from(missing);
     if (active === "en") requestTranslations(pendingRef.current);
-  }, [collectTargets, lookup, requestTranslations]);
+  }, [collectTargets, lookup, reverseLookup, requestTranslations]);
 
 
   // Warm the English cache in the background while the page is in Turkish,
