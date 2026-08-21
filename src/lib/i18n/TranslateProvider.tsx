@@ -54,7 +54,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
-    return dictionary[key] ?? cacheRef.current.get(key);
+    return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
   }, []);
 
   /** Collect translatable text nodes + attributes below `root`. */
