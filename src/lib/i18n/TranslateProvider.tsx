@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { dictionary } from "./dictionary";
+import { overridesEn } from "./overrides.en";
 import { translateServer } from "./translate.functions";
 
 export type Lang = "tr" | "en";
@@ -53,7 +54,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
 
   const lookup = useCallback((source: string) => {
     const key = source.trim();
-    return dictionary[key] ?? cacheRef.current.get(key);
+    return overridesEn[key] ?? dictionary[key] ?? cacheRef.current.get(key);
   }, []);
 
   /** Collect translatable text nodes + attributes below `root`. */
