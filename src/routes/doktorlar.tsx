@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
 import { doctors } from "@/lib/site";
+import { useTranslate } from "@/lib/i18n/TranslateProvider";
 
 export const Route = createFileRoute("/doktorlar")({
   head: () => ({
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/doktorlar")({
 });
 
 function Doctors() {
+  const { lang } = useTranslate();
   return (
     <>
       <PageHero
@@ -92,9 +94,10 @@ function Doctors() {
                   <Link
                     to="/randevu"
                     search={{ doktor: d.name, tedavi: undefined }}
+                    data-no-translate
                     className="mt-9 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-navy-soft"
                   >
-                    {d.name} ile randevu
+                    {lang === "en" ? `Book with ${d.name}` : `${d.name} ile randevu`}
                   </Link>
                 </div>
               </article>

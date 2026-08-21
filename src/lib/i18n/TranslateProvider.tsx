@@ -134,10 +134,28 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     [persistCache],
   );
 
-  const lookup = useCallback((source: string) => {
-    const key = source.trim();
-    return overridesEn[key] ?? dictionary[key] ?? generatedEn[key] ?? cacheRef.current.get(key);
+  /** Whitespace-insensitive key (nbsp, double spaces, line breaks). */
+  const normalizeKey = (s: string) => s.replace(/\s+/g, " ").trim();
+
+  const normalizedOverrides = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const [k, v] of Object.entries(overridesEn)) map.set(normalizeKey(k), v);
+    return map;
   }, []);
+
+  const lookup = useCallback(
+    (source: string) => {
+      const key = source.trim();
+      return (
+        overridesEn[key] ??
+        normalizedOverrides.get(normalizeKey(key)) ??
+        dictionary[key] ??
+        generatedEn[key] ??
+        cacheRef.current.get(key)
+      );
+    },
+    [normalizedOverrides],
+  );
 
   /** English -> Turkish reverse index, used to repair leftovers after EN -> TR. */
   const reverseRef = useRef<Map<string, string> | null>(null);
