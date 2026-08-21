@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import lounge from "@/assets/gallery-lounge.jpg";
 import sterilization from "@/assets/gallery-sterilization.jpg";
-import heroClinic from "@/assets/hero-clinic.jpg";
+import clinicBuilding from "@/assets/klinik-bina.jpg.asset.json";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
