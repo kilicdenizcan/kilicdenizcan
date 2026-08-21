@@ -139,6 +139,27 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
     return overridesEn[key] ?? dictionary[key] ?? generatedEn[key] ?? cacheRef.current.get(key);
   }, []);
 
+  /** English -> Turkish reverse index, used to repair leftovers after EN -> TR. */
+  const reverseRef = useRef<Map<string, string> | null>(null);
+  const reverseSizeRef = useRef(-1);
+  const reverseLookup = useCallback((value: string) => {
+    const size = cacheRef.current.size;
+    if (!reverseRef.current || reverseSizeRef.current !== size) {
+      const map = new Map<string, string>();
+      const add = (tr: string, en: string) => {
+        const k = en.trim();
+        if (k && !map.has(k) && k !== tr.trim()) map.set(k, tr.trim());
+      };
+      for (const [tr, en] of Object.entries(generatedEn)) add(tr, en);
+      for (const [tr, en] of Object.entries(dictionary)) add(tr, en);
+      for (const [tr, en] of Object.entries(overridesEn)) add(tr, en);
+      for (const [tr, en] of cacheRef.current.entries()) add(tr, en);
+      reverseRef.current = map;
+      reverseSizeRef.current = size;
+    }
+    return reverseRef.current.get(value.trim());
+  }, []);
+
 
   /** Collect translatable text nodes + attributes below `root`. */
   const collectTargets = useCallback(() => {
