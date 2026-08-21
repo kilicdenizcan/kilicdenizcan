@@ -42,6 +42,8 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
   const inFlightRef = useRef<Set<string>>(new Set());
   const langRef = useRef<Lang>("tr");
   const persistTimerRef = useRef<number>(0);
+  const pendingRef = useRef<string[]>([]);
+
   const [, forceRender] = useState(0);
 
   langRef.current = lang;
