@@ -51,7 +51,7 @@ export function Navbar() {
               />
             </span>
             <span className="min-w-0 leading-tight">
-              <span className="block truncate text-[0.95rem] font-semibold text-navy">Yeni Yaşam</span>
+              <span data-no-translate className="block truncate text-[0.95rem] font-semibold text-navy">Yeni Yaşam</span>
               <span className="block truncate text-[0.62rem] tracking-[0.18em] text-muted-foreground uppercase">
                 AĞIZ VE DİŞ SAĞLIĞI POLİKLİNİĞİ
               </span>

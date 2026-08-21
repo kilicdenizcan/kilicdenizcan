@@ -20,7 +20,7 @@ export function Footer() {
                   className="size-8 object-cover"
                 />
               </span>
-              <span className="text-lg font-semibold">Yeni Yaşam</span>
+              <span data-no-translate className="text-lg font-semibold">Yeni Yaşam</span>
             </div>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-primary-foreground/65">
               Sultangazi'de ağız ve diş sağlığında dijital planlama, etik süreç yönetimi, sterilizasyon standardı ve
@@ -79,7 +79,7 @@ export function Footer() {
             <ul className="mt-5 space-y-4 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0" strokeWidth={1.6} />
-                <span>{clinic.address}</span>
+                <span data-no-translate>{clinic.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 size-4 shrink-0" strokeWidth={1.6} />
@@ -115,7 +115,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-primary-foreground/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {clinic.name}</p>
+          <p data-no-translate>© {new Date().getFullYear()} {clinic.name}</p>
           
         </div>
       </div>

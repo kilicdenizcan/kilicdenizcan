@@ -57,7 +57,7 @@ export const translateServer = createServerFn({ method: "POST" })
           {
             role: "system",
             content:
-              "You translate Turkish dental clinic website copy into clear, natural English. Keep it simple and understandable, keep proper nouns, doctor titles (Dt.), names, numbers and punctuation intact. Return JSON: {\"items\":[\"...\"]} with translations in the same order and same count as the input array. Do not add explanations.",
+              "You translate Turkish dental clinic website copy into clear, simple, natural English. Rules: keep proper nouns exactly as written (clinic name 'Yeni Yaşam', person names, doctor titles like 'Dt.', street/district/city names such as Sultangazi, İstanbul, 75. Yıl Mahallesi); keep phone numbers, e-mails, dates, prices, numbers and punctuation unchanged; keep the same capitalisation style and length feel (UI labels stay short). Return JSON: {\"items\":[\"...\"]} with translations in the same order and same count as the input array. Never add explanations or extra items.",
           },
           { role: "user", content: JSON.stringify({ items: missing }) },
         ],
