@@ -229,3 +229,12 @@ html.lang-switching body {
 @media (prefers-reduced-motion: reduce) {
   html.lang-switching body { animation: none; }
 }
+
+/* First paint while the English layer is being applied. */
+html.lang-pending body {
+  opacity: 0;
+}
+
+html body {
+  transition: opacity 0.18s ease;
+}

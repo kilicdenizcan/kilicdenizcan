@@ -231,6 +231,7 @@ export function TranslateProvider({ children }: { children: ReactNode }) {
       running = true;
       try {
         applyTranslations();
+        document.documentElement.classList.remove("lang-pending");
       } finally {
         running = false;
       }
