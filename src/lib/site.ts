@@ -526,8 +526,8 @@ export const faqs = [
     a: "İlk muayene ve tedavi planlaması ücretsizdir. Gerekli görülen dijital röntgen de muayeneye dahildir.",
   },
   {
-    q: "Anlaşmalı olduğunuz kurumlar var mı?",
-    a: "Özel sağlık sigortaları ve kurumsal anlaşmalarımız bulunmaktadır. Detaylar için kliniğimizi arayabilirsiniz.",
+    q: "Özel sağlık sigortası geçerli mi?",
+    a: "Evet. Kliniğimizde yaptırdığınız tedavilerin ücretlerini \u00a0fatura vasıtasıyla sigorta şirketinizden tahsil edebilirsiniz. Detaylar için kliniğimizi arayabilirsiniz.",
   },
   {
     q: "Taksit imkânı sunuyor musunuz?",
