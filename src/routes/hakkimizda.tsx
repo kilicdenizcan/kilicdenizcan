@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import lounge from "@/assets/gallery-lounge.jpg";
 import sterilization from "@/assets/gallery-sterilization.jpg";
-import clinicBuilding from "@/assets/klinik-bina.jpg.asset.json";
+import clinicBuilding from "@/assets/klinik-bina.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -57,7 +57,7 @@ function About() {
         <Reveal>
           <div className="overflow-hidden rounded-[2.5rem]">
             <img
-              src={clinicBuilding.url}
+              src={clinicBuilding}
               alt="Yeni Yaşam Ağız ve Diş Sağlığı Polikliniği bina tabelası"
               loading="lazy"
               width={1696}
