@@ -188,7 +188,7 @@ function RootComponent() {
     trackPageView(window.location.pathname);
 
     // SPA navigations: a single page_view per distinct path.
-    const unsubscribe = router.subscribe(({ toLocation }) => {
+    const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
       trackPageView(toLocation.pathname);
     });
     return unsubscribe;
