@@ -36,4 +36,4 @@ Başka dosyaya dokunulmaz.
 ## Doğrulama
 - Build/dev sunucusu hata vermez.
 - Önizlemede Network sekmesinde `gtag/js` ve `collect` istekleri görünür.
-- Sayfalar arası geçişte (örn. `/` → `/doktorlar` → `/tedaviler`) her geçişte bir `page_view` event'i gönderilir.
+- İlk yüklemede Network'te yalnızca tek `page_view` collect isteği; `/` → `/doktorlar` → `/tedaviler` geçişinde her biri için yalnızca birer `page_view`; aynı sayfaya geri dönüşte tekrar gönderilmez.
