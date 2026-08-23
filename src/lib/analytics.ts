@@ -25,9 +25,15 @@ declare global {
 export function trackPageView(path: string): void {
   if (typeof window === "undefined") return;
   if (typeof window.gtag !== "function") return;
-  if (path === lastTrackedPath) return;
+  if (path === lastTrackedPath) {
+    // eslint-disable-next-line no-console
+    console.debug("[GA4] suppressed dup page_view:", path);
+    return;
+  }
 
   lastTrackedPath = path;
+  // eslint-disable-next-line no-console
+  console.debug("[GA4] send page_view:", path);
   window.gtag("event", "page_view", {
     page_path: path,
     page_title: typeof document !== "undefined" ? document.title : "",
