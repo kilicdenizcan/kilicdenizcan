@@ -179,19 +179,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    // First (initial load) page_view — config has send_page_view:false,
-    // so the only page_view events come from trackPageView.
-    trackPageView(window.location.pathname);
-
-    // SPA navigations: a single page_view per distinct path.
-    const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
-      trackPageView(toLocation.pathname);
-    });
-    return unsubscribe;
-  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
