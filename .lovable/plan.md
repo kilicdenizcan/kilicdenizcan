@@ -24,7 +24,7 @@ Başka dosyaya dokunulmaz.
 
 ## Gereksinim karşılığı
 - **Tüm sayfalarda çalışır**: head script'leri tüm route'larda render edilir (kök layout).
-- **SPA page_view**: router aboneliği her istemci-tarafı geçişinde `page_view` gönderir.
+- **SPA page_view**: router aboneliği her istemci-tarafı geçişinde tek bir `page_view` gönderir. İlk yüklemede yalnızca bir adet (config `send_page_view:false` + tek trackPageView). Aynı path tekrar gönderilmez.
 - **PII yok**: Sadece `page_path` ve `page_title` gönderilir. Randevu formu, WhatsApp yönlendirmesi, doktor/randevu/sağlık verisi GA'ye hiçbir şekilde iletilmez — form gönderimi veya buton tıklamalarında event eklenmez.
 - **Minimum etki**: Yalnızca `analytics.ts` (yeni) ve `__root.tsx` (2 küçük ekleme). Diğer dosyalar değiştirilmez, refactor yapılmaz.
 
