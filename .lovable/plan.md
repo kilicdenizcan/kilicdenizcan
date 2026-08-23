@@ -1,0 +1,39 @@
+# GA4 Entegrasyonu Planı
+
+## Hedef
+Yeni Yaşam kliniği sitesine Google Analytics 4 (Measurement ID: **G-P8TMD8EXMR**) ekle. Sadece bu entegrasyon için gerekli minimum değişiklikler; mevcut tasarım, içerik, component, routing, form sistemi ve işlevler dokunulmaz kalır.
+
+## Yaklaşım
+Sağlanan Measurement ID doğrudan kullanılır (konnektör akışı gerekmez). gtag.js tarayıcıda çalışır; SSR/iş mantığına karışmaz.
+
+## Değişiklikler
+
+### 1. Yeni dosya: `src/lib/analytics.ts`
+- `GA_MEASUREMENT_ID = "G-P8TMD8EXMR"` sabiti.
+- `initGtag()` — gtag.js loader + ilk `config` çağrısı (yalnız client'ta, `window` varken).
+- `trackPageView(path)` — SPA geçişlerinde `gtag('event', 'page_view', { page_path, page_title })` tetikler.
+- Tüm fonksiyonlar `typeof window === 'undefined'` guard'lı; SSR'de no-op.
+
+### 2. `src/routes/__root.tsx` — minimum editler
+- **head() scripts** alanına iki script eklenir:
+  - gtag.js harici yükleyici (`async`): `https://www.googletagmanager.com/gtag/js?id=G-P8TMD8EXMR`
+  - inline config: `window.dataLayer`, `gtag('js', ...)`, `gtag('config', 'G-P8TMD8EXMR')`
+- **RootComponent** içinde `useRouter()` ile `router.subscribe` kuran `useEffect` eklenir; her gezinmede `trackPageView(location.pathname)` çağrılır. İlk yüklemedeki page_view inline config'ten gelir; abonelik sadece sonraki SPA geçişlerini yakalar.
+
+Başka dosyaya dokunulmaz.
+
+## Gereksinim karşılığı
+- **Tüm sayfalarda çalışır**: head script'leri tüm route'larda render edilir (kök layout).
+- **SPA page_view**: router aboneliği her istemci-tarafı geçişinde `page_view` gönderir.
+- **PII yok**: Sadece `page_path` ve `page_title` gönderilir. Randevu formu, WhatsApp yönlendirmesi, doktor/randevu/sağlık verisi GA'ye hiçbir şekilde iletilmez — form gönderimi veya buton tıklamalarında event eklenmez.
+- **Minimum etki**: Yalnızca `analytics.ts` (yeni) ve `__root.tsx` (2 küçük ekleme). Diğer dosyalar değiştirilmez, refactor yapılmaz.
+
+## Teknik notlar
+- TanStack Router'ın `router.subscribe` callback'i `{ fromLocation, toLocation }` alır; `toLocation.pathname` ile `trackPageView` çağrılır. Aynı path tekrar tetiklemeyi önlemek için ref ile karşılaştırma yapılabilir (basit eşitlik kontrolü).
+- `Scripts`/`HeadContent` zaten __root.tsx'te; mevcut yapıya uygun.
+- Inline script'ler `dangerouslySetInnerHTML` gerekmez — TanStack head script `children` alanı destekler.
+
+## Doğrulama
+- Build/dev sunucusu hata vermez.
+- Önizlemede Network sekmesinde `gtag/js` ve `collect` istekleri görünür.
+- Sayfalar arası geçişte (örn. `/` → `/doktorlar` → `/tedaviler`) her geçişte bir `page_view` event'i gönderilir.
