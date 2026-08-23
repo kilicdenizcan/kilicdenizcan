@@ -1,5 +1,8 @@
 // Google Analytics 4 (gtag.js) helper.
 // Measurement ID is the clinic's GA4 property. Browser-only; no-op during SSR.
+// The gtag.js loader and initial config (with automatic page_view disabled)
+// live in src/routes/__root.tsx head scripts; this module only sends page_view
+// events and de-duplicates them by path.
 
 export const GA_MEASUREMENT_ID = "G-P8TMD8EXMR";
 
@@ -12,20 +15,6 @@ declare global {
     dataLayer: unknown[];
     gtag: (...args: unknown[]) => void;
   }
-}
-
-/** Loads gtag.js and issues the initial config with automatic page_view disabled. */
-export function initGtag(): void {
-  if (typeof window === "undefined") return;
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function (...args: unknown[]) {
-    window.dataLayer.push(args);
-  };
-  window.gtag("js", new Date());
-  // send_page_view: false — automatic first page_view is disabled so the
-  // only page_view events come from trackPageView below (no double counting).
-  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
 }
 
 /**
