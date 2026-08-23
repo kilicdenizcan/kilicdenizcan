@@ -29,7 +29,7 @@ Başka dosyaya dokunulmaz.
 - **Minimum etki**: Yalnızca `analytics.ts` (yeni) ve `__root.tsx` (2 küçük ekleme). Diğer dosyalar değiştirilmez, refactor yapılmaz.
 
 ## Teknik notlar
-- TanStack Router'ın `router.subscribe` callback'i `{ fromLocation, toLocation }` alır; `toLocation.pathname` ile `trackPageView` çağrılır. Aynı path tekrar tetiklemeyi önlemek için ref ile karşılaştırma yapılabilir (basit eşitlik kontrolü).
+- TanStack Router'ın `router.subscribe` callback'i `{ fromLocation, toLocation }` alır; `toLocation.pathname` ile `trackPageView` çağrılır. `analytics.ts` içindeki `lastTrackedPath` modül değişkeni ile aynı path tekrar gönderilmez.bilir (basit eşitlik kontrolü).
 - `Scripts`/`HeadContent` zaten __root.tsx'te; mevcut yapıya uygun.
 - Inline script'ler `dangerouslySetInnerHTML` gerekmez — TanStack head script `children` alanı destekler.
 
