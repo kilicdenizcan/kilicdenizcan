@@ -11,7 +11,7 @@ Sağlanan Measurement ID doğrudan kullanılır (konnektör akışı gerekmez). 
 ### 1. Yeni dosya: `src/lib/analytics.ts`
 - `GA_MEASUREMENT_ID = "G-P8TMD8EXMR"` sabiti.
 - `initGtag()` — gtag.js loader + ilk `config` çağrısı (yalnız client'ta, `window` varken).
-- `trackPageView(path)` — SPA geçişlerinde `gtag('event', 'page_view', { page_path, page_title })` tetikler.
+- `trackPageView(path)` — `gtag('event', 'page_view', { page_path, page_title })` tetikler. `lastTrackedPath` modül değişkeniyle aynı path tekrar gönderilmesini engeller.
 - Tüm fonksiyonlar `typeof window === 'undefined'` guard'lı; SSR'de no-op.
 
 ### 2. `src/routes/__root.tsx` — minimum editler
