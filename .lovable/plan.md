@@ -18,7 +18,7 @@ Sağlanan Measurement ID doğrudan kullanılır (konnektör akışı gerekmez). 
 - **head() scripts** alanına iki script eklenir:
   - gtag.js harici yükleyici (`async`): `https://www.googletagmanager.com/gtag/js?id=G-P8TMD8EXMR`
   - inline config: `window.dataLayer`, `gtag('js', ...)`, `gtag('config', 'G-P8TMD8EXMR', { send_page_view: false })` — GA'nın otomatik ilk page_view'i devre dışı; ilk ve sonraki tüm page_view'ler tek yerden (trackPageView) gönderilir.
-- **RootComponent** içinde `useRouter()` ile `router.subscribe` kuran `useEffect` eklenir; her gezinmede `trackPageView(location.pathname)` çağrılır. İlk yüklemedeki page_view inline config'ten gelir; abonelik sadece sonraki SPA geçişlerini yakalar.
+- **RootComponent** içinde `useRouter()` ile `router.subscribe` kuran `useEffect` eklenir; her gezinmede `trackPageView(toLocation.pathname)` çağrılır. Abonelik mount edildiğinde ilk yükleme için de `trackPageView(location.pathname)` bir kez tetiklenir (config `send_page_view:false` olduğundan otomatik page_view yok → çift sayım önlenir). `trackPageView` içindeki `lastTrackedPath` ile aynı path tekrar gönderilmez (geri/ileri/yenileme dahil).
 
 Başka dosyaya dokunulmaz.
 
