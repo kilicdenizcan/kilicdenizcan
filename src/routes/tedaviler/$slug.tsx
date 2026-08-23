@@ -48,7 +48,6 @@ export const Route = createFileRoute("/tedaviler/$slug")({
 
 function TreatmentDetail() {
   const t: Treatment = Route.useLoaderData();
-  const others = treatments.filter((x) => x.slug !== t.slug).slice(0, 3);
   const showMeta = Boolean(t.duration || t.sessions || t.anesthesia);
 
   return (
@@ -209,31 +208,6 @@ function TreatmentDetail() {
               ))}
             </Accordion>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="section-y">
-        <div className="container-page">
-          <Reveal>
-            <p className="text-eyebrow">Diğer tedaviler</p>
-          </Reveal>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {others.map((o, i) => (
-              <Reveal key={o.slug} delay={i * 0.06}>
-                <Link
-                  to="/tedaviler/$slug"
-                  params={{ slug: o.slug }}
-                  className="group flex h-full flex-col justify-between rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift"
-                >
-                  <div>
-                    <h3 className="text-lg font-semibold text-navy">{o.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-graphite">{o.short}</p>
-                  </div>
-                  <ArrowUpRight className="mt-8 size-4 text-navy" strokeWidth={1.6} />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
