@@ -16,7 +16,6 @@ import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { TranslateProvider } from "@/lib/i18n/TranslateProvider";
-import { trackPageView } from "@/lib/analytics";
 
 
 function NotFoundComponent() {
