@@ -16,6 +16,7 @@ import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { TranslateProvider } from "@/lib/i18n/TranslateProvider";
+import { trackPageView } from "@/lib/analytics";
 
 
 function NotFoundComponent() {
@@ -109,6 +110,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
+        type: "text/javascript",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-P8TMD8EXMR",
+        async: true,
+      },
+      {
+        type: "text/javascript",
+        children:
+          "window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments);};window.gtag('js',new Date());window.gtag('config','G-P8TMD8EXMR',{send_page_view:false});",
+      },
+      {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
@@ -169,6 +180,20 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Initial page_view (config has send_page_view:false, so the only
+    // page_view events come from here). Dedupe via lastTrackedPath in
+    // trackPageView prevents repeats for the same path.
+    trackPageView(window.location.pathname);
+
+    // SPA navigations: a single page_view per distinct path.
+    const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
+      trackPageView(toLocation.pathname);
+    });
+    return unsubscribe;
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
