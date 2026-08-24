@@ -317,7 +317,7 @@ function Home() {
           <div className="mt-14 grid gap-4 md:grid-cols-2">
             {[
               { img: lounge, alt: "Klinik bekleme salonu", label: "Bekleme salonu" },
-              { img: sterilization, alt: "Sterilizasyon odası", label: "Sterilizasyon ünitesi" },
+              { img: sterilization, alt: "Muayene odası", label: "Muayene Odası" },
             ].map((g, i) => (
               <Reveal key={g.label} delay={i * 0.1}>
                 <figure className="group overflow-hidden rounded-3xl bg-muted">
