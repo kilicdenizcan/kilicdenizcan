@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -17,7 +18,6 @@ import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { TranslateProvider } from "@/lib/i18n/TranslateProvider";
 import { trackPageView } from "@/lib/analytics";
-
 
 function NotFoundComponent() {
   return (
@@ -159,7 +159,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-
 const langBootstrap = `(function(){try{var u=new URLSearchParams(location.search).get('lang');var s=localStorage.getItem('yy-lang');var en=u==='en'||(u!=='tr'&&s==='en');if(en){document.documentElement.lang='en';document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending');},1200);}}catch(e){}})();`;
 
 function RootShell({ children }: { children: ReactNode }) {
@@ -171,12 +170,12 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <Analytics />
         <Scripts />
       </body>
     </html>
   );
 }
-
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -210,4 +209,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-
