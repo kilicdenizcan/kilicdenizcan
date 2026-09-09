@@ -486,6 +486,12 @@ export type Review = {
  */
 export const reviews: Review[] = [
   {
+    name: "Leyla Çelik",
+    text: "İlgi alakanız her zaman çok güzel oldu çok memnunuz sizlerden iyiki tanımışız🌺",
+    date: "7 Eylül",
+    rating: 5,
+  },
+  {
     name: "Talha Gurle",
     text: "Güler yüzlü bir yaklaşım, herkes oldukça ilgiliydi. Hem bilgilendirme hem de titiz çalışması sayesinde güvene bilirsiniz. Kesinlikle tavsiye ederim.",
     date: "10 ay önce",

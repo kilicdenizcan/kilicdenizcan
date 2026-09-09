@@ -177,6 +177,8 @@ export const generatedEn: Record<string, string> = {
   "Gömülü 20'lik dişler ağrı, sıkışma ve çapraşıklığa yol açabilir. Panoramik röntgen (gerekli durumlarda 3B tomografi) ile sinir komşuluğu değerlendirildikten sonra cerrahi işlem kısa sürede ve konforlu şekilde tamamlanır.": "Impacted wisdom teeth can cause pain, pressure and crowding. After assessing their proximity to the nerve with a panoramic X-ray (3D tomography when necessary), the surgical procedure is completed quickly and comfortably.",
   "Gömülü dişlerde planlı, hızlı ve konforlu cerrahi.": "Planned, fast, and comfortable surgery for impacted teeth.",
   "Görüntüleme": "Imaging",
+  "İlgi alakanız her zaman çok güzel oldu çok memnunuz sizlerden iyiki tanımışız🌺": "Your care and attention have always been wonderful; we are very pleased with you and so glad we met you🌺",
+  "7 Eylül": "September 7",
   "Güler yüzlü bir yaklaşım, herkes oldukça ilgiliydi. Hem bilgilendirme hem de titiz çalışması sayesinde güvene bilirsiniz. Kesinlikle tavsiye ederim.": "A friendly approach, and everyone was very attentive. You can trust them thanks to both their clear explanations and meticulous work. I definitely recommend them.",
   "Gülümsemenizi güvenle yeniden tasarlıyoruz.": "We redesign your smile with confidence.",
   "Gülüş Tasarımı": "Smile Design",
